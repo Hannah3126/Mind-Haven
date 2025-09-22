@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import HomePage from "./HomePage"; // <-- new import
 
 // ---------------- MAIN APP ----------------
 function App() {
-  const [view, setView] = useState("login"); // "login" | "signup" | "dashboard"
+  const [view, setView] = useState("home"); // now starts at home
   const [role, setRole] = useState(null);
 
   // Login API
@@ -33,7 +34,11 @@ function App() {
     if (data.success) setView("login");
   };
 
-  // Routing
+  // ---------------- VIEW ROUTING ----------------
+  if (view === "home") {
+    return <HomePage goToLogin={() => setView("login")} />;
+  }
+
   if (view === "dashboard") {
     return role === "admin" ? (
       <AdminDashboard onLogout={() => setView("login")} />
@@ -41,10 +46,23 @@ function App() {
       <UserDashboard onLogout={() => setView("login")} />
     );
   }
+
   if (view === "signup") {
-    return <SignupPage onSignup={handleSignup} switchToLogin={() => setView("login")} />;
+    return (
+      <SignupPage
+        onSignup={handleSignup}
+        switchToLogin={() => setView("login")}
+      />
+    );
   }
-  return <LoginPage onLogin={handleLogin} switchToSignup={() => setView("signup")} />;
+
+  // default is login
+  return (
+    <LoginPage
+      onLogin={handleLogin}
+      switchToSignup={() => setView("signup")}
+    />
+  );
 }
 
 // ---------------- LOGIN PAGE ----------------
@@ -71,8 +89,13 @@ function LoginPage({ onLogin, switchToSignup }) {
             }}
           >
             <label className="label">Email</label>
-            <input className="input" type="email" value={email}
-              onChange={(e) => setEmail(e.target.value)} required />
+            <input
+              className="input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
             <label className="label">Password</label>
             <div className="input-wrap password">
@@ -93,8 +116,14 @@ function LoginPage({ onLogin, switchToSignup }) {
             </div>
 
             <div className="actions">
-              <button className="btn primary" type="submit">Login</button>
-              <button className="btn link" type="button" onClick={switchToSignup}>
+              <button className="btn primary" type="submit">
+                Login
+              </button>
+              <button
+                className="btn link"
+                type="button"
+                onClick={switchToSignup}
+              >
                 Create Account
               </button>
             </div>
@@ -129,8 +158,13 @@ function SignupPage({ onSignup, switchToLogin }) {
             }}
           >
             <label className="label">Email</label>
-            <input className="input" type="email" value={email}
-              onChange={(e) => setEmail(e.target.value)} required />
+            <input
+              className="input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
             <label className="label">Password</label>
             <div className="input-wrap password">
@@ -151,8 +185,14 @@ function SignupPage({ onSignup, switchToLogin }) {
             </div>
 
             <div className="actions">
-              <button className="btn primary" type="submit">Sign Up</button>
-              <button className="btn link" type="button" onClick={switchToLogin}>
+              <button className="btn primary" type="submit">
+                Sign Up
+              </button>
+              <button
+                className="btn link"
+                type="button"
+                onClick={switchToLogin}
+              >
                 Back to Login
               </button>
             </div>
@@ -183,7 +223,13 @@ function AdminDashboard({ onLogout }) {
             <h1 className="brand">Mindheaven Admin</h1>
           </div>
           <h2 className="title">Users Data</h2>
-          <table style={{ width: "100%", marginTop: "12px", borderCollapse: "collapse" }}>
+          <table
+            style={{
+              width: "100%",
+              marginTop: "12px",
+              borderCollapse: "collapse",
+            }}
+          >
             <thead>
               <tr>
                 <th style={{ borderBottom: "1px solid #555" }}>ID</th>
@@ -202,7 +248,9 @@ function AdminDashboard({ onLogout }) {
             </tbody>
           </table>
           <div className="actions" style={{ marginTop: "20px" }}>
-            <button className="btn secondary" onClick={onLogout}>Logout</button>
+            <button className="btn secondary" onClick={onLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -239,7 +287,9 @@ function UserDashboard({ onLogout }) {
           <Section title="Videos & Podcasts" items={videos} />
           <Section title="Community Highlights" items={forums} />
           <div className="actions" style={{ marginTop: "20px" }}>
-            <button className="btn secondary" onClick={onLogout}>Logout</button>
+            <button className="btn secondary" onClick={onLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -254,12 +304,15 @@ function Section({ title, items }) {
       <h3>{title}</h3>
       <div style={{ display: "flex", gap: "12px", overflowX: "auto" }}>
         {items.map((it, i) => (
-          <div key={i} style={{
-            minWidth: "200px",
-            padding: "12px",
-            background: "#222",
-            borderRadius: "12px"
-          }}>
+          <div
+            key={i}
+            style={{
+              minWidth: "200px",
+              padding: "12px",
+              background: "#222",
+              borderRadius: "12px",
+            }}
+          >
             <h4>{it.title}</h4>
             <p style={{ fontSize: "13px" }}>{it.preview}</p>
           </div>
@@ -279,7 +332,10 @@ function Logo() {
           <stop offset="100%" stopColor="#E0C3FC" />
         </linearGradient>
       </defs>
-      <path fill="url(#g)" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+      <path
+        fill="url(#g)"
+        d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"
+      />
     </svg>
   );
 }
@@ -316,3 +372,4 @@ function GlobalStyles() {
 }
 
 export default App;
+
