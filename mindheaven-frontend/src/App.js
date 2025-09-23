@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import HomePage from "./HomePage"; // <-- new import
+import HomePage from "./HomePage"; 
 
-// ---------------- MAIN APP ----------------
 function App() {
-  const [view, setView] = useState("home"); // now starts at home
+  const [view, setView] = useState("home");
   const [role, setRole] = useState(null);
 
   // Login API
@@ -34,7 +33,7 @@ function App() {
     if (data.success) setView("login");
   };
 
-  // ---------------- VIEW ROUTING ----------------
+
   if (view === "home") {
     return <HomePage goToLogin={() => setView("login")} />;
   }
@@ -56,7 +55,7 @@ function App() {
     );
   }
 
-  // default is login
+  // default page is login
   return (
     <LoginPage
       onLogin={handleLogin}
@@ -65,7 +64,6 @@ function App() {
   );
 }
 
-// ---------------- LOGIN PAGE ----------------
 function LoginPage({ onLogin, switchToSignup }) {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
