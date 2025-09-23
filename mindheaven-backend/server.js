@@ -1,6 +1,3 @@
-// =========================
-// 1. Imports & Setup
-// =========================
 const express = require("express");
 const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
@@ -12,15 +9,13 @@ const PORT = 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// =========================
-// 2. Database Setup
-// =========================
+// Database
 const db = new sqlite3.Database("./users.db", (err) => {
   if (err) console.error(err.message);
   console.log("Connected to SQLite DB");
 });
 
-// Create table if not exists
+// Create table
 db.run(
   `CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,7 +25,7 @@ db.run(
   )`
 );
 
-// Seed demo accounts if they don’t exist
+// demo accounts
 db.get("SELECT * FROM users WHERE email = ?", ["admin@mindheaven.com"], (err, row) => {
   if (!row) {
     db.run("INSERT INTO users (email, password, role) VALUES (?, ?, ?)", [
@@ -51,11 +46,8 @@ db.get("SELECT * FROM users WHERE email = ?", ["user@mindheaven.com"], (err, row
   }
 });
 
-// =========================
-// 3. Routes
-// =========================
 
-// Login validation
+// Login 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -73,7 +65,7 @@ app.post("/login", (req, res) => {
         return res.json({ success: false, message: "Invalid email or password" });
       }
 
-      // ✅ Login successful
+     
       res.json({
         success: true,
         message: "Login successful",
@@ -84,17 +76,17 @@ app.post("/login", (req, res) => {
 });
 
 
-// Signup (create account)
+// Signup
 app.post("/signup", (req, res) => {
   const { email, password } = req.body;
 
-  // Check if user already exists
+  // if user already exists
   db.get("SELECT * FROM users WHERE email = ?", [email], (err, row) => {
     if (row) {
       return res.json({ success: false, message: "User already exists" });
     }
 
-    // New users are always "user"
+    // New users
     db.run(
       "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
       [email, password, "user"],
@@ -109,19 +101,8 @@ app.post("/signup", (req, res) => {
 });
 
 
-// Optional: view all users (for demo/testing)
-app.get("/users", (req, res) => {
-  db.all("SELECT * FROM users", [], (err, rows) => {
-    if (err) {
-      return res.json({ message: "Error fetching users" });
-    }
-    res.json(rows);
-  });
-});
-
-// =========================
-// 4. Start Server
-// =========================
+// Start Server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
