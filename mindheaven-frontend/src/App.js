@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HomePage from "./HomePage"; 
+import HomePage from "./Homepage"; 
 
 function App() {
   const [view, setView] = useState("home");
