@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import HomePage from "./Homepage"; 
+import HomePage from "./Homepage";
 
 function App() {
   const [view, setView] = useState("home");
   const [role, setRole] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Login API
+  // -------- API Calls --------
   const handleLogin = async (email, password) => {
     const res = await fetch("http://localhost:5000/login", {
       method: "POST",
@@ -21,7 +22,6 @@ function App() {
     }
   };
 
-  // Signup API
   const handleSignup = async (email, password) => {
     const res = await fetch("http://localhost:5000/signup", {
       method: "POST",
@@ -33,102 +33,124 @@ function App() {
     if (data.success) setView("login");
   };
 
+  // -------- Header Component --------
+  const Header = () => (
+    <header className="app-header">
+      <h1 className="logo" onClick={() => setView("home")}>
+        MindHeaven
+      </h1>
 
-  if (view === "home") {
-    return <HomePage goToLogin={() => setView("login")} />;
-  }
+      <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <button onClick={() => setView("home")}>Home</button>
+        <button onClick={() => setView("login")}>Login</button>
+        <button onClick={() => setView("signup")}>Sign Up</button>
+      </nav>
 
-  if (view === "dashboard") {
-    return role === "admin" ? (
-      <AdminDashboard onLogout={() => setView("login")} />
-    ) : (
-      <UserDashboard onLogout={() => setView("login")} />
-    );
-  }
+      <div
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
+    </header>
+  );
 
-  if (view === "signup") {
-    return (
+  // -------- View Rendering --------
+  let content;
+  if (view === "home")
+    content = <HomePage goToLogin={() => setView("login")} />;
+  else if (view === "dashboard")
+    content =
+      role === "admin" ? (
+        <AdminDashboard onLogout={() => setView("login")} />
+      ) : (
+        <UserDashboard onLogout={() => setView("login")} />
+      );
+  else if (view === "signup")
+    content = (
       <SignupPage
         onSignup={handleSignup}
         switchToLogin={() => setView("login")}
       />
     );
-  }
+  else
+    content = (
+      <LoginPage
+        onLogin={handleLogin}
+        switchToSignup={() => setView("signup")}
+      />
+    );
 
-  // default page is login
   return (
-    <LoginPage
-      onLogin={handleLogin}
-      switchToSignup={() => setView("signup")}
-    />
+    <div className="App">
+      <Header />
+      <main className="main-content">{content}</main>
+      <GlobalStyles />
+    </div>
   );
 }
 
+// ---------------- LOGIN PAGE ----------------
 function LoginPage({ onLogin, switchToSignup }) {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [show, setShow] = useState(false);
 
   return (
-    <>
-      <GlobalStyles />
-      <div className="page page-centered">
-        <div className="card">
-          <div className="brand-row">
-            <Logo />
-            <h1 className="brand">Mindheaven</h1>
-          </div>
-          <h2 className="title">Sign in</h2>
-          <form
-            className="form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              onLogin(email, pwd);
-            }}
-          >
-            <label className="label">Email</label>
+    <div className="page page-centered">
+      <div className="card">
+        <div className="brand-row">
+          <Logo />
+          <h1 className="brand">MindHeaven</h1>
+        </div>
+        <h2 className="title">Sign in</h2>
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onLogin(email, pwd);
+          }}
+        >
+          <label className="label">Email</label>
+          <input
+            className="input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label className="label">Password</label>
+          <div className="input-wrap password">
             <input
               className="input"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type={show ? "text" : "password"}
+              value={pwd}
+              onChange={(e) => setPwd(e.target.value)}
               required
             />
+            <button
+              type="button"
+              className="eye"
+              onClick={() => setShow(!show)}
+            >
+              {show ? "🙈" : "👁️"}
+            </button>
+          </div>
 
-            <label className="label">Password</label>
-            <div className="input-wrap password">
-              <input
-                className="input"
-                type={show ? "text" : "password"}
-                value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                className="eye"
-                onClick={() => setShow(!show)}
-              >
-                {show ? "🙈" : "👁️"}
-              </button>
-            </div>
-
-            <div className="actions">
-              <button className="btn primary" type="submit">
-                Login
-              </button>
-              <button
-                className="btn link"
-                type="button"
-                onClick={switchToSignup}
-              >
-                Create Account
-              </button>
-            </div>
-          </form>
-        </div>
+          <div className="actions">
+            <button className="btn primary" type="submit">
+              Login
+            </button>
+            <button className="btn link" type="button" onClick={switchToSignup}>
+              Create Account
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -139,65 +161,58 @@ function SignupPage({ onSignup, switchToLogin }) {
   const [show, setShow] = useState(false);
 
   return (
-    <>
-      <GlobalStyles />
-      <div className="page page-centered">
-        <div className="card">
-          <div className="brand-row">
-            <Logo />
-            <h1 className="brand">Mindheaven</h1>
-          </div>
-          <h2 className="title">Create account</h2>
-          <form
-            className="form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSignup(email, pwd);
-            }}
-          >
-            <label className="label">Email</label>
+    <div className="page page-centered">
+      <div className="card">
+        <div className="brand-row">
+          <Logo />
+          <h1 className="brand">MindHeaven</h1>
+        </div>
+        <h2 className="title">Create account</h2>
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSignup(email, pwd);
+          }}
+        >
+          <label className="label">Email</label>
+          <input
+            className="input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label className="label">Password</label>
+          <div className="input-wrap password">
             <input
               className="input"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type={show ? "text" : "password"}
+              value={pwd}
+              onChange={(e) => setPwd(e.target.value)}
               required
             />
+            <button
+              type="button"
+              className="eye"
+              onClick={() => setShow(!show)}
+            >
+              {show ? "🙈" : "👁️"}
+            </button>
+          </div>
 
-            <label className="label">Password</label>
-            <div className="input-wrap password">
-              <input
-                className="input"
-                type={show ? "text" : "password"}
-                value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                className="eye"
-                onClick={() => setShow(!show)}
-              >
-                {show ? "🙈" : "👁️"}
-              </button>
-            </div>
-
-            <div className="actions">
-              <button className="btn primary" type="submit">
-                Sign Up
-              </button>
-              <button
-                className="btn link"
-                type="button"
-                onClick={switchToLogin}
-              >
-                Back to Login
-              </button>
-            </div>
-          </form>
-        </div>
+          <div className="actions">
+            <button className="btn primary" type="submit">
+              Sign Up
+            </button>
+            <button className="btn link" type="button" onClick={switchToLogin}>
+              Back to Login
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -212,47 +227,44 @@ function AdminDashboard({ onLogout }) {
   }, []);
 
   return (
-    <>
-      <GlobalStyles />
-      <div className="page page-centered">
-        <div className="card" style={{ maxWidth: "800px" }}>
-          <div className="brand-row">
-            <Logo />
-            <h1 className="brand">Mindheaven Admin</h1>
-          </div>
-          <h2 className="title">Users Data</h2>
-          <table
-            style={{
-              width: "100%",
-              marginTop: "12px",
-              borderCollapse: "collapse",
-            }}
-          >
-            <thead>
-              <tr>
-                <th style={{ borderBottom: "1px solid #555" }}>ID</th>
-                <th style={{ borderBottom: "1px solid #555" }}>Email</th>
-                <th style={{ borderBottom: "1px solid #555" }}>Role</th>
+    <div className="page page-centered">
+      <div className="card" style={{ maxWidth: "800px" }}>
+        <div className="brand-row">
+          <Logo />
+          <h1 className="brand">MindHeaven Admin</h1>
+        </div>
+        <h2 className="title">Users Data</h2>
+        <table
+          style={{
+            width: "100%",
+            marginTop: "12px",
+            borderCollapse: "collapse",
+          }}
+        >
+          <thead>
+            <tr>
+              <th style={{ borderBottom: "1px solid #555" }}>ID</th>
+              <th style={{ borderBottom: "1px solid #555" }}>Email</th>
+              <th style={{ borderBottom: "1px solid #555" }}>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((u) => (
+              <tr key={u.id}>
+                <td>{u.id}</td>
+                <td>{u.email}</td>
+                <td>{u.role}</td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id}>
-                  <td>{u.id}</td>
-                  <td>{u.email}</td>
-                  <td>{u.role}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="actions" style={{ marginTop: "20px" }}>
-            <button className="btn secondary" onClick={onLogout}>
-              Logout
-            </button>
-          </div>
+            ))}
+          </tbody>
+        </table>
+        <div className="actions" style={{ marginTop: "20px" }}>
+          <button className="btn secondary" onClick={onLogout}>
+            Logout
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -272,30 +284,27 @@ function UserDashboard({ onLogout }) {
   ];
 
   return (
-    <>
-      <GlobalStyles />
-      <div className="page page-centered">
-        <div className="card" style={{ maxWidth: "800px" }}>
-          <div className="brand-row">
-            <Logo />
-            <h1 className="brand">Mindheaven</h1>
-          </div>
-          <h2 className="title">Welcome User</h2>
-          <Section title="Recommended Blogs" items={blogs} />
-          <Section title="Videos & Podcasts" items={videos} />
-          <Section title="Community Highlights" items={forums} />
-          <div className="actions" style={{ marginTop: "20px" }}>
-            <button className="btn secondary" onClick={onLogout}>
-              Logout
-            </button>
-          </div>
+    <div className="page page-centered">
+      <div className="card" style={{ maxWidth: "800px" }}>
+        <div className="brand-row">
+          <Logo />
+          <h1 className="brand">MindHeaven</h1>
+        </div>
+        <h2 className="title">Welcome User</h2>
+        <Section title="Recommended Blogs" items={blogs} />
+        <Section title="Videos & Podcasts" items={videos} />
+        <Section title="Community Highlights" items={forums} />
+        <div className="actions" style={{ marginTop: "20px" }}>
+          <button className="btn secondary" onClick={onLogout}>
+            Logout
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-// ---------------- REUSABLE SECTION ----------------
+// ---------------- SECTION ----------------
 function Section({ title, items }) {
   return (
     <div style={{ margin: "20px 0" }}>
@@ -338,7 +347,7 @@ function Logo() {
   );
 }
 
-// ---------------- STYLES ----------------
+// ---------------- GLOBAL STYLES ----------------
 function GlobalStyles() {
   return (
     <style>{`
@@ -347,27 +356,54 @@ function GlobalStyles() {
         background: linear-gradient(to bottom right, rgba(15,23,42,0.6), rgba(2,6,23,0.6)),
         url('https://images.unsplash.com/photo-1523246191871-c0aa1a3d79d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
       }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(90deg, #4c6ef5, #15aabf);
+        color: white;
+        padding: 15px 25px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo { cursor: pointer; }
+      .nav-links { display: flex; gap: 10px; }
+      .nav-links button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+      .nav-links button:hover { background: rgba(255,255,255,0.4); }
+
+      .hamburger { display: none; flex-direction: column; cursor: pointer; }
+      .bar { height: 3px; width: 25px; background-color: white; margin: 4px 0; transition: 0.3s; }
+
+      @media (max-width: 768px) {
+        .nav-links { 
+          position: absolute; top: 70px; right: 0; background: #4c6ef5; 
+          flex-direction: column; align-items: flex-start; width: 100%; 
+          max-height: 0; overflow: hidden; transition: max-height 0.3s ease; 
+        }
+        .nav-links.open { max-height: 200px; }
+        .hamburger { display: flex; }
+      }
+
       .card { width: 100%; max-width: 440px; padding: 28px;
         background: rgba(255,255,255,0.08); border-radius: 18px;
         backdrop-filter: blur(12px); color: #fff; }
       .brand-row { display: flex; align-items: center; gap: 10px; }
       .brand { font-weight: 700; font-size: 22px; background: linear-gradient(90deg, #8EC5FC, #E0C3FC);
-        -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .title { margin-top: 12px; font-size: 22px; }
+        -webkit-background-clip: text; color: transparent; }
       .form { display: grid; gap: 12px; }
-      .label { font-size: 13px; }
       .input { width: 100%; padding: 10px; border-radius: 12px; border: none; }
-      .password { position: relative; }
-      .eye { position: absolute; right: 8px; top: 8px; background: transparent; border: none; cursor: pointer; color: #ddd; }
       .actions { display: flex; gap: 10px; margin-top: 12px; }
-      .btn { padding: 10px 14px; border-radius: 12px; cursor: pointer; border: none; }
+      .btn { padding: 10px 14px; border-radius: 12px; border: none; cursor: pointer; }
       .btn.primary { background: linear-gradient(90deg, #8EC5FC, #E0C3FC); color: #000; font-weight: 600; }
       .btn.secondary { background: rgba(255,255,255,0.2); color: #fff; }
       .btn.link { background: none; color: #bbb; text-decoration: underline; }
-      h3 { margin-top: 18px; }
     `}</style>
   );
 }
 
 export default App;
+
 
