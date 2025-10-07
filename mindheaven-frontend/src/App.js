@@ -1,409 +1,58 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState } from "react";
 import HomePage from "./Homepage";
+import Login from "./login";
+import Signup from "./signup";
+import UserDashboard from "./userdashboard";
+import AdminDashboard from "./admindashboard";
+import "./App.css";
 
 function App() {
-  const [view, setView] = useState("home");
-  const [role, setRole] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [page, setPage] = useState("home");
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
 
-  // -------- API Calls --------
-  const handleLogin = async (email, password) => {
-    const res = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      setRole(data.role);
-      setView("dashboard");
-    } else {
-      alert(data.message || "Login failed");
-    }
+  const handleLogin = (userRole, userEmail) => {
+    setRole(userRole);
+    setEmail(userEmail);
+    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
   };
-
-  const handleSignup = async (email, password) => {
-    const res = await fetch("http://localhost:5000/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    alert(data.message);
-    if (data.success) setView("login");
-  };
-
-  // -------- Header Component --------
-  const Header = () => (
-    <header className="app-header">
-      <h1 className="logo" onClick={() => setView("home")}>
-        MindHeaven
-      </h1>
-
-      <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-        <button onClick={() => setView("home")}>Home</button>
-        <button onClick={() => setView("login")}>Login</button>
-        <button onClick={() => setView("signup")}>Sign Up</button>
-      </nav>
-
-      <div
-        className={`hamburger ${menuOpen ? "open" : ""}`}
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
-      </div>
-    </header>
-  );
-
-  // -------- View Rendering --------
-  let content;
-  if (view === "home")
-    content = <HomePage goToLogin={() => setView("login")} />;
-  else if (view === "dashboard")
-    content =
-      role === "admin" ? (
-        <AdminDashboard onLogout={() => setView("login")} />
-      ) : (
-        <UserDashboard onLogout={() => setView("login")} />
-      );
-  else if (view === "signup")
-    content = (
-      <SignupPage
-        onSignup={handleSignup}
-        switchToLogin={() => setView("login")}
-      />
-    );
-  else
-    content = (
-      <LoginPage
-        onLogin={handleLogin}
-        switchToSignup={() => setView("signup")}
-      />
-    );
 
   return (
     <div className="App">
-      <Header />
-      <main className="main-content">{content}</main>
-      <GlobalStyles />
+      {page === "home" && (
+        <HomePage
+          goToLogin={() => setPage("login")}
+          goToSignup={() => setPage("signup")}
+        />
+      )}
+      {page === "login" && (
+        <Login
+          goToSignup={() => setPage("signup")}
+          onLogin={handleLogin}
+          goToHome={() => setPage("home")}
+        />
+      )}
+      {page === "signup" && (
+        <Signup
+          goToLogin={() => setPage("login")}
+          goToHome={() => setPage("home")}
+        />
+      )}
+      {page === "userDashboard" && (
+        <UserDashboard email={email} goToHome={() => setPage("home")} />
+      )}
+      {page === "adminDashboard" && (
+        <AdminDashboard email={email} goToHome={() => setPage("home")} />
+      )}
     </div>
-  );
-}
-
-// ---------------- LOGIN PAGE ----------------
-function LoginPage({ onLogin, switchToSignup }) {
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [show, setShow] = useState(false);
-
-  return (
-    <div className="page page-centered">
-      <div className="card">
-        <div className="brand-row">
-          <Logo />
-          <h1 className="brand">MindHeaven</h1>
-        </div>
-        <h2 className="title">Sign in</h2>
-        <form
-          className="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            onLogin(email, pwd);
-          }}
-        >
-          <label className="label">Email</label>
-          <input
-            className="input"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <label className="label">Password</label>
-          <div className="input-wrap password">
-            <input
-              className="input"
-              type={show ? "text" : "password"}
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className="eye"
-              onClick={() => setShow(!show)}
-            >
-              {show ? "🙈" : "👁️"}
-            </button>
-          </div>
-
-          <div className="actions">
-            <button className="btn primary" type="submit">
-              Login
-            </button>
-            <button className="btn link" type="button" onClick={switchToSignup}>
-              Create Account
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// ---------------- SIGNUP PAGE ----------------
-function SignupPage({ onSignup, switchToLogin }) {
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [show, setShow] = useState(false);
-
-  return (
-    <div className="page page-centered">
-      <div className="card">
-        <div className="brand-row">
-          <Logo />
-          <h1 className="brand">MindHeaven</h1>
-        </div>
-        <h2 className="title">Create account</h2>
-        <form
-          className="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSignup(email, pwd);
-          }}
-        >
-          <label className="label">Email</label>
-          <input
-            className="input"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <label className="label">Password</label>
-          <div className="input-wrap password">
-            <input
-              className="input"
-              type={show ? "text" : "password"}
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className="eye"
-              onClick={() => setShow(!show)}
-            >
-              {show ? "🙈" : "👁️"}
-            </button>
-          </div>
-
-          <div className="actions">
-            <button className="btn primary" type="submit">
-              Sign Up
-            </button>
-            <button className="btn link" type="button" onClick={switchToLogin}>
-              Back to Login
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// ---------------- ADMIN DASHBOARD ----------------
-function AdminDashboard({ onLogout }) {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
-
-  return (
-    <div className="page page-centered">
-      <div className="card" style={{ maxWidth: "800px" }}>
-        <div className="brand-row">
-          <Logo />
-          <h1 className="brand">MindHeaven Admin</h1>
-        </div>
-        <h2 className="title">Users Data</h2>
-        <table
-          style={{
-            width: "100%",
-            marginTop: "12px",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ borderBottom: "1px solid #555" }}>ID</th>
-              <th style={{ borderBottom: "1px solid #555" }}>Email</th>
-              <th style={{ borderBottom: "1px solid #555" }}>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u.id}>
-                <td>{u.id}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="actions" style={{ marginTop: "20px" }}>
-          <button className="btn secondary" onClick={onLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---------------- USER DASHBOARD ----------------
-function UserDashboard({ onLogout }) {
-  const blogs = [
-    { title: "5 Ways to Reduce Stress", preview: "Simple daily habits..." },
-    { title: "Meditation Basics", preview: "How to start today..." },
-  ];
-  const videos = [
-    { title: "Mindfulness 101", preview: "Video intro..." },
-    { title: "Yoga for Anxiety", preview: "Follow along..." },
-  ];
-  const forums = [
-    { title: "Coping with Exams", preview: "Share tips..." },
-    { title: "Workplace Stress", preview: "Discuss burnout..." },
-  ];
-
-  return (
-    <div className="page page-centered">
-      <div className="card" style={{ maxWidth: "800px" }}>
-        <div className="brand-row">
-          <Logo />
-          <h1 className="brand">MindHeaven</h1>
-        </div>
-        <h2 className="title">Welcome User</h2>
-        <Section title="Recommended Blogs" items={blogs} />
-        <Section title="Videos & Podcasts" items={videos} />
-        <Section title="Community Highlights" items={forums} />
-        <div className="actions" style={{ marginTop: "20px" }}>
-          <button className="btn secondary" onClick={onLogout}>
-            Logout
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ---------------- SECTION ----------------
-function Section({ title, items }) {
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <h3>{title}</h3>
-      <div style={{ display: "flex", gap: "12px", overflowX: "auto" }}>
-        {items.map((it, i) => (
-          <div
-            key={i}
-            style={{
-              minWidth: "200px",
-              padding: "12px",
-              background: "#222",
-              borderRadius: "12px",
-            }}
-          >
-            <h4>{it.title}</h4>
-            <p style={{ fontSize: "13px" }}>{it.preview}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ---------------- LOGO ----------------
-function Logo() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" className="logo">
-      <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#8EC5FC" />
-          <stop offset="100%" stopColor="#E0C3FC" />
-        </linearGradient>
-      </defs>
-      <path
-        fill="url(#g)"
-        d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"
-      />
-    </svg>
-  );
-}
-
-// ---------------- GLOBAL STYLES ----------------
-function GlobalStyles() {
-  return (
-    <style>{`
-      body { margin: 0; font-family: Inter, sans-serif; }
-      .page { min-height: 100vh; display: grid; place-items: center;
-        background: linear-gradient(to bottom right, rgba(15,23,42,0.6), rgba(2,6,23,0.6)),
-        url('https://images.unsplash.com/photo-1523246191871-c0aa1a3d79d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
-      }
-
-      .app-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: linear-gradient(90deg, #4c6ef5, #15aabf);
-        color: white;
-        padding: 15px 25px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      .logo { cursor: pointer; }
-      .nav-links { display: flex; gap: 10px; }
-      .nav-links button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
-      .nav-links button:hover { background: rgba(255,255,255,0.4); }
-
-      .hamburger { display: none; flex-direction: column; cursor: pointer; }
-      .bar { height: 3px; width: 25px; background-color: white; margin: 4px 0; transition: 0.3s; }
-
-      @media (max-width: 768px) {
-        .nav-links { 
-          position: absolute; top: 70px; right: 0; background: #4c6ef5; 
-          flex-direction: column; align-items: flex-start; width: 100%; 
-          max-height: 0; overflow: hidden; transition: max-height 0.3s ease; 
-        }
-        .nav-links.open { max-height: 200px; }
-        .hamburger { display: flex; }
-      }
-
-      .card { width: 100%; max-width: 440px; padding: 28px;
-        background: rgba(255,255,255,0.08); border-radius: 18px;
-        backdrop-filter: blur(12px); color: #fff; }
-      .brand-row { display: flex; align-items: center; gap: 10px; }
-      .brand { font-weight: 700; font-size: 22px; background: linear-gradient(90deg, #8EC5FC, #E0C3FC);
-        -webkit-background-clip: text; color: transparent; }
-      .form { display: grid; gap: 12px; }
-      .input { width: 100%; padding: 10px; border-radius: 12px; border: none; }
-      .actions { display: flex; gap: 10px; margin-top: 12px; }
-      .btn { padding: 10px 14px; border-radius: 12px; border: none; cursor: pointer; }
-      .btn.primary { background: linear-gradient(90deg, #8EC5FC, #E0C3FC); color: #000; font-weight: 600; }
-      .btn.secondary { background: rgba(255,255,255,0.2); color: #fff; }
-      .btn.link { background: none; color: #bbb; text-decoration: underline; }
-    `}</style>
   );
 }
 
 export default App;
+
+
+
+
 
 

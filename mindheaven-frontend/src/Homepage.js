@@ -1,76 +1,158 @@
-import React from "react";
-import "./Homepage.css";
 
-function HomePage({ goToLogin }) {
+
+import React from "react";
+import "./App.css";
+
+function HomePage({ goToLogin, goToSignup }) {
   return (
     <div className="homepage">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">Welcome to MindHeaven</h1>
-          <p className="hero-subtitle">
-            Discover peace, clarity, and balance. Your journey to mental wellness starts here.
-          </p>
+      {/* ---------- NAVBAR ---------- */}
+      <nav className="navbar">
+        <div className="logo">Mind Heaven</div>
+        <ul className="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Wellness</a></li>
+          <li><a href="#">Games</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Blogs</a></li>
+        </ul>
+        <div className="nav-buttons">
+          <button className="nav-btn" onClick={goToLogin}>Login</button>
+          <button className="nav-btn signup-btn" onClick={goToSignup}>Sign Up</button>
+        </div>
+      </nav>
+
+      {/* ---------- HERO SECTION ---------- */}
+      <section className="hero-section">
+        <div className="hero-text">
+          <h1>Your mind deserves the same care as your body</h1>
+          <p>Nurture it with peace and balance.</p>
           <div className="hero-buttons">
-            <button className="primary-btn" onClick={goToLogin}>
-              Get Started
+            <button className="btn-primary" onClick={goToLogin}>
+              Explore Wellness
             </button>
-            <button
-              className="secondary-btn"
-              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })}
-            >
-              Learn More
-            </button>
+            <button className="btn-secondary">View Blogs</button>
           </div>
         </div>
         <div className="hero-image">
           <img
-            src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1000&q=80"
-            alt="Mindful meditation illustration"
+            src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+            alt="Meditation illustration"
           />
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="about">
-        <h2>What is MindHeaven?</h2>
-        <p>
-          MindHeaven is your safe digital space for mental wellness — combining guided meditation,
-          community support, and mood tracking to help you live a calmer and more balanced life.
-        </p>
-      </section>
-
-      {/* Features Section */}
-      <section className="features">
-        <div className="feature-card">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/2920/2920264.png"
-            alt="Meditation"
-          />
-          <h3>Guided Meditation</h3>
-          <p>Explore soothing meditation sessions designed to help you unwind and reconnect.</p>
-        </div>
-        <div className="feature-card">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/833/833472.png"
-            alt="Mood Tracker"
-          />
-          <h3>Mood Tracking</h3>
-          <p>Keep track of your emotions and see your progress toward emotional stability.</p>
-        </div>
-        <div className="feature-card">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/1087/1087927.png"
-            alt="Community"
-          />
-          <h3>Supportive Community</h3>
-          <p>Connect with people who care — share experiences and grow together.</p>
+      {/* ---------- FEATURES SECTION ---------- */}
+      <section className="features-section">
+        <h2>What we provide</h2>
+        <p>Everything you need for a healthier, calmer mind</p>
+        <div className="features-grid">
+          <div className="feature-card">
+            <h3>🧘‍♀️ Meditation & Exercise</h3>
+            <p>Practice mindfulness and energize your body with guided sessions.</p>
+          </div>
+          <div className="feature-card">
+            <h3>🎵 Songs & Music</h3>
+            <p>Boost your spirit with soothing playlists made for your mood.</p>
+          </div>
+          <div className="feature-card">
+            <h3>🧠 Thought Tracker</h3>
+            <p>Record, reflect, and track your emotions with ease.</p>
+          </div>
+          <div className="feature-card">
+            <h3>💡 Mental Health Tips</h3>
+            <p>Simple science-based advice for everyday wellness.</p>
+          </div>
+          <div className="feature-card">
+            <h3>🎮 Games</h3>
+            <p>Fun ways to reduce stress while staying mindful.</p>
+          </div>
+          <div className="feature-card">
+            <h3>📝 Blogs</h3>
+            <p>Explore expert insights and personal stories that inspire growth.</p>
+          </div>
         </div>
       </section>
 
-      {/* Footer Section */}
+      {/* ---------- STATS SECTION ---------- */}
+      <section className="stats-section">
+        <h2>Did you know?</h2>
+        <p>The truth about mental health</p>
+        <div className="stats-grid">
+          <div className="stat">
+            <h3>1+</h3>
+            <p>People live with a mental health disorder</p>
+          </div>
+          <div className="stat">
+            <h3>7 Lakh</h3>
+            <p>Lose their lives to suicide each year</p>
+          </div>
+          <div className="stat">
+            <h3>1 in 7</h3>
+            <p>Individuals experience a mental health condition</p>
+          </div>
+          <div className="stat">
+            <h3>$1 Trillion/yr</h3>
+            <p>Depression & anxiety cost the global economy annually</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- BLOG SECTION ---------- */}
+      <section className="blog-section">
+        <h2>Blogs Section</h2>
+        <p>Articles and tips to improve mental health</p>
+        <div className="blog-grid">
+          <div className="blog-card">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3458/3458595.png"
+              alt="Anxiety"
+            />
+            <h3>Tips to control anxiety</h3>
+            <p>Learn simple methods to manage anxiety effectively.</p>
+          </div>
+          <div className="blog-card">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3940/3940056.png"
+              alt="Depression"
+            />
+            <h3>Tips to reduce depression</h3>
+            <p>Discover ways to improve your mood naturally.</p>
+          </div>
+          <div className="blog-card">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/4825/4825112.png"
+              alt="Stress management"
+            />
+            <h3>Tips to reduce stress</h3>
+            <p>Balance your life with relaxation and mindfulness.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- TESTIMONIAL SECTION ---------- */}
+      <section className="testimonial-section">
+        <h2>Hear from our users</h2>
+        <p>Real stories of growth, healing, and positive change</p>
+        <div className="testimonial-grid">
+          <div className="testimonial">
+            <p>
+              “Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”
+            </p>
+            <h4>— Roger Workman</h4>
+          </div>
+          <div className="testimonial">
+            <p>
+              “The meditation and games are so helpful! My mental health has improved significantly.”
+            </p>
+            <h4>— Aditi Sharma</h4>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- FOOTER ---------- */}
       <footer className="footer">
-        <p>© 2025 MindHeaven. All Rights Reserved.</p>
+        <p>© 2025 Mind Heaven | Designed to make mental health accessible for everyone.</p>
       </footer>
     </div>
   );
@@ -78,5 +160,3 @@ function HomePage({ goToLogin }) {
 
 export default HomePage;
 
-
- 
