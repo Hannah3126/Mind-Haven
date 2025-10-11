@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./App.css";
+import "./Homepage.css";
 import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -29,100 +30,100 @@ function HomePage({ goToLogin, goToSignup }) {
       </nav>
 
       {/* ---------- HERO SECTION ---------- */}
-      
-<section
-  className="hero-section"
-  style={{
-    // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home.png'})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    color: "#fff",
-    padding: "70px 70px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    borderRadius: "25px",
-    minHeight: "60vh",
-    position: "relative",
-    zIndex: 1,
-    margin: "10px auto 40px auto",
-    width: "85%",
-    overflow: "hidden",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
-  }}
->
-  <div
-    className="hero-text"
-    style={{
-      maxWidth: "70%",
-      padding: "20px 0",
-      textAlign: "left",
-    }}
-  >
-    <h1
-      style={{
-        
-        color: "black",
-        fontSize: "2.2rem",
-        marginBottom: "12px",
-        lineHeight: "1.2",
-        fontWeight: "600",
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)", // makes text readable on bright areas
-      }}
-    >
-      Your mind deserves the same care as your body
-    </h1>
 
-    <p
-      style={{
-        color: "black",
-        fontSize: "1rem",
-        marginBottom: "20px",
-        textShadow: "1px 1px 4px rgba(0, 0, 0, 0.4)",
-      }}
-    >
-      Nurture it with peace and balance.
-    </p>
-
-    <div className="hero-buttons" style={{ display: "flex", gap: "12px" }}>
-      <button
-        className="btn-primary"
+      <section
+        className="hero-section"
         style={{
-          backgroundColor: "#4c6ef5",
+          // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home.png'})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           color: "#fff",
-          padding: "10px 22px",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "600",
+          padding: "70px 70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          borderRadius: "25px",
+          minHeight: "60vh",
+          position: "relative",
+          zIndex: 1,
+          margin: "10px auto 40px auto",
+          width: "85%",
+          overflow: "hidden",
+          boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
         }}
-        onClick={goToLogin}
       >
-        Explore Wellness
-      </button>
+        <div
+          className="hero-text"
+          style={{
+            maxWidth: "70%",
+            padding: "20px 0",
+            textAlign: "left",
+          }}
+        >
+          <h1
+            style={{
 
-      <button
-        className="btn-secondary"
-        style={{
-          backgroundColor: "#fff",
-          color: "#4c6ef5",
-          padding: "10px 22px",
-          border: "2px solid #4a90e2",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "600",
-          
-        }}
-      >
-        View Blogs
-      </button>
-    </div>
-  </div>
-</section>
+              color: "black",
+              fontSize: "2.2rem",
+              marginBottom: "12px",
+              lineHeight: "1.2",
+              fontWeight: "600",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)", // makes text readable on bright areas
+            }}
+          >
+            Your mind deserves the same care as your body
+          </h1>
+
+          <p
+            style={{
+              color: "black",
+              fontSize: "1rem",
+              marginBottom: "20px",
+              textShadow: "1px 1px 4px rgba(0, 0, 0, 0.4)",
+            }}
+          >
+            Nurture it with peace and balance.
+          </p>
+
+          <div className="hero-buttons" style={{ display: "flex", gap: "12px" }}>
+            <button
+              className="btn-primary"
+              style={{
+                backgroundColor: "#4c6ef5",
+                color: "#fff",
+                padding: "10px 22px",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer",
+                fontWeight: "600",
+              }}
+              onClick={goToLogin}
+            >
+              Explore Wellness
+            </button>
+
+            <button
+              className="btn-secondary"
+              style={{
+                backgroundColor: "#fff",
+                color: "#4c6ef5",
+                padding: "10px 22px",
+                border: "2px solid #4a90e2",
+                borderRadius: "8px",
+                cursor: "pointer",
+                fontWeight: "600",
+
+              }}
+            >
+              View Blogs
+            </button>
+          </div>
+        </div>
+      </section>
 
 
 
@@ -137,13 +138,13 @@ function HomePage({ goToLogin, goToSignup }) {
       {/* ---------- FEATURES SECTION ---------- */}
       <section className="features-section">
         <h2 className="feature-title" style={{ color: "black" }}>
-  What we <span style={{ color: "#4c6ef5" }}>provide</span>
-</h2>
+          What we <span style={{ color: "#4c6ef5" }}>provide</span>
+        </h2>
         <p>Everything you need for a healthier, calmer mind</p>
         <div className="features-grid">
           <div className="feature-card">
             <a href="/meditation" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
@@ -153,7 +154,7 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
           <div className="feature-card">
             <a href="/songs" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
@@ -163,7 +164,7 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
           <div className="feature-card">
             <a href="/Tracker" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
@@ -173,7 +174,7 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
           <div className="feature-card">
             <a href="/tips" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
@@ -183,7 +184,7 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
           <div className="feature-card">
             <a href="/games" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
@@ -193,7 +194,7 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
           <div className="feature-card">
             <a href="/blogs" className="arrow-icon">
-                 <ArrowUpRight  color="black" />
+              <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
               <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
@@ -206,73 +207,85 @@ function HomePage({ goToLogin, goToSignup }) {
 
       {/* ---------- STATS SECTION ---------- */}
       <section className="did-you-know-section">
-  <div className="did-you-know-card">
-    <h2>Did you know<span className="question-mark">?</span></h2>
-    <p className="subtitle">The Truth About Mental Health</p>
-    <p className="description">
-      Good mental health is the foundation of a happy and meaningful life. 
-      It allows us to manage stress, build strong relationships, and make positive choices. 
-      A healthy mind leads to inner peace and personal growth.
-    </p>
-    <button className="learn-more-btn">Learn more</button>
-  </div>
+        <div className="did-you-know-card">
+          <h2>Did you know<span className="question-mark">?</span></h2>
+          <p className="subtitle">The Truth About Mental Health</p>
+          <p className="description">
+            Good mental health is the foundation of a happy and meaningful life.
+            It allows us to manage stress, build strong relationships, and make positive choices.
+            A healthy mind leads to inner peace and personal growth.
+          </p>
+          <button className="learn-more-btn">Learn more</button>
+        </div>
 
-  <div className="did-you-know-stats">
-    <div className="stat">
-      <h3>1+</h3>
-      <p>People live with a mental health disorder</p>
-    </div>
-    <div className="stat">
-      <h3>7 Lakh</h3>
-      <p>Lose their lives to suicide each year</p>
-    </div>
-    <div className="stat">
-      <h3>1 in 7</h3>
-      <p>Adolescents experience a mental health condition</p>
-    </div>
-    <div className="stat">
-      <h3>5%</h3>
-      <p>Adults are affected by depression</p>
-    </div>
-    <div className="stat">
-      <h3>75%</h3>
-      <p>People in low-income countries receive no treatment</p>
-    </div>
-    <div className="stat">
-      <h3>$1 Trillion/yr</h3>
-      <p>Depression & anxiety cost the global economy annually</p>
-    </div>
-  </div>
-</section>
+        <div className="did-you-know-stats">
+          <div className="stat">
+            <h3>1+</h3>
+            <p>People live with a mental health disorder</p>
+          </div>
+          <div className="stat">
+            <h3>7 Lakh</h3>
+            <p>Lose their lives to suicide each year</p>
+          </div>
+          <div className="stat">
+            <h3>1 in 7</h3>
+            <p>Adolescents experience a mental health condition</p>
+          </div>
+          <div className="stat">
+            <h3>5%</h3>
+            <p>Adults are affected by depression</p>
+          </div>
+          <div className="stat">
+            <h3>75%</h3>
+            <p>People in low-income countries receive no treatment</p>
+          </div>
+          <div className="stat">
+            <h3>$1 Trillion/yr</h3>
+            <p>Depression & anxiety cost the global economy annually</p>
+          </div>
+        </div>
+      </section>
 
 
 
       {/* ---------- BLOG SECTION ---------- */}
       <section className="blog-section">
         <h2>Blogs Section</h2>
-        <p>Articles and tips to improve mental health</p>
+        <p className="blog-caption">Articles and tips to improve mental health</p>
         <div className="blog-grid">
           <div className="blog-card">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/3458/3458595.png"
+              src="/blog1.png"
               alt="Anxiety"
             />
+            <div className="blog-meta">
+              <p className="blog-small-title">Anxiety</p>
+              <p className="blog-date">Oct 10, 2025</p>
+            </div>
             <h3>Tips to control anxiety</h3>
             <p>Learn simple methods to manage anxiety effectively.</p>
           </div>
           <div className="blog-card">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/3940/3940056.png"
+              src="/blog2.png"
               alt="Depression"
             />
+            <div className="blog-meta">
+              <p className="blog-small-title">Anxiety</p>
+              <p className="blog-date">Oct 10, 2025</p>
+            </div>
             <h3>Tips to reduce depression</h3>
             <p>Discover ways to improve your mood naturally.</p>
           </div>
           <div className="blog-card">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/4825/4825112.png"
+              src="/blog3.png"
               alt="Stress management"
             />
+            <div className="blog-meta">
+              <p className="blog-small-title">Anxiety</p>
+              <p className="blog-date">Oct 10, 2025</p>
+            </div>
             <h3>Tips to reduce stress</h3>
             <p>Balance your life with relaxation and mindfulness.</p>
           </div>
@@ -285,16 +298,42 @@ function HomePage({ goToLogin, goToSignup }) {
         <p>Real stories of growth, healing, and positive change</p>
         <div className="testimonial-grid">
           <div className="testimonial">
+            <img src="/female.png" alt="" className="user-icon" />
+            <p className="testinomal-date">1 month ago</p>
+            <h4>Roger Workman</h4>
             <p>
               “Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”
             </p>
-            <h4>— Roger Workman</h4>
+
           </div>
           <div className="testimonial">
+            <img src="/male-user.png" alt="" className="user-icon" />
+            <p className="testinomal-date">1 month ago</p>
+            <h4>Aditi Sharma</h4>
             <p>
               “The meditation and games are so helpful! My mental health has improved significantly.”
             </p>
-            <h4>— Aditi Sharma</h4>
+
+          </div>
+
+          <div className="testimonial">
+            <img src="/female.png" alt="" className="user-icon" />
+            <p className="testinomal-date">1 month ago</p>
+            <h4>Aditi Sharma</h4>
+            <p>
+              “The meditation and games are so helpful! My mental health has improved significantly.”
+            </p>
+
+          </div>
+          <div className="testimonial">
+            <img src="/male-user.png" alt="" className="user-icon" />
+            <p className="testinomal-date">1 month ago</p>
+            <h4>Aditi Sharma</h4>
+
+            <p>
+              “The meditation and games are so helpful! My mental health has improved significantly.”
+            </p>
+
           </div>
         </div>
       </section>

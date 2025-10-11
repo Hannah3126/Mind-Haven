@@ -3,12 +3,6 @@
 /* ---------- NAVBAR ---------- */
 /* ---------- NAVBAR (replace any existing navbar rules) ---------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
-
-* {
-  font-family: 'Be Vietnam Pro', sans-serif;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -98,7 +92,7 @@
 
 /* HERO SECTION  */
 .hero-section {
-  background-image: url("/public/Home.png");
+  background-image: url("/public/backgroung-img.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -419,21 +413,17 @@
   margin-top: 20px;
 }
 
-.stat {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
 
 .did-you-know-section {
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 60px 10%;
+  padding: 60px 40px;
   gap: 60px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   flex-wrap: wrap;
+  width: 80%;
   /* responsive layout */
 }
 
@@ -488,49 +478,42 @@
 }
 
 /* Right side stats */
+
 .did-you-know-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 columns */
-  grid-auto-rows: auto;
-  /* auto-adjusts height */
+  /* 3 equal columns */
   grid-template-rows: repeat(2, auto);
-
-  text-align: center;
-  /* padding: 40px 5%; */
-  gap: 30px 0;
-  /* vertical spacing only */
-  position: relative;
+  /* 2 rows */
+  gap: 15px;
+  padding-top: 20px;
+  flex: 1;
+  /* space between items */
 }
 
 .stat {
+  display: inline;
   /* flex: 1; */
   min-width: 150px;
-  padding: 0 25px;
+  text-align: start;
+  padding-right: 5px;
   position: relative;
 }
 
-/* Vertical divider lines */
+/* 
+Vertical divider lines */
 .stat:not(:nth-child(3n))::after {
 
   content: "";
   position: absolute;
   top: 10%;
   right: 0;
-  height: 60%;
+  height: 75%;
   width: 1px;
-  background-color: #cfcfcf;
+  background-color: black;
 }
 
-.stat:nth-child(n + 4)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background-color: #cfcfcf;
-}
+
 
 
 /* Headings (numbers) */
@@ -545,7 +528,7 @@
 .stat p {
   font-size: 0.95rem;
   color: #555;
-  line-height: 1.4;
+
 }
 
 /* Responsive view */
@@ -579,36 +562,94 @@
 .blog-section {
   text-align: center;
   padding: 60px 10%;
+
+}
+
+.blog-section h2 {
+  color: #6B8DE9;
+  font-weight: 500;
+}
+
+.blog-section p {
+
+  font-weight: 200;
+}
+
+.blog-section {
+  width: 80%;
+  color: #333333;
 }
 
 .blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  margin-top: 30px;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
 }
 
 .blog-card {
   background: white;
-  padding: 20px;
+  padding: 20px 20px;
   border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 6px #6B8DE9;
+}
+
+.blog-card:hover {
+  /* changes background on hover */
+  transform: translateY(-5px);
+  /* moves card slightly up */
+  box-shadow: 0 5px 10px #6B8DE9;
+  /* adds shadow */
 }
 
 .blog-card img {
-  width: 80px;
-  height: 80px;
+  width: 100%;
   margin-bottom: 15px;
 }
 
+.blog-meta {
+  font-size: 13px;
+  color: #333333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* TESTIMONIALS */
+.user-img {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.user-icon {
+  width: 30%;
+  border-radius: 50%;
+
+}
+
 .testimonial-section {
-  background: #f3f5ff;
   text-align: center;
   padding: 60px 10%;
 }
 
+.testimonial-section h2 {
+  color: #6B8DE9;
+  font-weight: 400;
+}
+
+.testimonial-section p {
+  color: #333333;
+}
+
+.testinomal-date {
+  font-size: 13px;
+
+  color: #333333;
+}
+
 .testimonial-grid {
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -617,11 +658,20 @@
 }
 
 .testimonial {
+  border: 1px solid #6B8DE9;
   background: white;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 200px;
+}
+
+.testimonial:hover {
+  /* changes background on hover */
+  transform: translateY(-5px);
+  /* moves card slightly up */
+  box-shadow: 0 5px 10px black;
+  /* adds shadow */
 }
 
 /* FOOTER */

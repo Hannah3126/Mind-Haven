@@ -1,6 +1,14 @@
 /* Homepage.css */
 
 /* Main container */
+
+.be-vietnam-pro-thin {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
 .homepage {
   display: flex;
   flex-direction: column;
