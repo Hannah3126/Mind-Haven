@@ -430,12 +430,43 @@
 /* Left card */
 .did-you-know-card {
   background-color: #fff;
-  border: 2px solid #d0d0d0;
+  border: 2px solid #4c6ef5;
   border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(202, 183, 183, 0.6);
+
+
   padding: 35px;
   width: 360px;
   min-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.did-you-know-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(76, 110, 245, 0.25);
+  background-color: #4c6ef5;
+  color: #fff;
+  border: 2px solid #555;
+}
+
+.did-you-know-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px; /* increased from 10px to 18px */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+
+.did-you-know-card:hover h2,
+.did-you-know-card:hover p,
+.did-you-know-card:hover .subtitle,
+.did-you-know-card:hover .learn-more-btn {
+  color: #fff;
 }
 
 .did-you-know-card h2 {
@@ -445,8 +476,18 @@
   margin-bottom: 5px;
 }
 
-.question-mark {
+.question-icon {
   color: #4c6ef5;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-top: 2px;
+  vertical-align: middle;
+  margin-left: 0;
+}
+
+/* When hovering the entire card */
+.did-you-know-card:hover .question-icon {
+  color: #fff; /* icon turns white */
+  /* transform: scale(1.2) rotate(8deg); */
 }
 
 .did-you-know-card .subtitle {
@@ -561,13 +602,16 @@ Vertical divider lines */
 /* BLOG */
 .blog-section {
   text-align: center;
-  padding: 60px 10%;
+  padding: 40px 10% 60px;
+  width:80%;
+  margin-top: 0;
 
 }
 
 .blog-section h2 {
   color: #6B8DE9;
   font-weight: 500;
+  font-size: 2rem;
 }
 
 .blog-section p {
@@ -581,31 +625,63 @@ Vertical divider lines */
 }
 
 .blog-grid {
-  text-align: start;
+  padding-top: 40px;
   display: flex;
   justify-content: center;
-  gap: 60px;
+  flex-wrap: wrap;   /* allows responsive wrapping */
+  gap: 80px;         /* space between cards */
+  text-align: start;
 }
 
 .blog-card {
   background: white;
-  padding: 20px 20px;
+  border: 1px solid #4c6ef5;
   border-radius: 15px;
-  box-shadow: 0 1px 6px #6B8DE9;
+  box-shadow: 0 6px 15px rgba(76, 110, 245, 0.25);
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
 }
 
 .blog-card:hover {
-  /* changes background on hover */
-  transform: translateY(-5px);
-  /* moves card slightly up */
-  box-shadow: 0 5px 10px #6B8DE9;
-  /* adds shadow */
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(76, 110, 245, 0.35); /* soft glow */
 }
 
 .blog-card img {
   width: 100%;
+  border-radius: 10px;
   margin-bottom: 15px;
+  object-fit: cover;
 }
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 15px;
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  gap: 4px;
+}
+
+.read-more:hover {
+  color: #3b5bdb;
+}
+
+.read-more svg {
+  margin-left: 6px;
+  transition: transform 0.3s ease;
+}
+
+.read-more:hover svg {
+  transform: translateX(4px);
+}
+
 
 .blog-meta {
   font-size: 13px;
@@ -613,6 +689,41 @@ Vertical divider lines */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px; /* ⬅️ reduced from default (often ~15–20px) */
+}
+
+.blog-card h3 {
+  margin-top: 5px; /* ⬅️ reduces the space above the heading */
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.view-more-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.view-more-btn {
+  background-color: #4c6ef5;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-more-btn:hover {
+  background-color: #3b5bdb;
+  transform: translateY(-2px);
+}
+
+.blog-subtitle {
+  font-weight: 300;
+  color: #444;
+  margin-bottom: 40px;
+  font-size: 1rem;
 }
 
 /* TESTIMONIALS */
@@ -623,29 +734,48 @@ Vertical divider lines */
 }
 
 .user-icon {
-  width: 30%;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  /* border: 3px solid #6B8DE9; */
+  object-fit: cover;
+  margin: 0 auto 8px auto; /* centers image and reduces gap below */
+  display: block; /* ensures margin auto works */
+}
 
+
+.testimonial h4 {
+  margin-top: 4px;
+  margin-bottom: 2px; /* less space between name and date */
+  text-align: center; /* reduced top margin */
+  font-weight: 600;
+  color: #333;
+  
 }
 
 .testimonial-section {
   text-align: center;
   padding: 60px 10%;
+  padding: 30px 10% 60px 10%; /* reduced top padding */
+  margin-top: -20px;
 }
 
 .testimonial-section h2 {
   color: #6B8DE9;
   font-weight: 400;
+  font-size: 2rem;
 }
 
 .testimonial-section p {
   color: #333333;
+  font-size: 14px;
 }
 
 .testinomal-date {
-  font-size: 13px;
-
+  font-size: 10px;
+  margin-bottom: 20px;
   color: #333333;
+  margin-top: 0px;
 }
 
 .testimonial-grid {
@@ -653,24 +783,27 @@ Vertical divider lines */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
+  gap: 40px;
   margin-top: 30px;
 }
 
 .testimonial {
-  border: 1px solid #6B8DE9;
+  border: 2px solid #6B8DE9;
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 200px;
+  box-shadow: 0 6px 18px rgba(107, 141, 233, 0.4);
+  max-width: 210px;
+  max-height: 250px;
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .testimonial:hover {
   /* changes background on hover */
   transform: translateY(-5px);
   /* moves card slightly up */
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
   /* adds shadow */
 }
 

@@ -5,6 +5,9 @@ import "./App.css";
 import "./Homepage.css";
 import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
+import { HelpCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
 
 
 
@@ -103,7 +106,7 @@ function HomePage({ goToLogin, goToSignup }) {
               }}
               onClick={goToLogin}
             >
-              Explore Wellness
+              Schedule Appointment
             </button>
 
             <button
@@ -119,7 +122,7 @@ function HomePage({ goToLogin, goToSignup }) {
 
               }}
             >
-              View Blogs
+              Emergency 
             </button>
           </div>
         </div>
@@ -208,19 +211,23 @@ function HomePage({ goToLogin, goToSignup }) {
       {/* ---------- STATS SECTION ---------- */}
       <section className="did-you-know-section">
         <div className="did-you-know-card">
-          <h2>Did you know<span className="question-mark">?</span></h2>
+          <h2 className="did-you-know-heading">
+  Did you know 
+  <HelpCircle className="question-icon" size={30} />
+</h2>
+
           <p className="subtitle">The Truth About Mental Health</p>
           <p className="description">
             Good mental health is the foundation of a happy and meaningful life.
             It allows us to manage stress, build strong relationships, and make positive choices.
             A healthy mind leads to inner peace and personal growth.
           </p>
-          <button className="learn-more-btn">Learn more</button>
+          {/* <button className="learn-more-btn">Learn more</button> */}
         </div>
 
         <div className="did-you-know-stats">
           <div className="stat">
-            <h3>1+</h3>
+            <h3>1 Billion</h3>
             <p>People live with a mental health disorder</p>
           </div>
           <div className="stat">
@@ -263,7 +270,11 @@ function HomePage({ goToLogin, goToSignup }) {
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to control anxiety</h3>
-            <p>Learn simple methods to manage anxiety effectively.</p>
+            <a href="/blogs/1" className="read-more">
+                
+             <ArrowRight size={16} strokeWidth={2.5} />
+             Read more
+             </a>
           </div>
           <div className="blog-card">
             <img
@@ -275,7 +286,11 @@ function HomePage({ goToLogin, goToSignup }) {
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce depression</h3>
-            <p>Discover ways to improve your mood naturally.</p>
+            <a href="/blogs/1" className="read-more">
+                
+             <ArrowRight size={16} strokeWidth={2.5} />
+             Read more
+             </a>
           </div>
           <div className="blog-card">
             <img
@@ -287,8 +302,18 @@ function HomePage({ goToLogin, goToSignup }) {
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce stress</h3>
-            <p>Balance your life with relaxation and mindfulness.</p>
+            <a href="/blogs/1" className="read-more">
+                
+             <ArrowRight size={16} strokeWidth={2.5} />
+             Read more
+             </a>
           </div>
+          </div>
+
+  {/* View More button section */}
+  <div className="view-more-container">
+    <button className="view-more-btn">View More</button>
+  <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
         </div>
       </section>
 
@@ -298,18 +323,20 @@ function HomePage({ goToLogin, goToSignup }) {
         <p>Real stories of growth, healing, and positive change</p>
         <div className="testimonial-grid">
           <div className="testimonial">
-            <img src="/female.png" alt="" className="user-icon" />
+            <img src="/Pic1.png" alt="" className="user-icon" />
+            <h4>Jamin</h4>
             <p className="testinomal-date">1 month ago</p>
-            <h4>Roger Workman</h4>
+            
             <p>
               “Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”
             </p>
 
           </div>
           <div className="testimonial">
-            <img src="/male-user.png" alt="" className="user-icon" />
+            <img src="/pic2.png" alt="" className="user-icon" />
+            <h4>Srija Namala</h4>
             <p className="testinomal-date">1 month ago</p>
-            <h4>Aditi Sharma</h4>
+            
             <p>
               “The meditation and games are so helpful! My mental health has improved significantly.”
             </p>
@@ -317,21 +344,23 @@ function HomePage({ goToLogin, goToSignup }) {
           </div>
 
           <div className="testimonial">
-            <img src="/female.png" alt="" className="user-icon" />
+            <img src="/Pic3.png" alt="" className="user-icon" />
+            <h4>Tejas</h4>
             <p className="testinomal-date">1 month ago</p>
-            <h4>Aditi Sharma</h4>
+            
             <p>
-              “The meditation and games are so helpful! My mental health has improved significantly.”
+              “ For years, I struggled to find a consistent self-care routine, but this app provides the structure and gentle guidance.”
             </p>
 
           </div>
           <div className="testimonial">
-            <img src="/male-user.png" alt="" className="user-icon" />
+            <img src="/Pic4.png" alt="" className="user-icon" />
+            <h4>Hannah Joshua</h4>
             <p className="testinomal-date">1 month ago</p>
-            <h4>Aditi Sharma</h4>
+            
 
             <p>
-              “The meditation and games are so helpful! My mental health has improved significantly.”
+              “The CBT (Cognitive Behavioral Therapy) lessons are short, actionable, and grounded in research.”
             </p>
 
           </div>
@@ -340,7 +369,7 @@ function HomePage({ goToLogin, goToSignup }) {
 
       {/* ---------- FOOTER ---------- */}
       <footer className="footer">
-        <p>© 2025 Mind Heaven | Designed to make mental health accessible for everyone.</p>
+        <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
       </footer>
     </div>
   );
