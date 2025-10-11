@@ -92,7 +92,7 @@
 
 /* HERO SECTION  */
 .hero-section {
-  background-image: url("/public/backgroung-img.png");
+  background-image: url("/public/Home.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -757,7 +757,7 @@ Vertical divider lines */
   text-align: center;
   padding: 60px 10%;
   padding: 30px 10% 60px 10%; /* reduced top padding */
-  margin-top: -20px;
+  margin-top: -25px;
 }
 
 .testimonial-section h2 {

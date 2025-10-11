@@ -37,7 +37,7 @@ function HomePage({ goToLogin, goToSignup }) {
       <section
         className="hero-section"
         style={{
-          // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home.png'})`,
+          // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home1.png'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
