@@ -75,7 +75,7 @@ export default function Tips({ goToHome }) {
   return (
     <div className="tips-page">
       {/* Navbar */}
-      <nav className="tips-navbar">
+      <nav className="navbar">
         <button className="back-button" onClick={goToHome}>
           <ArrowLeft size={18} style={{ marginRight: "6px" }} /> Back
         </button>

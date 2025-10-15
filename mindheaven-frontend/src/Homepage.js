@@ -182,9 +182,9 @@ function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness, 
             <p>Simple science-based advice for everyday wellness.</p>
           </div>
           <div className="feature-card">
-            <a href="/games" className="arrow-icon">
-              <ArrowUpRight color="black" />
-            </a>
+          <button className="arrow-icon" onClick={goToGames}>
+            <ArrowUpRight color="black" />
+          </button>
             <div className="feature-icon">
               <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
             </div>
