@@ -103,24 +103,45 @@ form {
 }
 
 /* Checkbox grid */
-.symptom-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 20px;
-  margin-bottom: 20px;
+/* === Checkboxes and Radio Buttons General Style === */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00bcd4; /* Teal check / active color */
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0; /* prevent squishing */
+}
+
+/* === Group containers === */
+.checkbox-item,
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between the circle/box and the text */
+  font-size: 15px;
   text-align: left;
 }
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #f9f9f9; /* optional for clarity */
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
+/* === Layout grid for multiple options (like symptoms) === */
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* two even columns */
+  gap: 12px 20px;
+  margin-bottom: 20px;
 }
+
+/* === Optional visual polish === */
+
+
+/* === Responsive: one column on small screens === */
+@media (max-width: 600px) {
+  .symptom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 /* Input Groups */
@@ -169,7 +190,7 @@ form {
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0px;
   font-size: 15px;
   color: #333;
   cursor: pointer;
