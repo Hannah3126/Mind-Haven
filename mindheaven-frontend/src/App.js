@@ -8,6 +8,7 @@ import AdminDashboard from "./admindashboard";
 import GamesPage from './Games';
 import WordleGame from './Wordle';
 import ContactUs from "./ContactUs";
+import WellnessPage from "./wellnesspage";
 
 
 
@@ -34,6 +35,7 @@ function App() {
           goToSignup={() => setPage("signup")}
           goToGames={() => setPage("games")}
           goToContact={() => setPage("contact")}
+          goToWellness={() => setPage("wellness")}
         />
       )}
       {page === "login" && (
@@ -66,6 +68,13 @@ function App() {
       )}
       {page === "contact" && (
          <ContactUs goToHome={() => setPage("home")} />
+     )}
+     {page === "wellness" && (
+         <WellnessPage goToHome={() => setPage("home")} 
+         goToLogin={() => setPage("login")}
+         goToSignup={() => setPage("signup")}
+         goToGames={() => setPage("games")}
+         goToContact={() => setPage("contact")}/>
      )}
 
       
