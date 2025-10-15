@@ -9,7 +9,7 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ goToLogin, goToSignup,goToGames }) {
+function HomePage({ goToLogin, goToSignup,goToGames, goToContact }) {
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -19,8 +19,9 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
           <li><a href="#">Home</a></li>
           <li><a href="#">Wellness</a></li>
           <li><a href="#" onClick={goToGames}>Games</a></li>
+          
           <li><a href="#">Blogs</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#" onClick={goToContact}>ContactUs</a></li>
         </ul>
         <div className="nav-buttons">
           <button className="nav-btn" onClick={goToLogin}>Login</button>

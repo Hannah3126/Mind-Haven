@@ -7,6 +7,8 @@ import UserDashboard from "./userdashboard";
 import AdminDashboard from "./admindashboard";
 import GamesPage from './Games';
 import WordleGame from './Wordle';
+import ContactUs from "./ContactUs";
+
 
 
 import "./App.css";
@@ -16,6 +18,7 @@ function App() {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [wordlePage, setWordlePage] = useState(false);
+  
 
   const handleLogin = (userRole, userEmail) => {
     setRole(userRole);
@@ -30,6 +33,7 @@ function App() {
           goToLogin={() => setPage("login")}
           goToSignup={() => setPage("signup")}
           goToGames={() => setPage("games")}
+          goToContact={() => setPage("contact")}
         />
       )}
       {page === "login" && (
@@ -60,6 +64,11 @@ function App() {
       {page === "wordle" && (
         <WordleGame goBack={() => setPage("games")} />
       )}
+      {page === "contact" && (
+         <ContactUs goToHome={() => setPage("home")} />
+     )}
+
+      
     </div>
   );
 }

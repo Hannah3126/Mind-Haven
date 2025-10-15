@@ -105,18 +105,23 @@ form {
 /* Checkbox grid */
 .symptom-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 15px;
-  margin-bottom: 15px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 20px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
 .checkbox-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 10px;
+  background-color: #f9f9f9; /* optional for clarity */
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
 }
+
 
 /* Input Groups */
 .form-group {
