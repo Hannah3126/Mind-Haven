@@ -1,45 +1,94 @@
+import React, { useState } from "react";
+import Chatbot from "./Chatbot";
+import { MessageCircle } from "lucide-react";
 
-import React from "react";
-import Logo from "./Logo";
+export default function UserDashboard({ user = {}, onLogout = () => {}, onProfile = () => {} }) {
+  const [chatOpen, setChatOpen] = useState(false);
 
-function Section({ title, items }) {
-return (
-<div style={{ margin: "20px 0" }}> <h3>{title}</h3>
-<div style={{ display: "flex", gap: "12px", overflowX: "auto" }}>
-{items.map((it, i) => (
-<div
-key={i}
-style={{
-minWidth: "200px",
-padding: "12px",
-background: "#222",
-borderRadius: "12px",
-}}
-> <h4>{it.title}</h4>
-<p style={{ fontSize: "13px" }}>{it.preview}</p> </div>
-))} </div> </div>
-);
+  return (
+    <div style={{ minHeight: "100vh", background: "#f8fafc" }}>
+      {/* Navbar */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 20px",
+          borderBottom: "1px solid #e5e7eb",
+          background: "#fff",
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+        }}
+      >
+        <div style={{ fontWeight: 800, fontSize: 20, color: "#4c6ef5" }}>Mindheaven</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <button
+            onClick={() => setChatOpen((v) => !v)}
+            title="Open Chat"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 12px",
+              borderRadius: 10,
+              border: "1px solid #e5e7eb",
+              background: "#fff",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            <MessageCircle size={18} /> Chat
+          </button>
+
+          <button
+            onClick={onProfile}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 10,
+              background: "#4c6ef5",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            Profile
+          </button>
+
+          <button
+            onClick={onLogout}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 10,
+              background: "#b91c1c",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+
+      {/* Dashboard content */}
+      <div style={{ padding: "24px 32px" }}>
+        <h2 style={{ marginBottom: 16 }}>Welcome, {user?.email || "User"} 👋</h2>
+        <p style={{ color: "#475569", maxWidth: 640 }}>
+          This is your personalized dashboard. You can view your profile, connect with the community,
+          explore wellness tools, or chat with the AI companion anytime using the chat icon below.
+        </p>
+      </div>
+
+      {/* Floating Chat */}
+      <Chatbot
+        open={chatOpen}
+        onClose={() => setChatOpen(false)}
+        userEmail={user?.email || ""}
+        apiBase="http://localhost:5000"
+      />
+    </div>
+  );
 }
-
-function UserDashboard({ onLogout, userEmail }) {
-const blogs = [
-{ title: "5 Ways to Reduce Stress", preview: "Simple daily habits..." },
-{ title: "Meditation Basics", preview: "How to start today..." },
-];
-const videos = [
-{ title: "Mindfulness 101", preview: "Video intro..." },
-{ title: "Yoga for Anxiety", preview: "Follow along..." },
-];
-const forums = [
-{ title: "Coping with Exams", preview: "Share tips..." },
-{ title: "Workplace Stress", preview: "Discuss burnout..." },
-];
-
-return ( <div className="page page-centered">
-<div className="card" style={{ maxWidth: "800px" }}> <div className="brand-row"> <Logo /> <h1 className="brand">MindHeaven</h1> </div> <h2 className="title">Welcome, {userEmail || "User"}</h2> <Section title="Recommended Blogs" items={blogs} /> <Section title="Videos & Podcasts" items={videos} /> <Section title="Community Highlights" items={forums} />
-<div className="actions" style={{ marginTop: "20px" }}> <button className="btn secondary" onClick={onLogout}>
-Logout </button> </div> </div> </div>
-);
-}
-
-export default UserDashboard;

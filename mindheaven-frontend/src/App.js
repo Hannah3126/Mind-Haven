@@ -1,73 +1,62 @@
-
 import React, { useState } from "react";
-import HomePage from "./Homepage";
+import Homepage from "./Homepage";
 import Login from "./login";
 import Signup from "./signup";
-import UserDashboard from "./userdashboard";
-import AdminDashboard from "./admindashboard";
-import GamesPage from './Games';
-import WordleGame from './Wordle';
+import Profile from "./profile";
 
-
-import "./App.css";
-
-function App() {
+export default function App() {
+  // pages: "home" | "login" | "signup" | "profile"
   const [page, setPage] = useState("home");
-  const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [wordlePage, setWordlePage] = useState(false);
 
-  const handleLogin = (userRole, userEmail) => {
-    setRole(userRole);
-    setEmail(userEmail);
-    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
+  const [auth, setAuth] = useState({
+    loggedIn: false,
+    userId: null,
+    email: "",
+    role: "",
+  });
+
+  const handleLoggedIn = ({ email, role, userId }) => {
+    setAuth({ loggedIn: true, email, role, userId });
+    // IMPORTANT: land on the Homepage (acts as dashboard)
+    setPage("home");
   };
 
+  const handleLogout = () => {
+    setAuth({ loggedIn: false, email: "", role: "", userId: null });
+    setPage("home");
+  };
+
+  // ---------- Routes ----------
+  if (page === "login") {
+    return <Login onSuccess={handleLoggedIn} onBack={() => setPage("home")} />;
+  }
+
+  if (page === "signup") {
+    return <Signup onBack={() => setPage("home")} onSuccess={() => {}} />;
+  }
+
+  if (page === "profile") {
+    if (!auth.loggedIn) {
+      return <Login onSuccess={handleLoggedIn} onBack={() => setPage("home")} />;
+    }
+    return (
+      <Profile
+        apiBase="http://localhost:5000"
+        user={{ id: auth.userId, email: auth.email, role: auth.role }}
+        onBack={() => setPage("home")}
+      />
+    );
+  }
+
+  // Default: Homepage (acts as user dashboard when logged in)
   return (
-    <div className="App">
-      {page === "home" && (
-        <HomePage
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-        />
-      )}
-      {page === "login" && (
-        <Login
-          goToSignup={() => setPage("signup")}
-          onLogin={handleLogin}
-          goToHome={() => setPage("home")}
-        />
-      )}
-      {page === "signup" && (
-        <Signup
-          goToLogin={() => setPage("login")}
-          goToHome={() => setPage("home")}
-        />
-      )}
-      {page === "userDashboard" && (
-        <UserDashboard email={email} goToHome={() => setPage("home")} />
-      )}
-      {page === "adminDashboard" && (
-        <AdminDashboard email={email} goToHome={() => setPage("home")} />
-      )}
-      {page === "games" && (
-        <GamesPage 
-        goToHome={() => setPage("home")}
-        goToWordle={() => setPage("wordle")} />
-        
-      )}
-      {page === "wordle" && (
-        <WordleGame goBack={() => setPage("games")} />
-      )}
-    </div>
+    <Homepage
+      loggedIn={auth.loggedIn}
+      email={auth.email}
+      goToLogin={() => setPage("login")}
+      goToSignup={() => setPage("signup")}
+      goProfile={() => setPage("profile")}
+      logout={handleLogout}
+    />
   );
 }
-
-export default App;
-
-
-
-
-
-

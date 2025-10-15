@@ -1,39 +1,111 @@
-
-
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "./Homepage.css";
-import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
-import { HelpCircle } from "lucide-react";
-import { ArrowRight } from "lucide-react";
+import {
+  Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen, MessageCircle,
+  ArrowUpRight, HelpCircle, ArrowRight
+} from "lucide-react";
+import Chatbot from "./Chatbot";
 
+export default function HomePage({
+  loggedIn = false,
+  email = "",
+  goToLogin = () => {},
+  goToSignup = () => {},
+  goProfile = () => {},
+  logout = () => {},
+  goToGames = () => {},
+}) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const initial = email ? email.charAt(0).toUpperCase() : "U";
 
-function HomePage({ goToLogin, goToSignup,goToGames }) {
   return (
-    <div className="homepage">
+    <div className="homepage" style={{ position: "relative" }}>
       {/* ---------- NAVBAR ---------- */}
-      <nav className="navbar">
+      <nav className="navbar" style={{ position: "relative", zIndex: 20 }}>
         <div className="logo">Mind Heaven</div>
+
         <ul className="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Wellness</a></li>
-          <li><a href="#" onClick={goToGames}>Games</a></li>
-          <li><a href="#">Blogs</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#" onClick={(e) => e.preventDefault()}>Home</a></li>
+          <li><a href="#" onClick={(e) => e.preventDefault()}>Wellness</a></li>
+          <li><a href="#" onClick={(e) => { e.preventDefault(); goToGames(); }}>Games</a></li>
+          <li><a href="#" onClick={(e) => e.preventDefault()}>Blogs</a></li>
+          <li><a href="#" onClick={(e) => e.preventDefault()}>Contact Us</a></li>
         </ul>
-        <div className="nav-buttons">
-          <button className="nav-btn" onClick={goToLogin}>Login</button>
-          <button className="nav-btn signup-btn" onClick={goToSignup}>Sign Up</button>
-        </div>
+
+        {/* RIGHT SIDE */}
+        {!loggedIn ? (
+          <div className="nav-buttons" style={{ display: "flex", gap: 8 }}>
+            <button className="nav-btn" type="button" onClick={goToLogin}>Login</button>
+            <button className="nav-btn signup-btn" type="button" onClick={goToSignup}>Sign Up</button>
+          </div>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {/* Chat button */}
+            <button
+              type="button"
+              title="Open chat"
+              onClick={() => setChatOpen((v) => !v)}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
+                padding: "8px 12px",
+                borderRadius: 10, border: "1px solid #e5e7eb",
+                background: "#fff", cursor: "pointer", fontWeight: 700
+              }}
+            >
+              <MessageCircle size={18} /> Chat
+            </button>
+
+            {/* Avatar menu */}
+            <div style={{ position: "relative" }}>
+              <button
+                type="button"
+                title={email}
+                onClick={() => setMenuOpen((v) => !v)}
+                style={{
+                  width: 40, height: 40, borderRadius: "50%",
+                  border: "1px solid #e5e7eb", background: "#fff",
+                  fontWeight: 800, cursor: "pointer"
+                }}
+              >
+                {initial}
+              </button>
+              {menuOpen && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: 0, marginTop: 8, zIndex: 60,
+                    background: "#fff", border: "1px solid #e5e7eb",
+                    borderRadius: 10, boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                    minWidth: 180, overflow: "hidden"
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => { setMenuOpen(false); goProfile(); }}
+                    style={{ display: "block", width: "100%", textAlign: "left", padding: "10px 12px", background: "transparent", border: "none", cursor: "pointer" }}
+                  >
+                    My Profile
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setMenuOpen(false); logout(); }}
+                    style={{ display: "block", width: "100%", textAlign: "left", padding: "10px 12px", background: "transparent", border: "none", cursor: "pointer", color: "#b91c1c" }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* ---------- HERO SECTION ---------- */}
-
       <section
         className="hero-section"
         style={{
-          // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home1.png'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -62,7 +134,6 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
         >
           <h1
             style={{
-
               color: "black",
               fontSize: "2.2rem",
               marginBottom: "12px",
@@ -71,7 +142,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)", // makes text readable on bright areas
+              textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)",
             }}
           >
             Your mind deserves the same care as your body
@@ -101,6 +172,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
                 fontWeight: "600",
               }}
               onClick={goToLogin}
+              type="button"
             >
               Schedule Appointment
             </button>
@@ -115,24 +187,14 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
                 borderRadius: "8px",
                 cursor: "pointer",
                 fontWeight: "600",
-
               }}
+              type="button"
             >
-              Emergency 
+              Emergency
             </button>
           </div>
         </div>
       </section>
-
-
-
-
-
-
-
-
-
-
 
       {/* ---------- FEATURES SECTION ---------- */}
       <section className="features-section">
@@ -140,6 +202,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
           What we <span style={{ color: "#4c6ef5" }}>provide</span>
         </h2>
         <p>Everything you need for a healthier, calmer mind</p>
+
         <div className="features-grid">
           <div className="feature-card">
             <a href="/meditation" className="arrow-icon">
@@ -151,6 +214,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
             <h3>Meditation & Exercise</h3>
             <p>Practice mindfulness and energize your body with guided sessions.</p>
           </div>
+
           <div className="feature-card">
             <a href="/songs" className="arrow-icon">
               <ArrowUpRight color="black" />
@@ -161,6 +225,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
             <h3> Songs & Music</h3>
             <p>Boost your spirit with soothing playlists made for your mood.</p>
           </div>
+
           <div className="feature-card">
             <a href="/Tracker" className="arrow-icon">
               <ArrowUpRight color="black" />
@@ -171,6 +236,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
             <h3> Thought Tracker</h3>
             <p>Record, reflect, and track your emotions with ease.</p>
           </div>
+
           <div className="feature-card">
             <a href="/tips" className="arrow-icon">
               <ArrowUpRight color="black" />
@@ -181,6 +247,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
             <h3> Mental Health Tips</h3>
             <p>Simple science-based advice for everyday wellness.</p>
           </div>
+
           <div className="feature-card">
             <a href="/games" className="arrow-icon">
               <ArrowUpRight color="black" />
@@ -191,6 +258,7 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
             <h3> Games</h3>
             <p>Fun ways to reduce stress while staying mindful.</p>
           </div>
+
           <div className="feature-card">
             <a href="/blogs" className="arrow-icon">
               <ArrowUpRight color="black" />
@@ -208,17 +276,14 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
       <section className="did-you-know-section">
         <div className="did-you-know-card">
           <h2 className="did-you-know-heading">
-  Did you know 
-  <HelpCircle className="question-icon" size={30} />
-</h2>
-
+            Did you know <HelpCircle className="question-icon" size={30} />
+          </h2>
           <p className="subtitle">The Truth About Mental Health</p>
           <p className="description">
             Good mental health is the foundation of a happy and meaningful life.
             It allows us to manage stress, build strong relationships, and make positive choices.
             A healthy mind leads to inner peace and personal growth.
           </p>
-          {/* <button className="learn-more-btn">Learn more</button> */}
         </div>
 
         <div className="did-you-know-stats">
@@ -249,67 +314,52 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
         </div>
       </section>
 
-
-
       {/* ---------- BLOG SECTION ---------- */}
       <section className="blog-section">
         <h2>Blogs Section</h2>
         <p className="blog-caption">Articles and tips to improve mental health</p>
+
         <div className="blog-grid">
           <div className="blog-card">
-            <img
-              src="/blog1.png"
-              alt="Anxiety"
-            />
+            <img src="/blog1.png" alt="Anxiety" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to control anxiety</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} /> Read more
+            </a>
           </div>
+
           <div className="blog-card">
-            <img
-              src="/blog2.png"
-              alt="Depression"
-            />
+            <img src="/blog2.png" alt="Depression" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce depression</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} /> Read more
+            </a>
           </div>
+
           <div className="blog-card">
-            <img
-              src="/blog3.png"
-              alt="Stress management"
-            />
+            <img src="/blog3.png" alt="Stress management" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce stress</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} /> Read more
+            </a>
           </div>
-          </div>
+        </div>
 
-  {/* View More button section */}
-  <div className="view-more-container">
-    <button className="view-more-btn">View More</button>
-  <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
+        <div className="view-more-container">
+          <button className="view-more-btn" type="button">View More</button>
+          <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
         </div>
       </section>
 
@@ -317,48 +367,34 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
       <section className="testimonial-section">
         <h2>Hear from our users</h2>
         <p>Real stories of growth, healing, and positive change</p>
+
         <div className="testimonial-grid">
           <div className="testimonial">
             <img src="/Pic1.png" alt="" className="user-icon" />
             <h4>Jamin</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”
-            </p>
-
+            <p>“Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”</p>
           </div>
+
           <div className="testimonial">
             <img src="/pic2.png" alt="" className="user-icon" />
             <h4>Srija Namala</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “The meditation and games are so helpful! My mental health has improved significantly.”
-            </p>
-
+            <p>“The meditation and games are so helpful! My mental health has improved significantly.”</p>
           </div>
 
           <div className="testimonial">
             <img src="/Pic3.png" alt="" className="user-icon" />
             <h4>Tejas</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “ For years, I struggled to find a consistent self-care routine, but this app provides the structure and gentle guidance.”
-            </p>
-
+            <p>“ For years, I struggled to find a consistent self-care routine, but this app provides the structure and gentle guidance.”</p>
           </div>
+
           <div className="testimonial">
             <img src="/Pic4.png" alt="" className="user-icon" />
             <h4>Hannah Joshua</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-
-            <p>
-              “The CBT (Cognitive Behavioral Therapy) lessons are short, actionable, and grounded in research.”
-            </p>
-
+            <p>“The CBT (Cognitive Behavioral Therapy) lessons are short, actionable, and grounded in research.”</p>
           </div>
         </div>
       </section>
@@ -367,9 +403,15 @@ function HomePage({ goToLogin, goToSignup,goToGames }) {
       <footer className="footer">
         <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
       </footer>
+
+      {/* Floating Chat panel */}
+      <Chatbot
+        open={chatOpen}
+        onClose={() => setChatOpen(false)}
+        userEmail={email}
+        apiBase="http://localhost:5000"
+      />
     </div>
   );
 }
-
-export default HomePage;
 
