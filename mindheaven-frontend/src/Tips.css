@@ -1,0 +1,192 @@
+.tips-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #eef4ff 0%, #f5f7ff 100%);
+    min-height: 100vh;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #333;
+    padding-bottom: 50px;
+  }
+  
+  .tips-navbar {
+    width: 100%;
+    background-color: #f5f7ff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .back-button {
+    display: block;
+    margin: 0px auto; /* centers it horizontally */
+    background-color: #5f6ded;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #4c5dd4;
+  }
+  
+  .nav-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    flex: 1;
+    color: #5f6ded;
+  }
+  
+  .spacer {
+    width: 100px;
+  }
+  
+  /* Headings */
+  .tips-heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2b2e4a;
+    margin-top: 40px;
+  }
+  
+  .tips-subheading {
+    color: #555;
+    text-align: center;
+    margin-bottom: 25px;
+    max-width: 600px;
+    font-size: 1rem;
+  }
+  
+  /* Search bar */
+  .search-bar {
+    padding: 10px 16px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    border: 1px solid #c7d2fe;
+    margin: 10px auto 30px auto;
+    display: block;
+    font-size: 1rem;
+    text-align: center;
+    transition: 0.2s ease;
+  }
+  
+  .search-bar:focus {
+    outline: none;
+    border-color: #4c6ef5;
+    box-shadow: 0 0 6px rgba(76, 110, 245, 0.3);
+  }
+  
+  /* Tips grid */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    padding: 0 20px;
+    width: 90%;
+    max-width: 1000px;
+  }
+  
+  .tip-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tip-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  }
+  
+  .tip-card .emoji {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .tip-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2b2e4a;
+    margin-bottom: 8px;
+  }
+  
+  .tip-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  
+  .tip-card .tag {
+    display: inline-block;
+    background: #eef2ff;
+    color: #4c6ef5;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  /* No results */
+  .no-results {
+    text-align: center;
+    color: #888;
+    margin-top: 40px;
+    font-style: italic;
+  }
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  
+  .tag {
+    background-color: #e6e9ff;
+    color: #4c5dd4;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  .hero-greeting {
+    text-align: center;
+    padding: 60px 20px 20px;
+    margin-top: 10px;
+    animation: fadeSlideIn 1.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .hero-greeting h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #102c57;
+  }
+  
+  .hero-greeting p {
+    font-size: 1.1rem;
+    color: #444;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Animation */
+@keyframes fadeSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

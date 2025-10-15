@@ -9,8 +9,7 @@ import GamesPage from './Games';
 import WordleGame from './Wordle';
 import ContactUs from "./ContactUs";
 import WellnessPage from "./wellnesspage";
-
-
+import Tips from "./Tips";
 
 import "./App.css";
 
@@ -35,7 +34,8 @@ function App() {
           goToSignup={() => setPage("signup")}
           goToGames={() => setPage("games")}
           goToContact={() => setPage("contact")}
-          goToWellness={() => setPage("wellness")}
+          goTowellness={() => setPage("wellness")}
+          goToTips={() => setPage("tips")}
         />
       )}
       {page === "login" && (
@@ -74,8 +74,14 @@ function App() {
          goToLogin={() => setPage("login")}
          goToSignup={() => setPage("signup")}
          goToGames={() => setPage("games")}
-         goToContact={() => setPage("contact")}/>
+         goToContact={() => setPage("contact")}
+         goToTips={() => setPage("tips")}/>
      )}
+     {page === "tips" && (
+        <Tips goToHome={() => setPage("home")}
+        />
+      )}
+     
 
       
     </div>

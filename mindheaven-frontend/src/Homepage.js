@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import "./App.css";
 import "./Homepage.css";
@@ -9,7 +7,7 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness }) {
+function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness, goToTips }) {
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -174,9 +172,9 @@ function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness }
             <p>Record, reflect, and track your emotions with ease.</p>
           </div>
           <div className="feature-card">
-            <a href="/tips" className="arrow-icon">
-              <ArrowUpRight color="black" />
-            </a>
+          <button className="arrow-icon" onClick={goToTips}>
+            <ArrowUpRight color="black" />
+          </button>
             <div className="feature-icon">
               <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
             </div>
