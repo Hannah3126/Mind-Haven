@@ -18,6 +18,27 @@ function App() {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [wordlePage, setWordlePage] = useState(false);
+
+  const navProps = {
+    currentPage: page, // Pass the current state to the Navbar
+    goToHome: () => setPage("home"),
+    goToLogin: () => setPage("login"),
+    goToSignup: () => setPage("signup"),
+    goToGames: () => setPage("games"),
+    goToContact: () => setPage("contact"),
+    goTowellness: () => setPage("wellness"),
+  };
+
+  return (
+    <div className="App">
+      {page === "home" && <HomePage {...navProps} />}
+      {/* You can now use the spread operator to pass all nav props easily: */}
+      {page === "wellness" && <WellnessPage {...navProps} />}
+      {page === "contact" && <ContactUs {...navProps} />}
+      {/* ... and so on for all your pages */}
+    </div>
+  );
+  
   
 
   const handleLogin = (userRole, userEmail) => {
@@ -34,8 +55,7 @@ function App() {
           goToSignup={() => setPage("signup")}
           goToGames={() => setPage("games")}
           goToContact={() => setPage("contact")}
-          goTowellness={() => setPage("wellness")}
-          goToTips={() => setPage("tips")}
+          goToWellness={() => setPage("wellness")}
         />
       )}
       {page === "login" && (

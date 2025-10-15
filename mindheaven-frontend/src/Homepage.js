@@ -1,32 +1,29 @@
 import React from "react";
 import "./App.css";
 import "./Homepage.css";
+import Navbar from "./navbar";
+
+import footer from './footer';
 import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness, goToTips }) {
+function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, goTowellness }) {
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
-      <nav className="navbar">
-        <div className="logo">Mind Heaven</div>
-        <ul className="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#" onClick={goTowellness}>Wellness</a></li>
-          
-          <li><a href="#" onClick={goToGames}>Games</a></li>
-          
-          <li><a href="#">Blogs</a></li>
-          <li><a href="#" onClick={goToContact}>ContactUs</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="nav-btn" onClick={goToLogin}>Login</button>
-          <button className="nav-btn signup-btn" onClick={goToSignup}>Sign Up</button>
-        </div>
-      </nav>
+      <Navbar 
+        currentPage={currentPage} // Pass the current page state
+        goToHome={() => { /* This should be passed from App.js */ }} 
+        goToLogin={goToLogin} 
+        goToSignup={goToSignup} 
+        goToGames={goToGames} 
+        goToContact={goToContact} 
+        goTowellness={goTowellness} 
+      />
+      
 
       {/* ---------- HERO SECTION ---------- */}
 
@@ -172,7 +169,7 @@ function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness, 
             <p>Record, reflect, and track your emotions with ease.</p>
           </div>
           <div className="feature-card">
-          <button className="arrow-icon" onClick={goToTips}>
+          <button className="arrow-icon" >
             <ArrowUpRight color="black" />
           </button>
             <div className="feature-icon">
@@ -364,9 +361,7 @@ function HomePage({ goToLogin, goToSignup,goToGames, goToContact, goTowellness, 
       </section>
 
       {/* ---------- FOOTER ---------- */}
-      <footer className="footer">
-        <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
-      </footer>
+     <footer /> 
     </div>
   );
 }

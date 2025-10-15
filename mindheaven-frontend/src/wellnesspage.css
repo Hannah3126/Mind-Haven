@@ -1,82 +1,149 @@
 /* --- Global Styles & Variables --- */
+/* --- Navbar.css --- */
+
+/* --- Variables (Ensure these match your application's colors) --- */
 :root {
-  --primary-color: #5d5dff; /* A shade of blue/purple for buttons */
-  --secondary-color: #f0f4f8; /* Light background for sections */
+  --primary-color: #5d5dff; /* Blue/Purple for main actions */
   --text-dark: #333;
   --text-light: #555;
+  --border-color: #e0e0e0;
   --max-width: 1200px;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  color: var(--text-dark);
-}
-
-/* --- Utility Class for Buttons --- */
-.primary-btn {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  margin-top: 15px;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-}
-
-.primary-btn:hover {
-  background-color: #4a4adf;
-}
-
-/* --- Header Styling (Mimicking the Navbar) --- */
+/* 1. Main Header Container */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    max-width: var(--max-width);
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Match the alignment and spacing from the image */
+  padding: 15px 5%; 
+  max-width: var(--max-width);
+  margin: 0 auto;
+  
+  /* Add a subtle bottom line, as seen in the Figma view */
+  border-bottom: 1px solid var(--border-color); 
 }
 
+/* 2. Logo Styling */
 .logo {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.4rem; /* Slightly larger than before */
+  color: var(--primary-color);
+  cursor: pointer; /* Indicates it's clickable */
+  
+  /* Ensure logo is on the far left */
+  margin-right: 50px; 
+}
+
+/* 3. Navigation Links (Center Section) */
+.nav {
+  display: flex;
+  flex-grow: 1; /* Allows the nav to take up available space */
+  justify-content: center; /* Centers the links group */
+  gap: 30px; /* Space between links */
 }
 
 .nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: var(--text-light);
-    font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 5px 0; /* Vertical padding for click target */
+  position: relative;
+  transition: color 0.3s ease;
 }
 
+.nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Active Link Indicator (Wellness page in the screenshot is active) */
 .nav a.active {
-    font-weight: bold;
-    color: var(--primary-color);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* If you want the blue line under the active link (as suggested by the design trend) */
+.nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Position below the text */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+
+/* 4. Auth Buttons (Right Section) */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .auth-buttons .signup-btn {
-    border: 1px solid var(--primary-color);
-    background: transparent;
-    color: var(--primary-color);
-    padding: 8px 15px;
-    border-radius: 5px;
-    margin-right: 10px;
+  /* White background, blue border */
+  border: 1px solid var(--primary-color);
+  background: white;
+  color: var(--primary-color);
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-buttons .signup-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .auth-buttons .login-btn {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: none;
+  /* Blue background, white text (like the primary button) */
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.auth-buttons .login-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* --- Responsive Adjustments (Crucial for mobile experience) --- */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 5%;
+  }
+
+  .logo {
+    margin-bottom: 15px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px 20px;
+    margin-bottom: 15px;
+  }
+  
+  .auth-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .auth-buttons button {
+    flex-grow: 1; /* Makes buttons fill the width */
+    text-align: center;
+  }
 }
 
 /* --- 1. Hero Banner Section --- */
