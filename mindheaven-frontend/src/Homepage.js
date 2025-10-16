@@ -15,6 +15,7 @@ export default function HomePage({
   goProfile = () => {},
   logout = () => {},
   goToGames = () => {},
+  goToWellness = () => {},
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
@@ -27,9 +28,33 @@ export default function HomePage({
         <div className="logo">Mind Heaven</div>
 
         <ul className="nav-links">
-          <li><a href="#" onClick={(e) => e.preventDefault()}>Home</a></li>
-          <li><a href="#" onClick={(e) => e.preventDefault()}>Wellness</a></li>
-          <li><a href="#" onClick={(e) => { e.preventDefault(); goToGames(); }}>Games</a></li>
+          <li>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                goToWellness();
+              }}
+            >
+              Wellness
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                goToGames();
+              }}
+            >
+              Games
+            </a>
+          </li>
           <li><a href="#" onClick={(e) => e.preventDefault()}>Blogs</a></li>
           <li><a href="#" onClick={(e) => e.preventDefault()}>Contact Us</a></li>
         </ul>
@@ -205,7 +230,7 @@ export default function HomePage({
 
         <div className="features-grid">
           <div className="feature-card">
-            <a href="/meditation" className="arrow-icon">
+            <a href="#" className="arrow-icon" onClick={(e)=>e.preventDefault()}>
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -216,7 +241,7 @@ export default function HomePage({
           </div>
 
           <div className="feature-card">
-            <a href="/songs" className="arrow-icon">
+            <a href="#" className="arrow-icon" onClick={(e)=>e.preventDefault()}>
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -227,7 +252,7 @@ export default function HomePage({
           </div>
 
           <div className="feature-card">
-            <a href="/Tracker" className="arrow-icon">
+            <a href="#" className="arrow-icon" onClick={(e)=>e.preventDefault()}>
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -238,7 +263,7 @@ export default function HomePage({
           </div>
 
           <div className="feature-card">
-            <a href="/tips" className="arrow-icon">
+            <a href="#" className="arrow-icon" onClick={(e)=>e.preventDefault()}>
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -249,7 +274,14 @@ export default function HomePage({
           </div>
 
           <div className="feature-card">
-            <a href="/games" className="arrow-icon">
+            <a
+              href="#"
+              className="arrow-icon"
+              onClick={(e) => {
+                e.preventDefault();
+                goToGames();
+              }}
+            >
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -260,7 +292,7 @@ export default function HomePage({
           </div>
 
           <div className="feature-card">
-            <a href="/blogs" className="arrow-icon">
+            <a href="#" className="arrow-icon" onClick={(e)=>e.preventDefault()}>
               <ArrowUpRight color="black" />
             </a>
             <div className="feature-icon">
@@ -287,30 +319,12 @@ export default function HomePage({
         </div>
 
         <div className="did-you-know-stats">
-          <div className="stat">
-            <h3>1 Billion</h3>
-            <p>People live with a mental health disorder</p>
-          </div>
-          <div className="stat">
-            <h3>7 Lakh</h3>
-            <p>Lose their lives to suicide each year</p>
-          </div>
-          <div className="stat">
-            <h3>1 in 7</h3>
-            <p>Adolescents experience a mental health condition</p>
-          </div>
-          <div className="stat">
-            <h3>5%</h3>
-            <p>Adults are affected by depression</p>
-          </div>
-          <div className="stat">
-            <h3>75%</h3>
-            <p>People in low-income countries receive no treatment</p>
-          </div>
-          <div className="stat">
-            <h3>$1 Trillion/yr</h3>
-            <p>Depression & anxiety cost the global economy annually</p>
-          </div>
+          <div className="stat"><h3>1 Billion</h3><p>People live with a mental health disorder</p></div>
+          <div className="stat"><h3>7 Lakh</h3><p>Lose their lives to suicide each year</p></div>
+          <div className="stat"><h3>1 in 7</h3><p>Adolescents experience a mental health condition</p></div>
+          <div className="stat"><h3>5%</h3><p>Adults are affected by depression</p></div>
+          <div className="stat"><h3>75%</h3><p>People in low-income countries receive no treatment</p></div>
+          <div className="stat"><h3>$1 Trillion/yr</h3><p>Depression & anxiety cost the global economy annually</p></div>
         </div>
       </section>
 
@@ -327,7 +341,7 @@ export default function HomePage({
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to control anxiety</h3>
-            <a href="/blogs/1" className="read-more">
+            <a href="#" className="read-more" onClick={(e)=>e.preventDefault()}>
               <ArrowRight size={16} strokeWidth={2.5} /> Read more
             </a>
           </div>
@@ -339,7 +353,7 @@ export default function HomePage({
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce depression</h3>
-            <a href="/blogs/1" className="read-more">
+            <a href="#" className="read-more" onClick={(e)=>e.preventDefault()}>
               <ArrowRight size={16} strokeWidth={2.5} /> Read more
             </a>
           </div>
@@ -351,7 +365,7 @@ export default function HomePage({
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce stress</h3>
-            <a href="/blogs/1" className="read-more">
+            <a href="#" className="read-more" onClick={(e)=>e.preventDefault()}>
               <ArrowRight size={16} strokeWidth={2.5} /> Read more
             </a>
           </div>
@@ -360,42 +374,6 @@ export default function HomePage({
         <div className="view-more-container">
           <button className="view-more-btn" type="button">View More</button>
           <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
-        </div>
-      </section>
-
-      {/* ---------- TESTIMONIAL SECTION ---------- */}
-      <section className="testimonial-section">
-        <h2>Hear from our users</h2>
-        <p>Real stories of growth, healing, and positive change</p>
-
-        <div className="testimonial-grid">
-          <div className="testimonial">
-            <img src="/Pic1.png" alt="" className="user-icon" />
-            <h4>Jamin</h4>
-            <p className="testinomal-date">1 month ago</p>
-            <p>“Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”</p>
-          </div>
-
-          <div className="testimonial">
-            <img src="/pic2.png" alt="" className="user-icon" />
-            <h4>Srija Namala</h4>
-            <p className="testinomal-date">1 month ago</p>
-            <p>“The meditation and games are so helpful! My mental health has improved significantly.”</p>
-          </div>
-
-          <div className="testimonial">
-            <img src="/Pic3.png" alt="" className="user-icon" />
-            <h4>Tejas</h4>
-            <p className="testinomal-date">1 month ago</p>
-            <p>“ For years, I struggled to find a consistent self-care routine, but this app provides the structure and gentle guidance.”</p>
-          </div>
-
-          <div className="testimonial">
-            <img src="/Pic4.png" alt="" className="user-icon" />
-            <h4>Hannah Joshua</h4>
-            <p className="testinomal-date">1 month ago</p>
-            <p>“The CBT (Cognitive Behavioral Therapy) lessons are short, actionable, and grounded in research.”</p>
-          </div>
         </div>
       </section>
 
