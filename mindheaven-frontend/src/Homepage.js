@@ -361,8 +361,14 @@ function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, g
       </section>
 
       {/* ---------- FOOTER ---------- */}
+     <footer className="footer-homepage">
+        <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
+      </footer>
+=======
      <footer /> 
-    </div>
+>>>>>>> b08133e143f57779a39f00a08dcccbe3fbeca9c8
+    </div> 
+    <
   );
 }
 
