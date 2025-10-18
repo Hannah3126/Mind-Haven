@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./navbar"; // ✅ use your existing navbar
 import "./ContactUs.css";
 
-export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness }) {
+export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
   return (
     <div className="contact-page">
       
@@ -14,6 +14,7 @@ export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames
         goToGames={goToGames}
         goToContact={goToContact}
         goTowellness={goTowellness}
+        goToBlogs={goToBlogs}
       />
 
       {/* ---------- HERO SECTION ---------- */}
@@ -83,10 +84,10 @@ export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames
       </ul>
 
       <ul>
-        <li>Exercises</li>
-        <li>Music & Songs</li>
-        <li>Tips To Calm Mind</li>
-        <li>Thought Tracker</li>
+        <li>Phone</li>
+        <li>Mail To</li>
+        <li>Drop Your Message</li>
+        <li>Feedback</li>
       </ul>
     </div>
 

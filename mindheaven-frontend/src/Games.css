@@ -1,167 +1,127 @@
-/* GamesPage.css */
-
 .games-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 10%;
-    background: linear-gradient(to bottom, #f0f4ff, #ffffff);
-    min-height: 100vh;
-    font-family: "Be Vietnam Pro", sans-serif;
-  }
-  
-  /* Top Header Bar */
-  .games-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    margin-bottom: 20px;
-  }
-  
-  .games-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2b2e4a;
-    text-align: center;
-  }
-  
-  .back-button {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: white;
-    border: 2px solid #4c6ef5;
-    color: #4c6ef5;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #4c6ef5;
-    color: white;
-  }
-  
-  /* Subtitle */
-  .games-subtitle {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 40px;
-    text-align: center;
-    max-width: 600px;
-  }
-  
-  /* Cards Grid */
-  .games-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
-  
-  /* Individual Game Card */
-  .game-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    padding: 30px 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .game-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Top-right arrow icon */
-  .arrow-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .game-icon {
-    margin-bottom: 15px;
-  }
-  
-  .game-card h3 {
-    font-size: 1.4rem;
-    color: #2b2e4a;
-    margin-bottom: 10px;
-  }
-  
-  .game-card p {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .navbar {
-    width: 90%;
-    max-width: 1100px;
-    margin: 20px auto 10px;
-    padding: 10px 20px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: "Be Vietnam Pro", sans-serif;
-  }
-  
-  .navbar-left,
-  .navbar-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-center {
-    flex: 2;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #2b2e4a;
-  }
-  
-  .nav-back-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border: none;
-    background: none;
-    font-weight: 600;
-    color: #4c6ef5;
-    cursor: pointer;
-    font-size: 0.95rem;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #333;
+  background-color: #fafafa;
+}
+
+/* ---------- Banner ---------- */
+.games-banner {
+  position: relative;
+  width: 90%;
+  height: 460px;
+  margin: 20px auto 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: url("/public/games-banner.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.banner-content {
+  padding-left: 80px;
+  text-align: left;
+  color: black;
+}
+
+.banner-content h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.banner-content p {
+  font-size: 1.2rem;
+  max-width: 500px;
+  color: #333;
+}
+
+/* ---------- Games Section ---------- */
+.games-section {
+  padding: 60px 80px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+.game-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+}
+
+.game-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.game-info {
+  padding: 16px;
+  text-align: left;
+}
+
+.game-info h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.game-info p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+.play-btn {
+  width: 100%;
+  background-color: #6b8eff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.play-btn:hover {
+  background-color: #5b7ae0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .banner-content {
+    padding-left: 30px;
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .games-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .back-button {
-      left: 10px;
-    }
-  
-    .games-title {
-      font-size: 1.6rem;
-    }
+  .banner-content h1 {
+    font-size: 2rem;
   }
+
+  .games-section {
+    padding: 30px 20px;
+  }
+
+  .games-grid {
+    gap: 20px;
+  }
+
+  .game-card {
+    width: 90%;
+  }
+}

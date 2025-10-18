@@ -10,7 +10,7 @@ import WordleGame from './Wordle';
 import ContactUs from "./ContactUs";
 import WellnessPage from "./wellnesspage";
 import Tips from "./Tips";
-
+import Blogs from "./blogs";
 import "./App.css";
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
     goToGames: () => setPage("games"),
     goToContact: () => setPage("contact"),
     goTowellness: () => setPage("wellness"),
+    goToBlogs: () => setPage("blogs"),
   };
 
   return (
@@ -35,9 +36,12 @@ function App() {
       {/* You can now use the spread operator to pass all nav props easily: */}
       {page === "wellness" && <WellnessPage {...navProps} />}
       {page === "contact" && <ContactUs {...navProps} />}
+      {page === "games" && <games {...navProps} />}
+      {page === "blogs" && <Blogs {...navProps} />}
       {/* ... and so on for all your pages */}
     </div>
   );
+  
   
   
 
@@ -99,6 +103,10 @@ function App() {
      )}
      {page === "tips" && (
         <Tips goToHome={() => setPage("home")}
+        />
+      )}
+      {page === "blogs" && (
+        <Blogs goToHome={() => setPage("home")}
         />
       )}
      

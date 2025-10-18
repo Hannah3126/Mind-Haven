@@ -21,7 +21,7 @@ const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imag
 );
 
 // ✅ Main Page Component
-const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness }) => {
+const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) => {
   return (
     <div className="wellness-page">
 
@@ -33,6 +33,7 @@ const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact,
         goToGames={goToGames}
         goToContact={goToContact}
         goTowellness={goTowellness}
+        goToBlogs={goToBlogs}
       />
 
       {/* ---------- HERO SECTION ---------- */}

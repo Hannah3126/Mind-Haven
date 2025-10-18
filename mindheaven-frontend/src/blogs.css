@@ -1,140 +1,132 @@
-.contact-page {
-   font-family: "Be Vietnam Pro", sans-serif;
+.blogpage {
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #333;
   
 }
 
-/* ---------- HERO SECTION ---------- */
-/* ---------- HERO SECTION ---------- */
-.contact-hero {
+/* Banner */
+.blog-banner {
   position: relative;
   width: 90%;
-  height:  480px;
-  margin: 20px auto 0 auto;;
+  height: 480px;
+  margin: 20px auto 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  background: url("/public/mailbox.png") center/cover no-repeat; /* ✅ full section background */
+
+  background: url("/public/blogs.png") center/cover no-repeat;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start; /* keeps items aligned to the left */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding-left: 0px;
 }
 
-/* Optional: Add a subtle overlay for better text visibility */
+/* Overlay container */
 .hero-overlay {
   width: 100%;
   height: 100%;
-  /* background: rgba(255, 255, 255, 0.6); light overlay */
   display: flex;
   align-items: center;
-  padding-left: 60px;
   justify-content: flex-start;
 }
 
-.hero-text {
-  color: black;
+/* Text container */
+.banner-content {
+  padding-left: 80px; /* controls left spacing */
   text-align: left;
+  color: black;
 }
 
-.hero-text h2 {
+/* Title */
+.banner-content h1 {
   font-size: 2.5rem;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-weight: 600;
-  color:black;
-  justify-content: flex-start;
+  color: black;
 }
 
-.hero-text p {
+/* Description */
+.banner-content p {
   font-size: 1.3rem;
   color: black;
-  
+  max-width: 500px;
+  line-height: 1.5;
 }
 
 
-/* ---------- MAIN CONTACT FORM SECTION ---------- */
-.contact-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 85%;
-  margin: 60px auto;
-  gap: 50px;
+/* Blog Grid */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:60px 40px;
+  padding:60px 20px;
+  justify-items: center; /* ✅ centers each card in its column */
+  align-items: start;
 }
 
-.contact-left {
-  flex: 1;
-}
-
-.contact-left h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: black;
-}
-
-.contact-left p {
-  color: black;
-  line-height: 1.6;
-  font-size: 1.5rem;
-}
-
-.contact-details {
-  margin-top: 20px;
-  line-height: 1.6;
-}
-
-.contact-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.blog-card {
   background: #fff;
-  padding: 35px;
-  border-radius: 15px;
-  border: 2px solid #4a90e2;
-  box-shadow: 0 2px 8px rgba(107, 142, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
 }
-
-.form-group label {
-  font-size: 0.95rem;
-  margin-bottom: 5px;
-  color: #333;
+.blog-card:hover {
+  transform: translateY(-5px);
 }
-
-.form-group input,
-.form-group textarea {
+.blog-card img {
   width: 100%;
-  padding: 10px;
-  border: 1.5px solid #6b8eff;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  outline: none;
-  max-width: 100%;
-  box-sizing: border-box;
+  height: 200px;
+  object-fit: cover;
+}
+.blog-content {
+  padding: 15px;
+}
+.blog-category {
+  font-size: 0.8rem;
+  color: #777;
+  margin-right: 10px;
+}
+.blog-date {
+  font-size: 0.8rem;
+  color: #777;
+}
+.blog-content h3 {
+  margin: 10px 0;
+}
+.read-more {
+  display: inline-block;
+  color: #3b6ef6;
+  text-decoration: none;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.read-more:hover {
+  text-decoration: underline;
 }
 
-.form-group textarea {
-  resize: none;
-  height: 100px;
+/* View More */
+.view-more {
+  text-align: center;
+  margin: 40px 0;
 }
-
-.submit-btn {
-  width: 120px;
-  padding: 10px;
-  background-color: #6b8eff;
-  color: white;
+.view-more button {
+  padding: 10px 20px;
+  background: #3b6ef6;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
-  align-self: flex-end;
-  transition: background 0.3s ease;
+}
+.view-more button:hover {
+  background: #345cd6;
+}
+.view-more p {
+  margin-top: 10px;
+  color: #555;
 }
 
-.submit-btn:hover {
-  background-color: #5a7ae0;
-}
-
-/* ---------- FOOTER ---------- */
+/* Footer */
 .footer {
   background: white;
   padding: 25px 0 10px;
@@ -166,7 +158,7 @@
   flex-direction: row;
   gap: 50px; 
   text-align: left;
-   margin-left: 60px;
+  margin-left: 60px;
 }
 
 .footer-links ul {
@@ -273,3 +265,4 @@
     max-width: 100%;
   }
 }
+

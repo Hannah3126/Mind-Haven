@@ -4,7 +4,7 @@ import React from "react";
 // Import any necessary icons if you use them here, though your current JSX doesn't.
 
 // Navbar must accept props for navigation (goTo...) and to know the current page.
-const Navbar = ({ currentPage, goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness }) => {
+const Navbar = ({ currentPage, goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) => {
   
   // Helper to apply 'active' class (assuming you pass currentPage from App.js)
   const isActive = (pageName) => currentPage === pageName ? 'active' : '';
@@ -17,7 +17,7 @@ const Navbar = ({ currentPage, goToHome, goToLogin, goToSignup, goToGames, goToC
         <li><a href="#" onClick={goToHome} className={isActive("home")}>Home</a></li>
         <li><a href="#" onClick={goTowellness} className={isActive("wellness")}>Wellness</a></li>
         <li><a href="#" onClick={goToGames} className={isActive("games")}>Games</a></li>
-        <li><a href="#" onClick={goToHome} className={isActive("blogs")}>Blogs</a></li>
+        <li><a href="#" onClick={goToBlogs} className={isActive("blogs")}>Blogs</a></li>
         <li><a href="#" onClick={goToContact} className={isActive("contact")}>ContactUs</a></li>
       </ul>
       <div className="nav-buttons">

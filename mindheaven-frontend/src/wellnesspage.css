@@ -278,6 +278,7 @@
   flex-direction: row;
   gap: 50px; 
   text-align: left;
+   margin-left: 60px;
 }
 
 .footer-links ul {
