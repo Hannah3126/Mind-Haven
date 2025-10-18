@@ -36,7 +36,7 @@ function App() {
       {/* You can now use the spread operator to pass all nav props easily: */}
       {page === "wellness" && <WellnessPage {...navProps} />}
       {page === "contact" && <ContactUs {...navProps} />}
-      {page === "games" && <games {...navProps} />}
+      {page === "games" && <GamesPage {...navProps} />}
       {page === "blogs" && <Blogs {...navProps} />}
       {/* ... and so on for all your pages */}
     </div>

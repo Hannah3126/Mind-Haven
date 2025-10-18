@@ -11,7 +11,7 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, goTowellness, goToBlogs }) {
+function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
