@@ -1,111 +1,121 @@
-import React, { useState } from "react";
+import React from "react";
+import Navbar from "./navbar"; // ✅ use your existing navbar
 import "./ContactUs.css";
 
-function ContactUs({ goToHome, goToLogin, goToSignup, goToGames, goToContact }) {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("✅ Thank you for contacting us! We'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
+export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness }) {
   return (
-     <div className="contact-page">
-      {/* ✅ SAME NAVBAR AS HOMEPAGE */}
-      <nav className="navbar">
-        <div className="logo">Mind Heaven</div>
-        <ul className="nav-links">
-          <li><a href="#" onClick={goToHome}>Home</a></li>
-          <li><a href="#">Wellness</a></li>
-          <li><a href="#" onClick={goToGames}>Games</a></li>
-          <li><a href="#">Blogs</a></li>
-          <li><a href="#" onClick={goToContact}>ContactUs</a></li>
-        </ul>
-        
-      </nav>
-      {/* Contact Section */}
-      <div className="contact-container">
-        <h2>Contact Us</h2>
-        <p className="contact-desc">
-          Have questions, feedback, or just want to reach out?  
-          Fill in the form below and we’ll respond as soon as possible.
-        </p>
+    <div className="contact-page">
+      
+      {/* ---------- NAVBAR ---------- */}
+      <Navbar
+        goToHome={goToHome}
+        goToLogin={goToLogin}
+        goToSignup={goToSignup}
+        goToGames={goToGames}
+        goToContact={goToContact}
+        goTowellness={goTowellness}
+      />
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+      {/* ---------- HERO SECTION ---------- */}
+      <section className="contact-hero">
+        <div className="hero-overlay">
+          <div className="hero-text">
+            <h2>Contact us</h2>
+            <p>We’re here to help. Reach out with any questions or feedback.</p>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="your@email.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Type your message here..."
-              rows="5"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          <button type="submit" className="submit-btn">
-            Send Message
-          </button>
-        </form>
-
-        {/* Contact Info Section */}
-        <div className="contact-info">
-          <h3>Our Contact Information</h3>
-          <p>
-            📍 <strong>Location:</strong> 123 Mind Street, Serenity City, USA
-          </p>
-          <p>
-            📞 <strong>Phone:</strong> +1 (555) 987-6543
-          </p>
-          <p>
-            ✉️ <strong>Email:</strong> support@mindheaven.com
-          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <footer className="contact-footer">
-        <p>© {new Date().getFullYear()} Mind Heaven. All rights reserved.</p>
-      </footer>
+      {/* ---------- MAIN CONTACT FORM SECTION ---------- */}
+      <section className="contact-main">
+        <div className="contact-left">
+          <h2>We’d love to hear from you...</h2>
+          <p>Reach out with your questions, feedback, or support needs — we’re here to help you every step of the way.</p>
+
+          <div className="contact-details">
+            <p><strong>Call :</strong><br />+1 314 224 5896</p>
+            <p><strong>Email To:</strong><br />mindheaven@gmail.com</p>
+          </div>
+        </div>
+
+        <form className="contact-form">
+          <div className="form-group">
+            <label>First Name:</label>
+            <input type="text" placeholder="Enter your first name" />
+          </div>
+          <div className="form-group">
+            <label>Last Name:</label>
+            <input type="text" placeholder="Enter your last name" />
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input type="email" placeholder="Enter your email" />
+          </div>
+          <div className="form-group">
+            <label>Phone:</label>
+            <input type="text" placeholder="Enter your phone number" />
+          </div>
+          <div className="form-group">
+            <label>Message:</label>
+            <textarea placeholder="Enter your message or any questions"></textarea>
+          </div>
+          <button className="submit-btn">Submit</button>
+        </form>
+      </section>
+
+      {/* ---------- FOOTER ---------- */}
+      <footer className="footer">
+  <div className="footer-container">
+    {/* ---- Brand ---- */}
+    <div className="footer-brand">
+      <h3>Mind Heaven</h3>
+      <p>Real Stories of growth, healing and positive change.</p>
+    </div>
+
+    {/* ---- Links ---- */}
+    <div className="footer-links">
+      <ul>
+        <li>Home</li>
+        <li>Wellness</li>
+        <li>Games</li>
+        <li>Blog</li>
+        <li>Contact Us</li>
+      </ul>
+
+      <ul>
+        <li>Exercises</li>
+        <li>Music & Songs</li>
+        <li>Tips To Calm Mind</li>
+        <li>Thought Tracker</li>
+      </ul>
+    </div>
+
+    {/* ---- Contact Info ---- */}
+    <div className="footer-contact">
+      <h4>Contact</h4>
+      <p>Email: mindheaven@gmail.com</p>
+      <p>Phone: +1 234 456 8890</p>
+    </div>
+
+    {/* ---- Message Box ---- */}
+    <div className="footer-message-box">
+      <textarea
+        className="footer-textarea"
+        placeholder="Type your message..."
+      ></textarea>
+      <button className="footer-send-btn">Send</button>
+    </div>
+  </div>
+
+  
+
+  <div className="footer-bottom">
+    <p>
+      © 2025 Mind Heaven | Designed with ♡ to make mental health accessible for
+      everyone.
+    </p>
+  </div>
+</footer>
     </div>
   );
 }
-
-export default ContactUs;
-
