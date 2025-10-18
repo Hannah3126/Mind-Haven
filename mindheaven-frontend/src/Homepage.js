@@ -366,7 +366,6 @@ function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, g
       </footer>
 =======
      <footer /> 
->>>>>>> 
     </div> 
 
 export default HomePage;
