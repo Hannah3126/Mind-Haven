@@ -366,11 +366,8 @@ function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, g
       </footer>
 =======
      <footer /> 
->>>>>>> b08133e143f57779a39f00a08dcccbe3fbeca9c8
+>>>>>>> 
     </div> 
-    <
-  );
-}
 
 export default HomePage;
 
