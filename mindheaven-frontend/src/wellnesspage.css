@@ -5,6 +5,8 @@
   color: #333;
   line-height: 1.6;
 }
+/* make navbar full width only on wellness page */
+
 
 
 /* ----------- HERO SECTION ----------- */
@@ -274,7 +276,8 @@
 .footer-links {
   display: flex; 
   flex-direction: row;
-  gap: 30px; 
+  gap: 50px; 
+  text-align: left;
 }
 
 .footer-links ul {

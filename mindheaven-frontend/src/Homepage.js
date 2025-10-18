@@ -2,8 +2,9 @@ import React from "react";
 import "./App.css";
 import "./Homepage.css";
 import Navbar from "./navbar";
+import './navbar.css';
 
-import footer from './footer';
+
 import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
 import { HelpCircle } from "lucide-react";
@@ -364,9 +365,10 @@ function HomePage({ currentPage, goToLogin, goToSignup,goToGames, goToContact, g
      <footer className="footer-homepage">
         <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
       </footer>
-=======
+
      <footer /> 
     </div> 
-
+  );
+}
 export default HomePage;
 
