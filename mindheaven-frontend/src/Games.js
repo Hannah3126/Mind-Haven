@@ -5,11 +5,11 @@ import "./navbar.css";
 
 const gamesData = [
   {
-    title: "Chess",
-    description: "Sharpen your strategy and focus with every move",
-    imageSrc: "/Chess.png",
+    title: "Matching Game",
+    description: "Challenge your memory and sharpen your focus in a calming way.",
+    imageSrc: "/Matching.jpg",
     alt: "Chess game setup",
-    action: "chess",
+    action: "matching",
   },
   {
     title: "Wordle",
@@ -58,6 +58,7 @@ export default function GamesPage({
   goToBlogs,
   goToWordle,
   goToTicTacToe,
+  goToMatchingGame
 }) {
   return (
     <div className="games-page">
@@ -99,7 +100,9 @@ export default function GamesPage({
                     if (game.action === "wordle") {
                       goToWordle();
                     } else if (game.action === "tic") {
-                      goToTicTacToe(); // ✅ Redirect to Tic Tac Toe
+                      goToTicTacToe();
+                    } else if (game.action === "matching") {
+                      goToMatchingGame(); // ✅ Redirect to Matching Game
                     } else {
                       alert(`${game.title} is coming soon!`);
                     }
