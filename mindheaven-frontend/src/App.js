@@ -10,6 +10,7 @@ import ContactUs from "./ContactUs";
 import WellnessPage from "./wellnesspage";
 import Tips from "./Tips";
 import Blogs from "./blogs";
+import TicTacToe from "./TicTacToe";
 import "./App.css";
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
           goTowellness={() => setPage("wellness")}
           goToBlogs={() => setPage("blogs")}
           goToWordle={() => setPage("wordle")}
+          goToTicTacToe={() => setPage("tictactoe")}
         />
       )}
 
@@ -92,6 +94,7 @@ function App() {
           goToContact={() => setPage("contact")}
           goTowellness={() => setPage("wellness")}
           goToBlogs={() => setPage("blogs")}
+
           currentPage="games"
         />
       )}
@@ -112,6 +115,20 @@ function App() {
       {page === "tips" && <Tips goToHome={() => setPage("home")} />}
 
       {page === "blogs" && <Blogs goToHome={() => setPage("home")} />}
+
+      {page === "tictactoe" && (
+        <TicTacToe
+          goBack={() => setPage("games")}
+          goToHome={() => setPage("home")}
+          goToLogin={() => setPage("login")}
+          goToSignup={() => setPage("signup")}
+          goToGames={() => setPage("games")}
+          goToContact={() => setPage("contact")}
+          goTowellness={() => setPage("wellness")}
+          goToBlogs={() => setPage("blogs")}
+          currentPage="tictactoe"
+        />
+      )}
     </div>
   );
 }

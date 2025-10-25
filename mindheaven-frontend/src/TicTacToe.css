@@ -1,0 +1,106 @@
+/* PAGE WRAPPER */
+.tictactoe-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eef4ff 0%, #f5f7ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Be Vietnam Pro", sans-serif;
+  }
+  
+  /* CENTERED CONTENT BELOW NAVBAR */
+  .tictactoe-content {
+    margin-top: 100px; /* leaves space for fixed navbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* BACK BUTTON */
+  .back-btn {
+    position: absolute;
+    top: 45px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: #4c6ef5;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+  }
+  
+  .back-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* TITLE + STATUS */
+  .tictactoe-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1e1e2f;
+    margin-bottom: 10px;
+  }
+  
+  .tictactoe-status {
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  /* BOARD */
+  .tictactoe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cell {
+    width: 100px;
+    height: 100px;
+    background: #f8f9ff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4c6ef5;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  
+  .cell:hover {
+    transform: scale(1.05);
+    background: #e0e7ff;
+  }
+  
+  .cell.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  /* RESET BUTTON */
+  .reset-btn {
+    margin-top: 25px;
+    padding: 10px 24px;
+    background: #4c6ef5;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .reset-btn:hover {
+    background: #3b5bdb;
+  }

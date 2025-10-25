@@ -56,7 +56,8 @@ export default function GamesPage({
   goToContact,
   goTowellness,
   goToBlogs,
-  goToWordle, // ✅ make sure App.js passes this prop
+  goToWordle,
+  goToTicTacToe,
 }) {
   return (
     <div className="games-page">
@@ -97,6 +98,8 @@ export default function GamesPage({
                   onClick={() => {
                     if (game.action === "wordle") {
                       goToWordle();
+                    } else if (game.action === "tic") {
+                      goToTicTacToe(); // ✅ Redirect to Tic Tac Toe
                     } else {
                       alert(`${game.title} is coming soon!`);
                     }
