@@ -1,45 +1,50 @@
 import React from "react";
 import "./Games.css";
-import Navbar from "./navbar"; // Assuming the Navbar component is in Navbar.js
-import "./navbar.css"; // Assuming CSS for Navbar is separate
+import Navbar from "./navbar";
+import "./navbar.css";
 
-// Define the data for the game cards
 const gamesData = [
   {
     title: "Chess",
     description: "Sharpen your strategy and focus with every move",
-    imageSrc: "/Chess.png", // Placeholder image name
+    imageSrc: "/Chess.png",
     alt: "Chess game setup",
+    action: "chess",
   },
   {
     title: "Wordle",
     description: "Improve your vocabulary while playing with words",
-    imageSrc: "/Word.png", // Placeholder image name
+    imageSrc: "/Word.png",
     alt: "Crossword puzzle",
+    action: "wordle",
   },
   {
     title: "Spot the difference",
     description: "Train your eyes to notice even the smallest things",
-    imageSrc: "/Spot.png", // Placeholder image name
+    imageSrc: "/Spot.png",
     alt: "Spot the difference puzzle",
+    action: "spot",
   },
   {
     title: "Jigsaw puzzle",
     description: "Assemble fragmented piece by piece",
-    imageSrc: "/Puzzle.png", // Placeholder image name
+    imageSrc: "/Puzzle.png",
     alt: "Jigsaw puzzle pieces",
+    action: "jigsaw",
   },
   {
     title: "Tic Tac Toe",
     description: "A quick and simple way to challenge your mind",
-    imageSrc: "/Tic.png", // Placeholder image name
+    imageSrc: "/Tic.png",
     alt: "Tic Tac Toe game",
+    action: "tic",
   },
   {
     title: "Quiz/Trivia",
     description: "Test your knowledge in a fun and easy way",
-    imageSrc: "/Quiz.png", // Placeholder image name
+    imageSrc: "/Quiz.png",
     alt: "Quiz or Trivia game",
+    action: "quiz",
   },
 ];
 
@@ -51,6 +56,7 @@ export default function GamesPage({
   goToContact,
   goTowellness,
   goToBlogs,
+  goToWordle, // ✅ make sure App.js passes this prop
 }) {
   return (
     <div className="games-page">
@@ -72,10 +78,7 @@ export default function GamesPage({
           <h1>Games page</h1>
           <p>Games to Relax and Refresh Your Mind</p>
         </div>
-        {/* The image is handled by CSS background in .games-banner::after for better control */}
-        <div className="banner-image-placeholder">
-          {/* Placeholder is purely for semantic structure, main visual is CSS background/after element */}
-        </div>
+        <div className="banner-image-placeholder"></div>
       </section>
 
       {/* ---------- GAMES GRID ---------- */}
@@ -83,7 +86,6 @@ export default function GamesPage({
         <div className="games-grid">
           {gamesData.map((game, index) => (
             <div className="games-card" key={index}>
-              {/* Note: Actual image paths need to be set up in your public folder */}
               <div className="games-card-image-wrapper">
                 <img src={game.imageSrc} alt={game.alt} />
               </div>
@@ -92,7 +94,13 @@ export default function GamesPage({
                 <p>{game.description}</p>
                 <button
                   className="play-now-btn"
-                  onClick={() => console.log(`Playing ${game.title}`)} // Add actual navigation/game launch logic here
+                  onClick={() => {
+                    if (game.action === "wordle") {
+                      goToWordle();
+                    } else {
+                      alert(`${game.title} is coming soon!`);
+                    }
+                  }}
                 >
                   Play now
                 </button>
@@ -101,62 +109,53 @@ export default function GamesPage({
           ))}
         </div>
       </section>
-      
-      {/* ---------- FOOTER (Excluded as per request) ---------- */}
-      {/* The original code had a placeholder for a footer here, which is now removed. */}
+
+      {/* ---------- FOOTER ---------- */}
       <footer className="footer">
-  <div className="footer-container">
-    {/* ---- Brand ---- */}
-    <div className="footer-brand">
-      <h3>Mind Heaven</h3>
-      <p>Real Stories of growth, healing and positive change.</p>
-    </div>
+        <div className="footer-container">
+          <div className="footer-brand">
+            <h3>Mind Heaven</h3>
+            <p>Real Stories of growth, healing and positive change.</p>
+          </div>
 
-    {/* ---- Links ---- */}
-    <div className="footer-links">
-      <ul>
-        <li>Home</li>
-        <li>Wellness</li>
-        <li>Games</li>
-        <li>Blog</li>
-        <li>Contact Us</li>
-      </ul>
+          <div className="footer-links">
+            <ul>
+              <li>Home</li>
+              <li>Wellness</li>
+              <li>Games</li>
+              <li>Blog</li>
+              <li>Contact Us</li>
+            </ul>
+            <ul>
+              <li>Exercises</li>
+              <li>Music & Songs</li>
+              <li>Tips To Calm Mind</li>
+              <li>Thought Tracker</li>
+            </ul>
+          </div>
 
-      <ul>
-        <li>Exercises</li>
-        <li>Music & Songs</li>
-        <li>Tips To Calm Mind</li>
-        <li>Thought Tracker</li>
-      </ul>
-    </div>
+          <div className="footer-contact">
+            <h4>Contact</h4>
+            <p>Email: mindheaven@gmail.com</p>
+            <p>Phone: +1 234 456 8890</p>
+          </div>
 
-    {/* ---- Contact Info ---- */}
-    <div className="footer-contact">
-      <h4>Contact</h4>
-      <p>Email: mindheaven@gmail.com</p>
-      <p>Phone: +1 234 456 8890</p>
-    </div>
+          <div className="footer-message-box">
+            <textarea
+              className="footer-textarea"
+              placeholder="Type your message..."
+            ></textarea>
+            <button className="footer-send-btn">Send</button>
+          </div>
+        </div>
 
-    {/* ---- Message Box ---- */}
-    <div className="footer-message-box">
-      <textarea
-        className="footer-textarea"
-        placeholder="Type your message..."
-      ></textarea>
-      <button className="footer-send-btn">Send</button>
-    </div>
-  </div>
-
-  
-
-  <div className="footer-bottom">
-    <p>
-      © 2025 Mind Heaven | Designed with ♡ to make mental health accessible for
-      everyone.
-    </p>
-  </div>
-</footer>
-      
+        <div className="footer-bottom">
+          <p>
+            © 2025 Mind Heaven | Designed with ♡ to make mental health
+            accessible for everyone.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

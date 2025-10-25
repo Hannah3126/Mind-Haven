@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./Wordle.css";
 import { ArrowLeft } from "lucide-react";
+import Navbar from "./navbar";
 
-function WordleGame({ goBack }) {
+function WordleGame({
+  goBack,
+  goToHome,
+  goToLogin,
+  goToSignup,
+  goToGames,
+  goToContact,
+  goTowellness,
+  goToBlogs,
+  currentPage,
+}) {
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
   const [validWords, setValidWords] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
 
-  // 🧠 Deterministic random function based on date
   const getSeededRandomIndex = (wordList) => {
     const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate(); // e.g., 20251015
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     const rng = mulberry32(seed);
     return Math.floor(rng() * wordList.length);
   };
 
-  // 📦 Simple seeded RNG
   const mulberry32 = (a) => {
     return function () {
       let t = (a += 0x6d2b79f5);
@@ -79,12 +88,21 @@ function WordleGame({ goBack }) {
 
   return (
     <div className="wordle-container">
-      <nav className="wordle-navbar">
-        <button className="back-btn" onClick={goBack}>
-          <ArrowLeft size={18} /> Back
-        </button>
-        <h1 className="wordle-logo">Mind Heaven - Wordle</h1>
-      </nav>
+      <Navbar
+        currentPage={currentPage}
+        goToHome={goToHome}
+        goToLogin={goToLogin}
+        goToSignup={goToSignup}
+        goToGames={goToGames}
+        goToContact={goToContact}
+        goTowellness={goTowellness}
+        goToBlogs={goToBlogs}
+      />
+
+      <button className="back-btn" onClick={goBack}>
+        <ArrowLeft size={18} /> Back
+      </button>
+      <h1 className="wordle-logo">Mind Heaven - Wordle</h1>
 
       <div className="wordle-body">
         <h2 className="game-title">Guess the 5-letter word 💡</h2>
@@ -104,26 +122,26 @@ function WordleGame({ goBack }) {
 
         {guesses.length < 5 && message !== "🎉 Great job! You guessed the word!" && (
           <div className="input-section">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleGuess();
-            }}
-            style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-          >
-            <input
-              type="text"
-              maxLength={5}
-              value={input}
-              onChange={(e) => setInput(e.target.value.toUpperCase())}
-              placeholder="Enter your guess"
-              className="wordle-input"
-              autoFocus
-            />
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
-          </form>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleGuess();
+              }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+            >
+              <input
+                type="text"
+                maxLength={5}
+                value={input}
+                onChange={(e) => setInput(e.target.value.toUpperCase())}
+                placeholder="Enter your guess"
+                className="wordle-input"
+                autoFocus
+              />
+              <button type="submit" className="submit-btn-wordle">
+                Submit
+              </button>
+            </form>
           </div>
         )}
 
