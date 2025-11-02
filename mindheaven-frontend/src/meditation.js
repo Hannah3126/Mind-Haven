@@ -12,49 +12,48 @@ export default function Meditation({
   goTowellness,
   goToBlogs,
 }) {
-  // ✅ Meditation data with YouTube links (replace with your own)
   const meditations = [
     {
       title: "Mindfulness Meditation",
       subtitle: "Mindfulness",
-      date: "01 July 2025",
-      img: "/blog1.png",
-      link: "https://www.youtube.com/watch?v=inpok4MKVLM",
+      
+      img: "/med1.jpg",
+      link: "https://www.youtube.com/watch?v=ssss7V1_eyA",
     },
     {
       title: "Deep Breathing Practice",
       subtitle: "Breathing",
-      date: "01 June 2025",
-      img: "/blog2.png",
-      link: "https://www.youtube.com/watch?v=nmFUDkj1Aq0",
+      
+      img: "/med2.jpg",
+      link: "https://www.youtube.com/watch?v=Z8emmFOuhxE",
     },
     {
       title: "Relaxation & Calm Mind",
       subtitle: "Relaxation",
-      date: "01 January 2025",
-      img: "/blog3.png",
-      link: "https://www.youtube.com/watch?v=ZToicYcHIOU",
+      
+      img: "/med3.jpg",
+      link: "https://www.youtube.com/watch?v=VpHz8Mb13_Y",
     },
     {
       title: "Positive Energy Meditation",
       subtitle: "Positivity",
-      date: "11 August 2025",
-      img: "/blog1.png",
-      link: "https://www.youtube.com/watch?v=ltC6W3PzO9Q",
+      
+      img: "/med4.jpg",
+      link: "https://www.youtube.com/watch?v=j734gLbQFbU",
     },
     {
       title: "Sleep Meditation",
       subtitle: "Sleep",
-      date: "03 July 2025",
-      img: "/blog2.png",
-      link: "https://www.youtube.com/watch?v=1vx8iUvfyCY",
+      
+      img: "/med5.jpg",
+      link: "https://www.youtube.com/watch?v=2K4T9HmEhWE",
     },
     {
       title: "Healing Meditation",
       subtitle: "Healing",
-      date: "12 March 2025",
-      img: "/blog3.png",
-      link: "https://www.youtube.com/watch?v=inpok4MKVLM",
+      
+      img: "/med6.jpg",
+      link: "https://www.youtube.com/watch?v=e69dOMFLLl8",
     },
   ];
 
@@ -72,7 +71,7 @@ export default function Meditation({
         goToBlogs={goToBlogs}
       />
 
-      {/* ---------- MEDITATION PAGE BANNER ---------- */}
+      {/* ---------- BANNER ---------- */}
       <section className="meditation-banner">
         <div className="banner-content">
           <h1>Meditation</h1>
@@ -80,7 +79,7 @@ export default function Meditation({
         </div>
       </section>
 
-      {/* ---------- MEDITATION SECTION ---------- */}
+      {/* ---------- MEDITATION GRID ---------- */}
       <section className="meditation-section">
         <div className="meditation-grid">
           {meditations.map((item, index) => (
@@ -105,18 +104,20 @@ export default function Meditation({
       {/* ---------- FOOTER ---------- */}
       <footer className="footer">
         <div className="footer-container">
+          {/* Brand Info */}
           <div className="footer-brand">
             <h3>Mind Heaven</h3>
             <p>Guided meditations to help you relax, focus, and heal.</p>
           </div>
 
+          {/* Navigation Links */}
           <div className="footer-links">
             <ul>
-              <li>Home</li>
-              <li>Wellness</li>
-              <li>Games</li>
-              <li>Blog</li>
-              <li>Contact Us</li>
+              <li onClick={goToHome}>Home</li>
+              <li onClick={goTowellness}>Wellness</li>
+              <li onClick={goToGames}>Games</li>
+              <li onClick={goToBlogs}>Blog</li>
+              <li onClick={goToContact}>Contact Us</li>
             </ul>
 
             <ul>
@@ -128,12 +129,14 @@ export default function Meditation({
             </ul>
           </div>
 
+          {/* Contact Info */}
           <div className="footer-contact">
             <h4>Contact</h4>
             <p>Email: mindheaven@gmail.com</p>
             <p>Phone: +1 234 456 8890</p>
           </div>
 
+          {/* Message Box */}
           <div className="footer-message-box">
             <textarea
               className="footer-textarea"

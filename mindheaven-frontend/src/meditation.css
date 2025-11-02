@@ -1,9 +1,11 @@
 .meditation-page {
   font-family: "Be Vietnam Pro", sans-serif;
   color: #333;
+  background-color: #fafbff;
+  min-height: 100vh;
 }
 
-/* Banner */
+/* ---------- Banner ---------- */
 .meditation-banner {
   position: relative;
   width: 90%;
@@ -25,79 +27,83 @@
 }
 
 .banner-content h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
   color: black;
 }
 
 .banner-content p {
   font-size: 1.3rem;
   color: black;
-  max-width: 500px;
-  line-height: 1.5;
+  max-width: 520px;
+  line-height: 1.6;
 }
 
-/* Meditation Grid */
+/* ---------- Meditation Grid ---------- */
 .meditation-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 60px 40px;
-  padding: 60px 20px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* wider cards */
+  gap: 60px 50px;
+  padding: 70px 60px;
   justify-items: center;
   align-items: start;
 }
 
 .meditation-card {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px; /* slightly wider limit */
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .meditation-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 15px rgba(107, 142, 255, 0.3);
 }
 
 .meditation-card img {
   width: 100%;
-  height: 200px;
+  height: 240px;
   object-fit: cover;
 }
 
 .meditation-meta {
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
-  font-size: 0.8rem;
+  padding: 10px 20px;
+  font-size: 0.85rem;
   color: #777;
 }
 
 .meditation-card h3 {
-  padding: 0 15px;
-  font-size: 1.1rem;
+  padding: 0 20px;
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-/* Start Button */
+/* ---------- Start Button ---------- */
 .start-btn {
-  margin: 10px 15px 15px;
+  margin: 10px 20px 20px;
   background-color: #6b8eff;
   color: white;
   border: none;
-  border-radius: 20px;
-  padding: 8px 20px;
-  font-size: 0.9rem;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .start-btn:hover {
   background-color: #5b7ae0;
+  transform: scale(1.05);
 }
 
-/* Footer reused from blogs.css */
+/* ---------- Footer ---------- */
 .footer {
   background: white;
   padding: 25px 0 10px;
@@ -113,12 +119,28 @@
   gap: 20px;
 }
 
+.footer-brand h3 {
+  font-size: 2rem;
+  color: #2b2b2b;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  color: black;
+  font-size: 1rem;
+}
+
 .footer-links {
-  display: flex;
+  display: flex; 
   flex-direction: row;
-  gap: 50px;
+  gap: 50px; 
   text-align: left;
-  margin-left: 60px;
+   margin-left: 60px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
 }
 
 .footer-links li {
@@ -133,11 +155,24 @@
   color: #6b8eff;
 }
 
+.footer-contact h4 {
+  font-size: 1rem;
+  color: #2b2b2b;
+  margin-bottom: 10px;
+}
+
+.footer-contact p {
+  color: black;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* Message Box */
 .footer-message-box {
   background: #f5f7ff;
   padding: 15px 20px;
   border-radius: 12px;
-  border: 1.5px solid #6b8eff;
+  border: 1.5px solid #6b8eff ;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -157,7 +192,13 @@
   font-size: 0.85rem;
   resize: none;
   outline: none;
+  transition: border 0.3s ease;
   margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.footer-textarea:focus {
+  border-color: #6b8eff;
 }
 
 .footer-send-btn {
@@ -171,6 +212,10 @@
   transition: background 0.3s ease;
 }
 
+.footer-send-btn:hover {
+  background-color: #5b7ae0;
+}
+/* Bottom */
 .footer-bottom {
   text-align: center;
   padding-top: 15px;
@@ -188,7 +233,21 @@
     flex-direction: column;
     gap: 20px;
   }
+
   .footer-message-box {
     max-width: 100%;
   }
+
+  .footer-textarea {
+    max-width: 100%;
+  }
 }
+
+
+.section-image,
+.mental-health-section img,
+.appointment-image img {
+  width: 400px !important; /* increase width for all section images */
+  height: auto;
+}
+

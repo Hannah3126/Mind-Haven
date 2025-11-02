@@ -21,6 +21,24 @@ function App() {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
 
+  // ✅ Centralized navigation functions
+  const navigation = {
+    goToHome: () => setPage("home"),
+    goToLogin: () => setPage("login"),
+    goToSignup: () => setPage("signup"),
+    goToUserDashboard: () => setPage("userDashboard"),
+    goToAdminDashboard: () => setPage("adminDashboard"),
+    goToGames: () => setPage("games"),
+    goToWordle: () => setPage("wordle"),
+    goToTicTacToe: () => setPage("tictactoe"),
+    goToMatchingGame: () => setPage("matching"),
+    goToContact: () => setPage("contact"),
+    goToWellness: () => setPage("wellness"),
+    goToTips: () => setPage("tips"),
+    goToMeditation: () => setPage("meditation"),
+    goToBlogs: () => setPage("blogs"),
+  };
+
   // ✅ Handle login role switching
   const handleLogin = (userRole, userEmail) => {
     setRole(userRole);
@@ -31,87 +49,50 @@ function App() {
   return (
     <div className="App">
       {/* 🏠 Home */}
-      {page === "home" && (
-        <HomePage
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goToWellness={() => setPage("wellness")}
-          goToBlogs={() => setPage("blogs")}
-        />
-      )}
+      {page === "home" && <HomePage {...navigation} />}
 
       {/* 🔐 Login */}
-      {page === "login" && (
-        <Login
-          goToSignup={() => setPage("signup")}
-          onLogin={handleLogin}
-          goToHome={() => setPage("home")}
-        />
-      )}
+      {page === "login" && <Login {...navigation} onLogin={handleLogin} />}
 
       {/* 📝 Signup */}
-      {page === "signup" && (
-        <Signup goToLogin={() => setPage("login")} goToHome={() => setPage("home")} />
-      )}
+      {page === "signup" && <Signup {...navigation} />}
 
       {/* 👤 User Dashboard */}
       {page === "userDashboard" && (
-        <UserDashboard email={email} goToHome={() => setPage("home")} />
+        <UserDashboard {...navigation} email={email} role={role} />
       )}
 
       {/* 🧑‍💼 Admin Dashboard */}
       {page === "adminDashboard" && (
-        <AdminDashboard email={email} goToHome={() => setPage("home")} />
-      )}
-      //
-
-      {/* 🎮 Games Page */}
-      {page === "games" && (
-        <GamesPage
-          goToHome={() => setPage("home")}
-          goToWordle={() => setPage("wordle")}
-          goToTicTacToe={() => setPage("tictactoe")}
-          goToMatchingGame={() => setPage("matching")}
-        />
+        <AdminDashboard {...navigation} email={email} role={role} />
       )}
 
-      {/* 🔠 Wordle Game */}
-      {page === "wordle" && <WordleGame goBack={() => setPage("games")} />}
+      {/* 🎮 Games */}
+      {page === "games" && <GamesPage {...navigation} />}
+
+      {/* 🔠 Wordle */}
+      {page === "wordle" && <WordleGame {...navigation} />}
 
       {/* ❌ Tic Tac Toe */}
-      {page === "tictactoe" && <TicTacToe goBack={() => setPage("games")} />}
+      {page === "tictactoe" && <TicTacToe {...navigation} />}
 
       {/* 🧩 Matching Game */}
-      {page === "matching" && <MatchingGame goBack={() => setPage("games")} />}
+      {page === "matching" && <MatchingGame {...navigation} />}
 
       {/* 💬 Contact */}
-      {page === "contact" && <ContactUs goToHome={() => setPage("home")} />}
+      {page === "contact" && <ContactUs {...navigation} />}
 
       {/* 🌿 Wellness */}
-      {page === "wellness" && (
-        <WellnessPage
-          goToHome={() => setPage("home")}
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goToTips={() => setPage("tips")}
-          goToMeditation={() => setPage("meditation")}
-        />
-      )}
+      {page === "wellness" && <WellnessPage {...navigation} />}
 
       {/* 💡 Tips */}
-      {page === "tips" && <Tips goToHome={() => setPage("home")} />}
+      {page === "tips" && <Tips {...navigation} />}
 
       {/* 🧘 Meditation */}
-      {page === "meditation" && (
-        <Meditation goToHome={() => setPage("home")} goToWellness={() => setPage("wellness")} />
-      )}
+      {page === "meditation" && <Meditation {...navigation} />}
 
       {/* 📰 Blogs */}
-      {page === "blogs" && <Blogs goToHome={() => setPage("home")} />}
+      {page === "blogs" && <Blogs {...navigation} />}
     </div>
   );
 }
