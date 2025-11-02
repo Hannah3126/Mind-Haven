@@ -12,8 +12,13 @@ import Tips from "./Tips";
 import Blogs from "./blogs";
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import TicTacToe from "./TicTacToe";
 import MatchingGame from './MatchingGame';
+=======
+import Meditation from "./meditation";
+
+>>>>>>> Stashed changes
 =======
 import Meditation from "./meditation";
 
@@ -143,7 +148,12 @@ function App() {
   />
 )}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+
+     
+>>>>>>> Stashed changes
 
      
 >>>>>>> Stashed changes
