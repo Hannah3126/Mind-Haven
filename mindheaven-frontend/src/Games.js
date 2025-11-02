@@ -133,10 +133,12 @@ export default function GamesPage({
               <li>Contact Us</li>
             </ul>
             <ul>
-              <li>Exercises</li>
-              <li>Music & Songs</li>
-              <li>Tips To Calm Mind</li>
-              <li>Thought Tracker</li>
+              <li>Matching Game</li>
+              <li>Worldle</li>
+              <li>Spot The </li>
+              <li>Puzzle</li>
+              <li>Tic Tac Toe</li>
+              <li>Quiz Trivia</li>
             </ul>
           </div>
 

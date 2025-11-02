@@ -1,4 +1,4 @@
-.meditation-page {
+.music-page {
   font-family: "Be Vietnam Pro", sans-serif;
   color: #333;
   background-color: #fafbff;
@@ -6,14 +6,14 @@
 }
 
 /* ---------- Banner ---------- */
-.meditation-banner {
+.music-banner {
   position: relative;
   width: 90%;
   height: 480px;
   margin: 20px auto 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  background: url("/public/medback.jpg") center/cover no-repeat;
+  background: url("/public/musicback.jpg") center/cover no-repeat; 
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -40,38 +40,38 @@
   line-height: 1.6;
 }
 
-/* ---------- Meditation Grid ---------- */
-.meditation-grid {
+/* ---------- Music Grid ---------- */
+.music-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* wider cards */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 60px 50px;
   padding: 70px 60px;
   justify-items: center;
   align-items: start;
 }
 
-.meditation-card {
+.music-card {
   background: #fff;
   width: 100%;
-  max-width: 420px; /* slightly wider limit */
+  max-width: 420px;
   border-radius: 18px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.meditation-card:hover {
+.music-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 15px rgba(107, 142, 255, 0.3);
 }
 
-.meditation-card img {
+.music-card img {
   width: 100%;
   height: 240px;
   object-fit: cover;
 }
 
-.meditation-meta {
+.music-meta {
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
@@ -79,13 +79,13 @@
   color: #777;
 }
 
-.meditation-card h3 {
+.music-card h3 {
   padding: 0 20px;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-/* ---------- Start Button ---------- */
+/* ---------- Play Button ---------- */
 .start-btn {
   margin: 10px 20px 20px;
   background-color: #6b8eff;
@@ -103,7 +103,7 @@
   transform: scale(1.05);
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer (copied from meditation) ---------- */
 .footer {
   background: white;
   padding: 25px 0 10px;
@@ -131,11 +131,11 @@
 }
 
 .footer-links {
-  display: flex; 
+  display: flex;
   flex-direction: row;
-  gap: 50px; 
+  gap: 50px;
   text-align: left;
-   margin-left: 60px;
+  margin-left: 60px;
 }
 
 .footer-links ul {
@@ -167,12 +167,11 @@
   margin: 4px 0;
 }
 
-/* Message Box */
 .footer-message-box {
   background: #f5f7ff;
   padding: 15px 20px;
   border-radius: 12px;
-  border: 1.5px solid #6b8eff ;
+  border: 1.5px solid #6b8eff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,7 +214,7 @@
 .footer-send-btn:hover {
   background-color: #5b7ae0;
 }
-/* Bottom */
+
 .footer-bottom {
   text-align: center;
   padding-top: 15px;
@@ -227,7 +226,7 @@
   font-size: 1rem;
 }
 
-/* Responsive */
+/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .footer-links {
     flex-direction: column;
@@ -242,12 +241,3 @@
     max-width: 100%;
   }
 }
-
-
-.section-image,
-.mental-health-section img,
-.appointment-image img {
-  width: 400px !important; /* increase width for all section images */
-  height: auto;
-}
-

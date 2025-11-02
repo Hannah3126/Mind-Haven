@@ -13,6 +13,7 @@ import Blogs from "./blogs";
 import TicTacToe from "./TicTacToe";
 import MatchingGame from "./MatchingGame";
 import Meditation from "./meditation";
+import Music from "./music";
 
 import "./App.css";
 
@@ -37,6 +38,7 @@ function App() {
     goToTips: () => setPage("tips"),
     goToMeditation: () => setPage("meditation"),
     goToBlogs: () => setPage("blogs"),
+    goToMlogs: () => setPage("music"),
   };
 
   // ✅ Handle login role switching
@@ -93,6 +95,8 @@ function App() {
 
       {/* 📰 Blogs */}
       {page === "blogs" && <Blogs {...navigation} />}
+
+      {page === "music" && <Music {...navigation} />}
     </div>
   );
 }
