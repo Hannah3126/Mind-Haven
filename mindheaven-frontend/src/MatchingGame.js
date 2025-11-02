@@ -92,6 +92,7 @@ export default function MatchingGame({
       />
 
       <div className="memory-container">
+      <button className="back-btn" onClick={goBack}>← Back</button>
         <h2>Memory Match 🧠</h2>
 
         <div className="level-select">

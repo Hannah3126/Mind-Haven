@@ -1,7 +1,6 @@
 .memory-game-page {
     background-color: #f8faff; /* Light calming blue tone */
     min-height: 100vh; /* Full page height */
-    padding-top: 80px; /* Space under navbar if fixed */
   }
 
 .memory-container {
