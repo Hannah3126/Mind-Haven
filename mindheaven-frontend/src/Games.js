@@ -41,7 +41,7 @@ const gamesData = [
   },
   {
     title: "Fun Quiz Game",
-    description: "Test your knowledge in a fun and easy way",
+    description: "Get to know about you in a fun and easy way",
     imageSrc: "/Quiz.png",
     alt: "Quiz or Trivia game",
     action: "quiz",
