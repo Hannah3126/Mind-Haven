@@ -2,9 +2,10 @@ import React from 'react';
 import './wellnesspage.css';
 import Navbar from './navbar';
 import './navbar.css';
+import './meditation.js';
 
 // ✅ Reusable Section Block Component
-const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imageAlt, reverseLayout, customClass , style}) => (
+const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imageAlt, reverseLayout, customClass , style, onButtonClick}) => (
   <section className={`section-block ${reverseLayout ? 'reverse' : ''}${customClass || ''}`}
   style={style}>
     <div className="image-container">
@@ -14,14 +15,16 @@ const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imag
   <h2 className="section-title">{title}</h2>
   {subtitle && <p className="section-subtitle">{subtitle}</p>}
   <p className="section-description">{description}</p>
-  <button className="primary-btn">{buttonText}</button>
+  <button className="primary-btn" onClick={onButtonClick}>
+        {buttonText}
+      </button>
 </div>
 
   </section>
 );
 
 // ✅ Main Page Component
-const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) => {
+const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs, goToMeditation }) => {
   return (
     <div className="wellness-page">
 
@@ -51,10 +54,12 @@ const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact,
           subtitle="Calm your mind. Refresh your energy."
           description="Find peace through gentle breathing, stretching, and guided mindfulness sessions. Take a few minutes each day to relax your body and reset your mind."
           buttonText="Start Session"
+          
           imageSrc="meditation.png"
           imageAlt="Woman doing yoga"
           reverseLayout={false}
           customClass="no-card"
+          onButtonClick={goToMeditation}
         />
 
         <SectionBlock

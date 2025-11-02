@@ -10,8 +10,13 @@ import ContactUs from "./ContactUs";
 import WellnessPage from "./wellnesspage";
 import Tips from "./Tips";
 import Blogs from "./blogs";
+<<<<<<< Updated upstream
 import TicTacToe from "./TicTacToe";
 import MatchingGame from './MatchingGame';
+=======
+import Meditation from "./meditation";
+
+>>>>>>> Stashed changes
 import "./App.css";
 
 function App() {
@@ -36,9 +41,35 @@ function App() {
     goToContact: () => setPage("contact"),
     goTowellness: () => setPage("wellness"),
     goToBlogs: () => setPage("blogs"),
+    goToMeditation: () => setPage("meditation"), 
   };
 
+<<<<<<< Updated upstream
   // Single return — everything combined
+=======
+  return (
+    <div className="App">
+      {page === "home" && <HomePage {...navProps} />}
+      {/* You can now use the spread operator to pass all nav props easily: */}
+      {page === "wellness" && <WellnessPage {...navProps} />}
+      {page === "contact" && <ContactUs {...navProps} />}
+      {page === "games" && <GamesPage {...navProps} />}
+      {page === "blogs" && <Blogs {...navProps} />}
+      {/* {page === "meditation" && <meditation {...navProps} />} */}
+      {/* ... and so on for all your pages */}
+    </div>
+  );
+  
+  
+  
+
+  const handleLogin = (userRole, userEmail) => {
+    setRole(userRole);
+    setEmail(userEmail);
+    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
+  };
+
+>>>>>>> Stashed changes
   return (
     <div className="App">
       {page === "home" && (
@@ -70,6 +101,45 @@ function App() {
       {page === "adminDashboard" && (
         <AdminDashboard email={email} goToHome={() => setPage("home")} />
       )}
+<<<<<<< Updated upstream
+=======
+      {page === "games" && (
+        <GamesPage 
+        goToHome={() => setPage("home")}
+        goToWordle={() => setPage("wordle")} />
+        
+      )}
+      {page === "wordle" && (
+        <WordleGame goBack={() => setPage("games")} />
+      )}
+      {page === "contact" && (
+         <ContactUs goToHome={() => setPage("home")} />
+     )}
+     {page === "wellness" && (
+         <WellnessPage goToHome={() => setPage("home")} 
+         goToLogin={() => setPage("login")}
+         goToSignup={() => setPage("signup")}
+         goToGames={() => setPage("games")}
+         goToContact={() => setPage("contact")}
+         goToTips={() => setPage("tips")}/>
+     )}
+     {page === "tips" && (
+        <Tips goToHome={() => setPage("home")}
+        />
+      )}
+      {page === "blogs" && (
+        <Blogs goToHome={() => setPage("home")}
+        />
+      )}
+      {page === "meditation" && (
+  <Meditation 
+    goToHome={() => setPage("home")}
+    goToWellness={() => setPage("wellness")}
+  />
+)}
+
+     
+>>>>>>> Stashed changes
 
       {page === "games" && (
         <GamesPage

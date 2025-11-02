@@ -1,0 +1,194 @@
+.meditation-page {
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #333;
+}
+
+/* Banner */
+.meditation-banner {
+  position: relative;
+  width: 90%;
+  height: 480px;
+  margin: 20px auto 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: url("/public/blogs.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.banner-content {
+  padding-left: 80px;
+  text-align: left;
+  color: black;
+}
+
+.banner-content h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.banner-content p {
+  font-size: 1.3rem;
+  color: black;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+/* Meditation Grid */
+.meditation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px 40px;
+  padding: 60px 20px;
+  justify-items: center;
+  align-items: start;
+}
+
+.meditation-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.meditation-card:hover {
+  transform: translateY(-5px);
+}
+
+.meditation-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.meditation-meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.meditation-card h3 {
+  padding: 0 15px;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Start Button */
+.start-btn {
+  margin: 10px 15px 15px;
+  background-color: #6b8eff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #5b7ae0;
+}
+
+/* Footer reused from blogs.css */
+.footer {
+  background: white;
+  padding: 25px 0 10px;
+  margin-top: 20px;
+  border-top: 2px solid #6b8eff;
+}
+
+.footer-container {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  text-align: left;
+  margin-left: 60px;
+}
+
+.footer-links li {
+  color: black;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-links li:hover {
+  color: #6b8eff;
+}
+
+.footer-message-box {
+  background: #f5f7ff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1.5px solid #6b8eff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 250px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(107, 142, 255, 0.1);
+}
+
+.footer-textarea {
+  width: 90%;
+  height: 70px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.85rem;
+  resize: none;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.footer-send-btn {
+  background-color: #6b8eff;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 15px;
+  margin-top: 0px;
+}
+
+.footer-bottom p {
+  color: black;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-message-box {
+    max-width: 100%;
+  }
+}
