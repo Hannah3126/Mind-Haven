@@ -67,24 +67,8 @@ function App() {
   
   
 
-  const handleLogin = (userRole, userEmail) => {
-    setRole(userRole);
-    setEmail(userEmail);
-    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
-  };
-
-
-  return (
-    <div className="App">
-      {page === "home" && (
-        <HomePage
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goToWellness={() => setPage("wellness")}
-        />
-      )}
+  
+      
 
       {page === "login" && (
         <Login
