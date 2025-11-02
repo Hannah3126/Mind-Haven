@@ -14,6 +14,9 @@ import TicTacToe from "./TicTacToe";
 import MatchingGame from "./MatchingGame";
 import Meditation from "./meditation";
 import Music from "./music";
+import SpotTheDifference from "./spot";
+import FunQuizGame from "./quiz";
+
 
 import "./App.css";
 
@@ -39,6 +42,8 @@ function App() {
     goToMeditation: () => setPage("meditation"),
     goToBlogs: () => setPage("blogs"),
     goToMusic: () => setPage("music"),
+    goTospot: () => setPage("spot"),
+    goToquiz: () => setPage("quiz"),
   };
 
   // ✅ Handle login role switching
@@ -80,6 +85,10 @@ function App() {
 
       {/* 🧩 Matching Game */}
       {page === "matching" && <MatchingGame {...navigation} />}
+
+      {page === "spot" && <SpotTheDifference {...navigation} />}
+      {page === "quiz" && <FunQuizGame {...navigation} />}
+
 
       {/* 💬 Contact */}
       {page === "contact" && <ContactUs {...navigation} />}

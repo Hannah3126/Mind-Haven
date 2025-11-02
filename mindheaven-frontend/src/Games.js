@@ -19,7 +19,7 @@ const gamesData = [
     action: "wordle",
   },
   {
-    title: "Spot the difference",
+    title: "Spot The Difference",
     description: "Train your eyes to notice even the smallest things",
     imageSrc: "/Spot.png",
     alt: "Spot the difference puzzle",
@@ -40,7 +40,7 @@ const gamesData = [
     action: "tic",
   },
   {
-    title: "Quiz/Trivia",
+    title: "Fun Quiz Game",
     description: "Test your knowledge in a fun and easy way",
     imageSrc: "/Quiz.png",
     alt: "Quiz or Trivia game",
@@ -58,7 +58,9 @@ export default function GamesPage({
   goToBlogs,
   goToWordle,
   goToTicTacToe,
-  goToMatchingGame
+  goToMatchingGame, 
+  goTospot,
+  goToquiz,
 }) {
   return (
     <div className="games-page">
@@ -103,6 +105,10 @@ export default function GamesPage({
                       goToTicTacToe();
                     } else if (game.action === "matching") {
                       goToMatchingGame(); // ✅ Redirect to Matching Game
+                    } else if (game.action === "spot") {
+                      goTospot();
+                    } else if (game.action === "quiz") {
+                      goToquiz();
                     } else {
                       alert(`${game.title} is coming soon!`);
                     }

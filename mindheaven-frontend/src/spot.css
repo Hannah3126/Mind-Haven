@@ -1,0 +1,96 @@
+.spot-page {
+  font-family: "Be Vietnam Pro", sans-serif;
+  background-color: #f8faff;
+  color: #333;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.spot-banner {
+  margin-top: 80px;
+  padding: 30px 20px;
+}
+
+.spot-banner h1 {
+  font-size: 2.2rem;
+  color: #3a6ea5;
+}
+
+.spot-banner p {
+  color: #555;
+}
+
+.spot-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.spot-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.spot-image-wrapper {
+  position: relative;
+}
+
+.spot-image {
+  width: 350px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Clickable difference zones */
+.spot-difference {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  border: 2px dashed rgba(255, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.spot-difference:hover {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.spot-difference.found {
+  background-color: rgba(0, 255, 100, 0.4);
+  border: 2px solid #27ae60;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.spot-status {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.spot-message {
+  font-weight: 600;
+  color: #3a6ea5;
+  margin-top: 10px;
+}
+
+.spot-footer {
+  margin-top: 50px;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
