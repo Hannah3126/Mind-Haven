@@ -10,23 +10,19 @@ import ContactUs from "./ContactUs";
 import WellnessPage from "./wellnesspage";
 import Tips from "./Tips";
 import Blogs from "./blogs";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+import meditation from "./meditation";
+
+
 import TicTacToe from "./TicTacToe";
 import MatchingGame from './MatchingGame';
-=======
-import Meditation from "./meditation";
 
->>>>>>> Stashed changes
-=======
-import Meditation from "./meditation";
 
->>>>>>> Stashed changes
-=======
-import Meditation from "./meditation";
 
->>>>>>> Stashed changes
+
+
+
+
+
 import "./App.css";
 
 function App() {
@@ -35,11 +31,11 @@ function App() {
   const [email, setEmail] = useState("");
 
   // Handle login role switching
-  const handleLogin = (userRole, userEmail) => {
+  function handleLogin(userRole, userEmail) {
     setRole(userRole);
     setEmail(userEmail);
     setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
-  };
+  }
 
   // All navigation props to pass to reusable Navbar components
   const navProps = {
@@ -54,9 +50,7 @@ function App() {
     goToMeditation: () => setPage("meditation"), 
   };
 
-<<<<<<< Updated upstream
-  // Single return — everything combined
-=======
+
   return (
     <div className="App">
       {page === "home" && <HomePage {...navProps} />}
@@ -67,176 +61,13 @@ function App() {
       {page === "blogs" && <Blogs {...navProps} />}
       {/* {page === "meditation" && <meditation {...navProps} />} */}
       {/* ... and so on for all your pages */}
+      {page === "meditation" && <meditation {...navProps} />}
     </div>
   );
   
   
   
 
-  const handleLogin = (userRole, userEmail) => {
-    setRole(userRole);
-    setEmail(userEmail);
-    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
-  };
-
->>>>>>> Stashed changes
-  return (
-    <div className="App">
-      {page === "home" && (
-        <HomePage
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goToWellness={() => setPage("wellness")}
-        />
-      )}
-
-      {page === "login" && (
-        <Login
-          goToSignup={() => setPage("signup")}
-          onLogin={handleLogin}
-          goToHome={() => setPage("home")}
-        />
-      )}
-
-      {page === "signup" && (
-        <Signup goToLogin={() => setPage("login")} goToHome={() => setPage("home")} />
-      )}
-
-      {page === "userDashboard" && (
-        <UserDashboard email={email} goToHome={() => setPage("home")} />
-      )}
-
-      {page === "adminDashboard" && (
-        <AdminDashboard email={email} goToHome={() => setPage("home")} />
-      )}
-<<<<<<< Updated upstream
-=======
-      {page === "games" && (
-        <GamesPage 
-        goToHome={() => setPage("home")}
-        goToWordle={() => setPage("wordle")} />
-        
-      )}
-      {page === "wordle" && (
-        <WordleGame goBack={() => setPage("games")} />
-      )}
-      {page === "contact" && (
-         <ContactUs goToHome={() => setPage("home")} />
-     )}
-     {page === "wellness" && (
-         <WellnessPage goToHome={() => setPage("home")} 
-         goToLogin={() => setPage("login")}
-         goToSignup={() => setPage("signup")}
-         goToGames={() => setPage("games")}
-         goToContact={() => setPage("contact")}
-         goToTips={() => setPage("tips")}/>
-     )}
-     {page === "tips" && (
-        <Tips goToHome={() => setPage("home")}
-        />
-      )}
-      {page === "blogs" && (
-        <Blogs goToHome={() => setPage("home")}
-        />
-      )}
-      {page === "meditation" && (
-  <Meditation 
-    goToHome={() => setPage("home")}
-    goToWellness={() => setPage("wellness")}
-  />
-)}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-
-     
->>>>>>> Stashed changes
-
-     
->>>>>>> Stashed changes
-
-     
->>>>>>> Stashed changes
-
-      {page === "games" && (
-        <GamesPage
-          goToHome={() => setPage("home")}
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goTowellness={() => setPage("wellness")}
-          goToBlogs={() => setPage("blogs")}
-          goToWordle={() => setPage("wordle")}
-          goToTicTacToe={() => setPage("tictactoe")}
-          goToMatchingGame={() => setPage("matching")}
-        />
-      )}
-
-      {page === "wordle" && (
-        <WordleGame
-          goBack={() => setPage("games")}
-          goToHome={() => setPage("home")}
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goTowellness={() => setPage("wellness")}
-          goToBlogs={() => setPage("blogs")}
-
-          currentPage="games"
-        />
-      )}
-
-      {page === "contact" && <ContactUs goToHome={() => setPage("home")} />}
-
-      {page === "wellness" && (
-        <WellnessPage
-          goToHome={() => setPage("home")}
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goToTips={() => setPage("tips")}
-        />
-      )}
-
-      {page === "tips" && <Tips goToHome={() => setPage("home")} />}
-
-      {page === "blogs" && <Blogs goToHome={() => setPage("home")} />}
-
-      {page === "tictactoe" && (
-        <TicTacToe
-          goBack={() => setPage("games")}
-          goToHome={() => setPage("home")}
-          goToLogin={() => setPage("login")}
-          goToSignup={() => setPage("signup")}
-          goToGames={() => setPage("games")}
-          goToContact={() => setPage("contact")}
-          goTowellness={() => setPage("wellness")}
-          goToBlogs={() => setPage("blogs")}
-          currentPage="tictactoe"
-        />
-      )}
-
-        {page === "matching" && (
-          <MatchingGame
-            goBack={() => setPage("games")}
-            goToHome={() => setPage("home")}
-            goToLogin={() => setPage("login")}
-            goToSignup={() => setPage("signup")}
-            goToGames={() => setPage("games")}
-            goToContact={() => setPage("contact")}
-            goTowellness={() => setPage("wellness")}
-            goToBlogs={() => setPage("blogs")}
-            currentPage="matching"
-          />
-        )}
-    </div>
-  );
 }
 
 export default App;
