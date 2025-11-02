@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Wordle.css";
-import { ArrowLeft } from "lucide-react";
 import Navbar from "./navbar";
 
 function WordleGame({
-  goBack,
   goToHome,
   goToLogin,
   goToSignup,
@@ -20,9 +18,13 @@ function WordleGame({
   const [validWords, setValidWords] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
 
+  // Seeded random for daily word
   const getSeededRandomIndex = (wordList) => {
     const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const seed =
+      today.getFullYear() * 10000 +
+      (today.getMonth() + 1) * 100 +
+      today.getDate();
     const rng = mulberry32(seed);
     return Math.floor(rng() * wordList.length);
   };
@@ -36,6 +38,7 @@ function WordleGame({
     };
   };
 
+  // Load valid words and pick the daily word
   useEffect(() => {
     fetch("/valid-wordle-words.txt")
       .then((res) => res.text())
@@ -53,6 +56,7 @@ function WordleGame({
       .catch(() => setMessage("⚠️ Failed to load word list."));
   }, []);
 
+  // Handle user guess
   const handleGuess = () => {
     const upperInput = input.toUpperCase();
 
@@ -79,6 +83,7 @@ function WordleGame({
     }
   };
 
+  // Determine letter color for Wordle logic
   const getColor = (letter, index) => {
     if (!wordToGuess) return "absent";
     if (wordToGuess[index] === letter) return "correct";
@@ -88,6 +93,7 @@ function WordleGame({
 
   return (
     <div className="wordle-container">
+      {/* Keep the top blue Navbar */}
       <Navbar
         currentPage={currentPage}
         goToHome={goToHome}
@@ -99,9 +105,6 @@ function WordleGame({
         goToBlogs={goToBlogs}
       />
 
-      <button className="back-btn" onClick={goBack}>
-        <ArrowLeft size={18} /> Back
-      </button>
       <h1 className="wordle-logo">Mind Heaven - Wordle</h1>
 
       <div className="wordle-body">

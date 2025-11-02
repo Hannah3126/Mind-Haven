@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./TicTacToe.css";
 import Navbar from "./navbar";
-import { ArrowLeft } from "lucide-react";
 
 const TicTacToe = ({
-  goBack,
   goToHome,
   goToLogin,
   goToSignup,
@@ -81,6 +79,7 @@ const TicTacToe = ({
 
   return (
     <div className="tictactoe-page">
+      {/* Keep the top blue Navbar */}
       <Navbar
         currentPage={currentPage}
         goToHome={goToHome}
@@ -93,10 +92,6 @@ const TicTacToe = ({
       />
 
       <div className="tictactoe-content">
-        <button className="back-btn" onClick={goBack}>
-          <ArrowLeft size={18} /> Back
-        </button>
-
         <h1 className="tictactoe-title">Tic Tac Toe 🤖</h1>
         <div className="tictactoe-status">{status}</div>
 
