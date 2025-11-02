@@ -38,7 +38,7 @@ function App() {
     goToTips: () => setPage("tips"),
     goToMeditation: () => setPage("meditation"),
     goToBlogs: () => setPage("blogs"),
-    goToMlogs: () => setPage("music"),
+    goToMusic: () => setPage("music"),
   };
 
   // ✅ Handle login role switching

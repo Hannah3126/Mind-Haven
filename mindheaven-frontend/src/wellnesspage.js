@@ -25,7 +25,7 @@ const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imag
 );
 
 // ✅ Main Page Component
-const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs, goToMeditation }) => {
+const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs, goToMeditation, goToMusic }) => {
   return (
     <div className="wellness-page">
 
@@ -78,6 +78,7 @@ const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact,
                   boxShadow: "0 4px 15px rgba(107, 142, 255, 0.12)",
                   padding: "30px"
   }}
+  onButtonClick={goToMusic}
           
         />
 

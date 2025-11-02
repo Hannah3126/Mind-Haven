@@ -16,14 +16,14 @@ export default function Music({
     {
       title: "Peaceful Piano",
       subtitle: "Relaxing Instrumental",
-      img: "/music1.jpg",
-      link: "https://www.youtube.com/watch?v=1ZYbU82GVz4",
+      img: "/music4.jpg",
+      link: "https://www.youtube.com/watch?v=fJy26OKglcA",
     },
     {
       title: "Ocean Waves Sound",
       subtitle: "Nature Therapy",
       img: "/music2.jpg",
-      link: "https://www.youtube.com/watch?v=1L0rDA8SglI",
+      link: "https://www.youtube.com/watch?v=40tPuU6jrgQ",
     },
     {
       title: "Calm Sleep Music",
@@ -34,7 +34,7 @@ export default function Music({
     {
       title: "Morning Motivation Beats",
       subtitle: "Energizing",
-      img: "/music4.jpg",
+      img: "/music1.jpg",
       link: "https://www.youtube.com/watch?v=UfcAVejslrU",
     },
     {
@@ -47,7 +47,7 @@ export default function Music({
       title: "Chakra Healing Music",
       subtitle: "Spiritual Balance",
       img: "/music6.jpg",
-      link: "https://www.youtube.com/watch?v=QJqz6VqRex8",
+      link: "https://www.youtube.com/watch?v=TxkyFCeWAxs&list=RDTxkyFCeWAxs&start_radio=1",
     },
   ];
 
@@ -114,11 +114,12 @@ export default function Music({
             </ul>
 
             <ul>
-              <li>Relaxation</li>
-              <li>Focus</li>
-              <li>Healing</li>
-              <li>Sleep</li>
-              <li>Energy</li>
+              <li>Relaxing</li>
+              <li>Nature Therapy</li>
+              <li>Sleep Aid</li>
+              <li>Energizing</li>
+              <li>Concentration</li>
+               <li>Spiritual Balance</li>
             </ul>
           </div>
 
