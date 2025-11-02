@@ -4,6 +4,7 @@ import Navbar from './navbar';
 import './navbar.css';
 import './meditation.js';
 
+
 // ✅ Reusable Section Block Component
 const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imageAlt, reverseLayout, customClass , style, onButtonClick}) => (
   <section className={`section-block ${reverseLayout ? 'reverse' : ''}${customClass || ''}`}
