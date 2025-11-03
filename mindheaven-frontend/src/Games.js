@@ -19,14 +19,14 @@ const gamesData = [
     action: "wordle",
   },
   {
-    title: "Spot The Difference",
-    description: "Train your eyes to notice even the smallest things",
+    title: "Pattern Recall",
+    description: "Train your mind and focus by recalling glowing sequences.",
     imageSrc: "/Spot.png",
-    alt: "Spot the difference puzzle",
-    action: "spot",
+    alt: "Memory pattern game",
+    action: "pattern",
   },
   {
-    title: "Sliding puzzle Game",
+    title: "Sliding Puzzle Game",
     description: "Assemble fragmented piece by piece",
     imageSrc: "/Puzzle.png",
     alt: "Jigsaw puzzle pieces",
@@ -59,7 +59,7 @@ export default function GamesPage({
   goToWordle,
   goToTicTacToe,
   goToMatchingGame, 
-  goTospot,
+  goToPatternRecall,
   goToquiz,
   goToPuzzle,
 }) {
@@ -105,12 +105,12 @@ export default function GamesPage({
                     } else if (game.action === "tic") {
                       goToTicTacToe();
                     } else if (game.action === "matching") {
-                      goToMatchingGame(); // ✅ Redirect to Matching Game
-                    } else if (game.action === "spot") {
-                      goTospot();
+                      goToMatchingGame();
+                    } else if (game.action === "pattern") {
+                      goToPatternRecall();
                     } else if (game.action === "quiz") {
                       goToquiz();
-                    }else if (game.action === "Puzzle") {
+                    } else if (game.action === "Puzzle") {
                       goToPuzzle();
                     } else {
                       alert(`${game.title} is coming soon!`);
@@ -143,8 +143,8 @@ export default function GamesPage({
             </ul>
             <ul>
               <li>Matching Game</li>
-              <li>Worldle</li>
-              <li>Spot The </li>
+              <li>Wordle</li>
+              <li>Pattern Recall</li>
               <li>Puzzle</li>
               <li>Tic Tac Toe</li>
               <li>Quiz Trivia</li>

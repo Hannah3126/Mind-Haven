@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "../styles/PatternRecall.css";
+import Navbar from "./navbar";
+import "./PatternRecall.css";
 
 const TILE_COUNT = 4;
 const TILE_COLORS = ["#A2D2FF", "#FFC8DD", "#CDB4DB", "#B5EAD7"];
 
 const getRandomTile = () => Math.floor(Math.random() * TILE_COUNT);
 
-export default function PatternRecall() {
+export default function PatternRecall({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
   const [sequence, setSequence] = useState([]);
   const [playerInput, setPlayerInput] = useState([]);
   const [activeTile, setActiveTile] = useState(null);
@@ -76,16 +77,15 @@ export default function PatternRecall() {
 
   return (
     <div className="pattern-recall-page">
-      <nav className="navbar">
-        <h2 className="logo">🧠 MindHeaven</h2>
-        <div className="nav-links">
-          <a href="/">Home</a>
-          <a href="/wellness">Wellness</a>
-          <a href="/games">Games</a>
-          <a href="/blogs">Blogs</a>
-          <a href="/contact">Contact</a>
-        </div>
-      </nav>
+      <Navbar
+        goToHome={goToHome}
+        goToLogin={goToLogin}
+        goToSignup={goToSignup}
+        goToGames={goToGames}
+        goToContact={goToContact}
+        goTowellness={goTowellness}
+        goToBlogs={goToBlogs}
+      />
 
       <div className="game-container">
         <h1 className="title">Pattern Recall</h1>

@@ -18,6 +18,7 @@ import SpotTheDifference from "./spot";
 import FunQuizGame from "./quiz";
 import Appointment from "./Appointment";
 import Puzzle from "./Puzzle";
+import PatternRecall from "./PatternRecall";
 
 
 import "./App.css";
@@ -48,6 +49,7 @@ function App() {
     goToquiz: () => setPage("quiz"),
     goToAppointment: () => setPage("Appointment"),
     goToPuzzle: () => setPage("Puzzle"),
+    goToPatternRecall: () => setPage("patternrecall"),
   };
 
   // ✅ Handle login role switching
@@ -93,6 +95,7 @@ function App() {
       {page === "spot" && <SpotTheDifference {...navigation} />}
       {page === "quiz" && <FunQuizGame {...navigation} />}
       {page === "Puzzle" && <Puzzle {...navigation} />}
+      {page === "patternrecall" && <PatternRecall {...navigation} />}
 
 
       {/* 💬 Contact */}
