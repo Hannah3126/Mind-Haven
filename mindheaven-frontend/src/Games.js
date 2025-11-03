@@ -22,7 +22,7 @@ const gamesData = [
     title: "Pattern Recall",
     description: "Train your mind and focus by recalling glowing sequences!",
     imageSrc: "/Spot.png",
-    alt: "Memory pattern game",
+    alt: "Pattern Reacall Game",
     action: "pattern",
   },
   {
