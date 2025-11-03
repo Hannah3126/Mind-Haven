@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "./navbar"; // ✅ import your reusable Navbar
 import "./Tips.css";
-import { ArrowLeft } from "lucide-react";
 
 const tipsData = [
   {
@@ -65,7 +65,7 @@ const tipsData = [
   }
 ];
 
-export default function Tips({ goToHome }) {
+export default function Tips(props) {
   const [search, setSearch] = useState("");
 
   const filteredTips = tipsData.filter(tip =>
@@ -74,16 +74,8 @@ export default function Tips({ goToHome }) {
 
   return (
     <div className="tips-page">
-      {/* Navbar */}
-      <nav className="navbar">
-        <button className="back-button" onClick={goToHome}>
-          <ArrowLeft size={18} style={{ marginRight: "6px" }} /> Back
-        </button>
-        <div className="nav-title">Mind Heaven – Wellness Tips</div>
-        <div className="spacer" />
-      </nav>
-
-      {/* Hero Greeting Section */}
+      <Navbar {...props} /> {/* ✅ Uses your default navbar */}
+      
       <div className="hero-greeting">
         <h2>🌞 Read Some Useful Tips to Help You Through</h2>
         <p>
@@ -92,7 +84,6 @@ export default function Tips({ goToHome }) {
         </p>
       </div>
 
-      {/* Search */}
       <h2 className="tips-heading">🌿 Small Habits, Big Calm</h2>
       <p className="tips-subheading">
         Practical daily tips to help you feel grounded, calm, and recharged.
@@ -106,7 +97,6 @@ export default function Tips({ goToHome }) {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* Tips Grid */}
       <div className="tips-grid">
         {filteredTips.length > 0 ? (
           filteredTips.map((tip, index) => (
