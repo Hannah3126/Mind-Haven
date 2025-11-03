@@ -3,6 +3,7 @@ import './wellnesspage.css';
 import Navbar from './navbar';
 import './navbar.css';
 import './meditation.js';
+import './Appointment';
 
 
 // ✅ Reusable Section Block Component
@@ -25,7 +26,7 @@ const SectionBlock = ({ title, subtitle, description, buttonText, imageSrc, imag
 );
 
 // ✅ Main Page Component
-const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs, goToMeditation, goToMusic }) => {
+const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs, goToMeditation, goToMusic, goToAppointment }) => {
   return (
     <div className="wellness-page">
 
@@ -124,6 +125,7 @@ const WellnessPage = ({ goToHome, goToLogin, goToSignup, goToGames, goToContact,
           imageAlt="appointment"
           reverseLayout={false}
           customClass="no-card"
+          onButtonClick={goToAppointment}
         />
 
         

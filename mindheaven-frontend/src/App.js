@@ -16,6 +16,7 @@ import Meditation from "./meditation";
 import Music from "./music";
 import SpotTheDifference from "./spot";
 import FunQuizGame from "./quiz";
+import Appointment from "./Appointment";
 
 
 import "./App.css";
@@ -44,6 +45,7 @@ function App() {
     goToMusic: () => setPage("music"),
     goTospot: () => setPage("spot"),
     goToquiz: () => setPage("quiz"),
+    goToAppointment: () => setPage("Appointment"),
   };
 
   // ✅ Handle login role switching
@@ -106,6 +108,7 @@ function App() {
       {page === "blogs" && <Blogs {...navigation} />}
 
       {page === "music" && <Music {...navigation} />}
+      {page === "Appointment" && <Appointment {...navigation} />}
     </div>
   );
 }
