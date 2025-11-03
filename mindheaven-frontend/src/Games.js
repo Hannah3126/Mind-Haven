@@ -54,7 +54,7 @@ export default function GamesPage({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
   goToWordle,
   goToTicTacToe,
@@ -73,7 +73,7 @@ export default function GamesPage({
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
       />
 

@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./navbar";
 import "./Appointment.css";
 
-export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
+export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs }) {
   return (
     <div className="appointment-page">
 
@@ -13,7 +13,7 @@ export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToG
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
       />
 

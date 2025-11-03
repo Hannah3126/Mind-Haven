@@ -10,7 +10,7 @@ export default function BlogPage({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
 }) {
   // ✅ Blog data with external links
@@ -69,7 +69,7 @@ export default function BlogPage({
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
       />
 
@@ -119,7 +119,7 @@ export default function BlogPage({
           <div className="footer-links">
             <ul>
               <li onClick={goToHome}>Home</li>
-              <li onClick={goTowellness}>Wellness</li>
+              <li onClick={goToWellness}>Wellness</li>
               <li onClick={goToGames}>Games</li>
               <li onClick={goToBlogs}>Blog</li>
               <li onClick={goToContact}>Contact Us</li>
