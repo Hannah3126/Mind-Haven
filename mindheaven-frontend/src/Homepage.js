@@ -99,7 +99,7 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
                 cursor: "pointer",
                 fontWeight: "600",
               }}
-              onClick={goToLogin}
+               onClick={() => goToWellness('appointment')}
             >
               Schedule Appointment
             </button>
@@ -141,9 +141,12 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
         <p>Everything you need for a healthier, calmer mind</p>
         <div className="features-grid">
           <div className="feature-card">
-            <a href="/meditation" className="arrow-icon">
-              <ArrowUpRight color="black" />
-            </a>
+            <button
+    className="arrow-icon"
+    onClick={() => goToWellness('meditation')} // optional section identifier
+  >
+    <ArrowUpRight color="black" />
+  </button>
             <div className="feature-icon">
               <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
             </div>
@@ -151,9 +154,12 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
             <p>Practice mindfulness and energize your body with guided sessions.</p>
           </div>
           <div className="feature-card">
-            <a href="/songs" className="arrow-icon">
-              <ArrowUpRight color="black" />
-            </a>
+            <button
+    className="arrow-icon"
+    onClick={() => goToWellness('music')} // optional section identifier
+  >
+    <ArrowUpRight color="black" />
+  </button>
             <div className="feature-icon">
               <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
             </div>
@@ -171,10 +177,11 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
             <p>Record, reflect, and track your emotions with ease.</p>
           </div>
           <div className="feature-card">
-          <button className="arrow-icon" >
+          <button className="arrow-icon" onClick={goToWellness}  >
             <ArrowUpRight color="black" />
           </button>
             <div className="feature-icon">
+              
               <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
             </div>
             <h3> Mental Health Tips</h3>
@@ -192,9 +199,10 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
           </div>
           <div className="feature-card">
             <a href="/blogs" className="arrow-icon">
-              <ArrowUpRight color="black" />
+              <ArrowUpRight color="black" onClick={goToBlogs} />
             </a>
             <div className="feature-icon">
+              
               <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
             </div>
             <h3> Blogs</h3>
@@ -307,7 +315,7 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
 
   {/* View More button section */}
   <div className="view-more-container">
-    <button className="view-more-btn">View More</button>
+    <button className="view-more-btn" onClick={goToBlogs}>View More </button>
   <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
         </div>
       </section>
