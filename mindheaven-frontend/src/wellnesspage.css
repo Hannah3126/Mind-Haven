@@ -394,110 +394,128 @@
   height: auto;
 }
 /* ----------- THOUGHT TRACKER SECTION----------- */
+/* ---------- Thought Tracker Two-Column Layout ---------- */
+
+/* ---------- Thought Tracker Two-Column Layout (Refined & Balanced) ---------- */
+
 .thought-tracker-box {
-  background-color: #ffffff;
-  border: 2px solid #4a90e2;
+  max-width: 780px;
+  margin: 40px auto;
+  padding: 25px;
   border-radius: 16px;
-  padding: 20px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 4px 15px rgba(107, 142, 255, 0.12);
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(74, 144, 226, 0.18);
+  text-align: center;
+}
+
+.thought-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2b3a67;
+  margin-bottom: 5px;
+}
+
+.thought-subtitle {
+  color: #5c6b8b;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.thought-split {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.thought-input-box,
+.thought-output-box {
+  flex: 1 1 48%;
+  background: #f9fbff;
+  border-radius: 12px;
+  border: 1px solid rgba(74, 144, 226, 0.15);
+  padding: 15px 18px;
+  text-align: left;
+  transition: 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 16px;
-  font-family: "Be Vietnam Pro", sans-serif;
 }
 
-.thought-tracker-box textarea {
-  width: 100%;
-  min-height: 100px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 1rem;
-  resize: vertical;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.thought-tracker-box textarea:focus {
-  border-color: #4a90e2;
-}
-
-/* Styled Button */
-.thought-tracker-box button {
-  align-self: flex-start;
-  background-color: #4a90e2;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.thought-tracker-box button:hover {
-  background-color: #3b78c3;
-}
-
-/* Reframed output box */
-.reframed-box {
-  background-color: #f0f7ff;
-  border-left: 4px solid #4a90e2;
-  padding: 12px 16px;
-  border-radius: 10px;
+.thought-input-box h4,
+.thought-output-box h4 {
+  color: #2b3a67;
+  margin-bottom: 10px;
+  font-weight: 600;
   font-size: 0.95rem;
-  color: #333;
-}
-
-.reframed-box h4 {
-  margin-bottom: 6px;
-  color: #4a90e2;
-}
-
-.thought-tracker-container {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(107, 142, 255, 0.12);
-  padding: 0;
-  overflow: hidden;
-  width: 100%;
-  max-width: 520px;
-  font-family: "Be Vietnam Pro", sans-serif;
-  border: 2px solid #4a90e2;
 }
 
 .thought-textarea {
   width: 100%;
-  border: none;
-  padding: 18px;
-  font-size: 1rem;
-  font-family: inherit;
-  resize: vertical;
+  height: 100px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1.8px solid #cbd6f3;
+  border-radius: 8px;
+  resize: none;
   outline: none;
-  box-sizing: border-box;
-  min-height: 120px;
-  border-bottom: 1px solid #eee;
+  background: #fff;
+  margin-bottom: 12px;
+  transition: 0.2s ease;
+}
+
+.thought-textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.12);
 }
 
 .reframe-btn {
-  display: block;
-  margin: 12px;
+  align-self: flex-start;
   background-color: #4a90e2;
   color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: 0.25s ease;
 }
 
 .reframe-btn:hover {
-  background-color: #3b78c3;
+  background-color: #3b7ac8;
+  transform: scale(1.03);
+}
+
+.reframed-display {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(74, 144, 226, 0.2);
+  padding: 12px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reframed-display p {
+  color: #444d63;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.placeholder {
+  color: #9aa4bf;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive Stack */
+@media (max-width: 850px) {
+  .thought-split {
+    flex-direction: column;
+  }
+  .thought-input-box,
+  .thought-output-box {
+    flex: 1 1 100%;
+  }
 }

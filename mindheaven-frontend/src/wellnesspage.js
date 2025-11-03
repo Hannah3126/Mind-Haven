@@ -19,6 +19,7 @@ const ThoughtTrackerBox = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ thought }),
+        mode: 'cors'
       });
       const data = await res.json();
       setReframed(data.reframed || 'No response received.');
@@ -31,24 +32,39 @@ const ThoughtTrackerBox = () => {
   };
 
   return (
-    <div className="thought-tracker-container">
-      <textarea
-        className="thought-textarea"
-        placeholder="Write your thought..."
-        value={thought}
-        onChange={(e) => setThought(e.target.value)}
-      />
+    <div className="thought-tracker-box">
+      <h3 className="thought-title">💭 Reflect & Reframe</h3>
+      <p className="thought-subtitle">
+        Type your thought on the left and receive a kinder perspective on the right.
+      </p>
 
-      <button className="reframe-btn" onClick={handleReframe} disabled={loading}>
-        {loading ? 'Reframing...' : 'Reframe'}
-      </button>
-
-      {reframed && (
-        <div className="reframed-result">
-          <h4>💡 Reframed Thought:</h4>
-          <p>{reframed}</p>
+      <div className="thought-split">
+        {/* LEFT SIDE - Input */}
+        <div className="thought-input-box">
+          <h4>📝 Your Thought</h4>
+          <textarea
+            className="thought-textarea"
+            placeholder="Write what’s on your mind..."
+            value={thought}
+            onChange={(e) => setThought(e.target.value)}
+          />
+          <button className="reframe-btn" onClick={handleReframe} disabled={loading}>
+            {loading ? 'Reframing...' : 'Reframe Thought'}
+          </button>
         </div>
-      )}
+
+        {/* RIGHT SIDE - Output */}
+        <div className="thought-output-box">
+          <h4>💡 Reframed Thought</h4>
+          <div className="reframed-display">
+            {reframed ? (
+              <p>{reframed}</p>
+            ) : (
+              <p className="placeholder">Your reframed thought will appear here.</p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

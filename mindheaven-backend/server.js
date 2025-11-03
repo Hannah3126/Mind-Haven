@@ -1,13 +1,26 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const sqlite3 = require("sqlite3").verbose();
-const cors = require("cors");
+import express from 'express';
+import bodyParser from 'body-parser';
+import sqlite3 from 'sqlite3';
+import cors from 'cors';
+import reframeThought from './reframe.js';
 
 const app = express();
 const PORT = 5000;
 
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
+
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+
+// ✅ Confirm CORS works
+app.get('/test', (req, res) => {
+  res.send("✅ Test route working with CORS");
+});
 
 // Database
 const db = new sqlite3.Database("./users.db", (err) => {
@@ -98,6 +111,21 @@ app.post("/signup", (req, res) => {
       }
     );
   });
+});
+
+app.get("/test", (req, res) => {
+  res.json({ message: "CORS test route working" });
+});
+
+app.post('/api/reframe', async (req, res) => {
+  try {
+    const { thought } = req.body;
+    const reframed = await reframeThought(thought);
+    res.json({ reframed });
+  } catch (err) {
+    console.error("Reframe Error:", err);
+    res.status(500).json({ error: "Something went wrong" });
+  }
 });
 
 
