@@ -7,7 +7,7 @@ const TILE_COLORS = ["#A2D2FF", "#FFC8DD", "#CDB4DB", "#B5EAD7"];
 
 const getRandomTile = () => Math.floor(Math.random() * TILE_COUNT);
 
-export default function PatternRecall({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
+export default function PatternRecall({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs }) {
   const [sequence, setSequence] = useState([]);
   const [playerInput, setPlayerInput] = useState([]);
   const [activeTile, setActiveTile] = useState(null);
@@ -83,7 +83,7 @@ export default function PatternRecall({ goToHome, goToLogin, goToSignup, goToGam
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
       />
 
