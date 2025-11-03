@@ -3,7 +3,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* background: linear-gradient(135deg, #e0c3fc, #8ec5fc); */
   background-color: #e0c3fc;
   color: #222;
   font-family: "Poppins", sans-serif;
@@ -44,7 +43,6 @@
 /* ========== FORM CARD ========== */
 .tracking-container {
   background: white;
-  
   width: 100%;
   max-width: 650px;
   margin: 60px auto;
@@ -63,7 +61,6 @@
   background-color: #fafafa;
 }
 
-/* Header section (icon + title) */
 /* Header section (icon + title side by side) */
 .form-header {
   display: flex;
@@ -85,7 +82,6 @@
   margin: 0;
 }
 
-
 /* ========== FORM CONTENT ========== */
 form {
   width: 100%;
@@ -102,16 +98,15 @@ form {
   text-align: left;
 }
 
-/* Checkbox grid */
 /* === Checkboxes and Radio Buttons General Style === */
 input[type="checkbox"],
 input[type="radio"] {
   width: 18px;
   height: 18px;
-  accent-color: #00bcd4; /* Teal check / active color */
+  accent-color: #00bcd4;
   cursor: pointer;
   margin: 0;
-  flex-shrink: 0; /* prevent squishing */
+  flex-shrink: 0;
 }
 
 /* === Group containers === */
@@ -119,7 +114,7 @@ input[type="radio"] {
 .radio-item {
   display: flex;
   align-items: center;
-  gap: 8px; /* space between the circle/box and the text */
+  gap: 8px;
   font-size: 15px;
   text-align: left;
 }
@@ -127,13 +122,10 @@ input[type="radio"] {
 /* === Layout grid for multiple options (like symptoms) === */
 .symptom-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* two even columns */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px 20px;
   margin-bottom: 20px;
 }
-
-/* === Optional visual polish === */
-
 
 /* === Responsive: one column on small screens === */
 @media (max-width: 600px) {
@@ -141,8 +133,6 @@ input[type="radio"] {
     grid-template-columns: 1fr;
   }
 }
-
-
 
 /* Input Groups */
 .form-group {
@@ -179,18 +169,20 @@ input[type="radio"] {
   outline: none;
 }
 
-/* Radio group alignment */
+/* ✅ Properly aligned Yes/No radio buttons */
 .radio-group {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 25px;
+  gap: 40px;
   margin-top: 8px;
+  width: 100%;
 }
 
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 0px;
+  gap: 6px;
   font-size: 15px;
   color: #333;
   cursor: pointer;
@@ -198,9 +190,10 @@ input[type="radio"] {
 
 .radio-group input[type="radio"] {
   transform: scale(1.1);
-  accent-color: #6B8DE9; /* Optional: matches your theme color */
+  accent-color: #6B8DE9;
 }
 
+/* Divider */
 .form-divider {
   border: none;
   border-top: 3px solid #d3d3d3;
@@ -208,7 +201,6 @@ input[type="radio"] {
   width: 100%;
   opacity: 0.6;
 }
-
 
 /* Email & password section at bottom */
 .email-section {
@@ -220,30 +212,30 @@ input[type="radio"] {
   margin-bottom: 5px;
   font-weight: 500;
   color: #333;
-
-}
-
-/* Submit button */
-.submit-btn {
-  margin-top: 25px;
-  background: linear-gradient(90deg, #8ec5fc, #e0c3fc);
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-  color: #000;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
 }
 
 .email-section input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 18px; /* ⬅️ increased spacing between email and password */
+  margin-bottom: 18px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 15px;
+}
+
+/* ✅ Left-aligned Submit button */
+.submit-btn {
+  align-self: flex-start;
+  margin-top: 25px;
+  background: linear-gradient(90deg, #8ec5fc, #e0c3fc);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 25px;
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .submit-btn:hover {
