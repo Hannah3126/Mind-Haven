@@ -6,7 +6,6 @@ import './MatchingGame.css';
 const ALL_ICONS = ['🌿', '🌞', '💧', '🌸', '🍃', '🪷', '🔥', '🌙', '🪻', '🌼', '🍂', '🌊'];
 
 export default function MatchingGame({
-  goBack,
   goToHome,
   goToLogin,
   goToSignup,
@@ -80,6 +79,7 @@ export default function MatchingGame({
 
   return (
     <div className="memory-game-page">
+      {/* ---------- NAVBAR ---------- */}
       <Navbar
         currentPage={currentPage}
         goToHome={goToHome}
@@ -91,8 +91,8 @@ export default function MatchingGame({
         goToBlogs={goToBlogs}
       />
 
+      {/* ---------- MEMORY GAME ---------- */}
       <div className="memory-container">
-      <button className="back-btn" onClick={goBack}>← Back</button>
         <h2>Memory Match 🧠</h2>
 
         <div className="level-select">
@@ -107,14 +107,14 @@ export default function MatchingGame({
         <p>{allMatched ? '🎉 You matched all cards!' : 'Flip cards to find pairs'}</p>
 
         <div
-            className="card-grid"
-            style={{
-                gridTemplateColumns:
-                cards.length <= 6 ? 'repeat(3, 80px)' :
-                cards.length <= 12 ? 'repeat(4, 80px)' :
-                'repeat(6, 80px)'
-            }}
-            >
+          className="card-grid"
+          style={{
+            gridTemplateColumns:
+              cards.length <= 6 ? 'repeat(3, 80px)' :
+              cards.length <= 12 ? 'repeat(4, 80px)' :
+              'repeat(6, 80px)'
+          }}
+        >
           {cards.map(card => (
             <div
               key={card.id}

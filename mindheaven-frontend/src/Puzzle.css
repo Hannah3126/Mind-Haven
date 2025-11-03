@@ -1,0 +1,65 @@
+.puzzle-page {
+  font-family: "Be Vietnam Pro", sans-serif;
+  text-align: center;
+  color: #333;
+  padding-bottom: 50px;
+}
+
+.puzzle-hero {
+  margin: 30px auto;
+}
+
+.puzzle-hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #2b2b2b;
+}
+
+.puzzle-hero p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Puzzle board */
+.puzzle-board {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6b8eff;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+.tile:hover {
+  background-color: #5a7ae0;
+}
+
+.empty {
+  background-color: #f5f5f5;
+  cursor: default;
+}
+
+.puzzle-info {
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+.solved-msg {
+  color: #4caf50;
+  font-weight: bold;
+  margin-top: 10px;
+}

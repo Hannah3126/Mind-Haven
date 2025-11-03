@@ -26,11 +26,11 @@ const gamesData = [
     action: "spot",
   },
   {
-    title: "Jigsaw puzzle",
+    title: "Sliding puzzle Game",
     description: "Assemble fragmented piece by piece",
     imageSrc: "/Puzzle.png",
     alt: "Jigsaw puzzle pieces",
-    action: "jigsaw",
+    action: "Puzzle",
   },
   {
     title: "Tic Tac Toe",
@@ -61,6 +61,7 @@ export default function GamesPage({
   goToMatchingGame, 
   goTospot,
   goToquiz,
+  goToPuzzle,
 }) {
   return (
     <div className="games-page">
@@ -109,6 +110,8 @@ export default function GamesPage({
                       goTospot();
                     } else if (game.action === "quiz") {
                       goToquiz();
+                    }else if (game.action === "Puzzle") {
+                      goToPuzzle();
                     } else {
                       alert(`${game.title} is coming soon!`);
                     }

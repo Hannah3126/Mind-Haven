@@ -150,6 +150,7 @@ function WordleGame({
 
         <p className="status-msg">{message}</p>
       </div>
+      
     </div>
   );
 }
