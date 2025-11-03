@@ -118,6 +118,7 @@ const WellnessPage = ({
   goToMeditation,
   goToMusic,
   goToAppointment,
+  goToTips,
 }) => {
   return (
     <div className="wellness-page">
@@ -201,6 +202,7 @@ const WellnessPage = ({
             boxShadow: '0 4px 15px rgba(107, 142, 255, 0.12)',
             padding: '30px',
           }}
+          onButtonClick={goToTips}
         />
 
         <SectionBlock
