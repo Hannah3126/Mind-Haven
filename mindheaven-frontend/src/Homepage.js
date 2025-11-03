@@ -11,7 +11,7 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips, }) {
+function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment }) {
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -99,7 +99,7 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
                 cursor: "pointer",
                 fontWeight: "600",
               }}
-               onClick={() => goToWellness('appointment')}
+               onClick={() => goToAppointment('appointment')}
             >
               Schedule Appointment
             </button>
