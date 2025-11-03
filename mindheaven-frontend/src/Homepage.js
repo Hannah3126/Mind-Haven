@@ -204,7 +204,7 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
           <div className="feature-card">
             <button
     className="arrow-icon"
-    onClick={() => goToWellness('music')} // optional section identifier
+    onClick={() => goToWellness('meditation')} // optional section identifier
   >
     <ArrowUpRight color="black" />
   </button>
@@ -215,9 +215,12 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
             <p>Boost your spirit with soothing playlists made for your mood.</p>
           </div>
           <div className="feature-card">
-            <a href="/Tracker" className="arrow-icon">
-              <ArrowUpRight color="black" />
-            </a>
+            <button
+    className="arrow-icon"
+    onClick={() => goToWellness('music')} // optional section identifier
+  >
+    <ArrowUpRight color="black" />
+  </button>
             <div className="feature-icon">
               <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
             </div>
@@ -225,7 +228,7 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
             <p>Record, reflect, and track your emotions with ease.</p>
           </div>
           <div className="feature-card">
-          <button className="arrow-icon" onClick={goToTips}  >
+          <button className="arrow-icon" onClick={goToWellness}  >
             <ArrowUpRight color="black" />
           </button>
             <div className="feature-icon">
