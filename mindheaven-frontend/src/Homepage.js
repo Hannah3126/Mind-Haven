@@ -1,8 +1,9 @@
-import React from "react";
 import "./App.css";
 import "./Homepage.css";
 import Navbar from "./navbar";
 import './navbar.css';
+import React, { useState } from "react";
+
 
 
 import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
@@ -12,6 +13,7 @@ import { ArrowRight } from "lucide-react";
 
 
 function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment }) {
+  const [showEmergencyModal, setShowEmergencyModal] = useState(false);
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -116,12 +118,58 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
                 fontWeight: "600",
 
               }}
+              onClick={() => setShowEmergencyModal(true)}
             >
               Emergency 
             </button>
           </div>
         </div>
       </section>
+
+      {/* ---------- EMERGENCY POPUP MODAL ---------- */}
+      {showEmergencyModal && (
+        <div className="emergency-overlay">
+          <div className="emergency-modal">
+            <h2>Need Immediate Help?</h2>
+            <p>
+              You are not alone. Please reach out for immediate support using
+              one of the numbers below.
+            </p>
+            <ul className="emergency-list">
+              <li>
+                <strong>🇺🇸 U.S.:</strong> 988 – Suicide & Crisis Lifeline
+              </li>
+              <li>
+                <strong>🇮🇳 India:</strong> 9152987821 – AASRA Helpline
+              </li>
+              <li>
+                <strong>🇬🇧 UK:</strong> 116 123 – Samaritans
+              </li>
+              <li>
+                <strong>🌍 Global:</strong>{" "}
+                <a
+                  href="https://findahelpline.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: "#4c6ef5", textDecoration: "underline" }}
+                >
+                  findahelpline.com
+                </a>
+              </li>
+            </ul>
+            <p style={{ fontStyle: "italic", marginTop: "10px" }}>
+              If you are in danger, please contact your local emergency
+              services immediately.
+            </p>
+            <button
+              className="close-btn"
+              onClick={() => setShowEmergencyModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
 
 
