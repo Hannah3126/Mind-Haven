@@ -20,7 +20,7 @@ const gamesData = [
   },
   {
     title: "Pattern Recall",
-    description: "Train your mind and focus by recalling glowing sequences.",
+    description: "Train your mind and focus by recalling glowing sequences!",
     imageSrc: "/Spot.png",
     alt: "Memory pattern game",
     action: "pattern",
