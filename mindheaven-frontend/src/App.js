@@ -130,7 +130,14 @@ function App() {
       {page === "blogs" && <Blogs {...navigation} />}
 
       {page === "music" && <Music {...navigation} />}
-      {page === "Appointment" && <Appointment {...navigation} />}
+      {page === "Appointment" && (
+        <Appointment
+          {...navigation}
+          userName={localStorage.getItem("user_name") || userName || ""}
+          userEmail={localStorage.getItem("user_email") || userEmail || ""}
+          userRole={localStorage.getItem("user_role") || userRole || ""}
+        />
+      )}
     </div>
   );
 }

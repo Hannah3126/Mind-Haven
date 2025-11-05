@@ -3,6 +3,16 @@ import Navbar from "./navbar";
 import "./Appointment.css";
 
 export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, userRole, userEmail,userName }) {
+  const [name, setName] = React.useState(userName || "");
+  const [email, setEmail] = React.useState(userEmail || "");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // prevent page refresh
+    console.log("Booking Data:", { name, email,});
+    alert("Appointment Recorded")
+  }
+
   return (
     <div className="appointment-page">
 
@@ -45,14 +55,25 @@ export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToG
         </div>
 
         <form className="appointment-form">
-          <div className="form-group">
-            <label>Full Name:</label>
-            <input type="text" placeholder="Enter your full name" />
-          </div>
-          <div className="form-group">
-            <label>Email:</label>
-            <input type="email" placeholder="Enter your email" />
-          </div>
+        <div className="form-group">
+          <label>Full Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+        </div>
           <div className="form-group">
             <label>Phone:</label>
             <input type="text" placeholder="Enter your phone number" />
