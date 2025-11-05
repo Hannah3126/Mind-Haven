@@ -89,25 +89,47 @@ app.post("/login", (req, res) => {
 });
 
 
-// Signup
+// Signup with onboarding info
 app.post("/signup", (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password, mood, reason, wantsTherapy, supportAreas, notesForTherapist } = req.body;
 
-  // if user already exists
+  // Convert array to JSON string
+  const supportAreasString = JSON.stringify(supportAreas || []);
+
   db.get("SELECT * FROM users WHERE email = ?", [email], (err, row) => {
     if (row) {
       return res.json({ success: false, message: "User already exists" });
     }
 
-    // New users
+    // Create user
     db.run(
       "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
       [email, password, "user"],
       function (err) {
         if (err) {
+          console.log(err);
           return res.json({ success: false, message: "Error creating user" });
         }
-        res.json({ success: true, message: "Account created successfully" });
+
+        const userId = this.lastID; // Newly created user ID
+
+        // Insert onboarding info
+        db.run(
+          `INSERT INTO user_profiles (user_id, mood, reason, wantsTherapy, supportAreas, notesForTherapist) 
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [userId, mood, reason, wantsTherapy, supportAreasString, notesForTherapist],
+          (err2) => {
+            if (err2) {
+              console.log(err2);
+              return res.json({ success: false, message: "Error saving profile data" });
+            }
+
+            return res.json({
+              success: true,
+              message: "Signup successful!",
+            });
+          }
+        );
       }
     );
   });

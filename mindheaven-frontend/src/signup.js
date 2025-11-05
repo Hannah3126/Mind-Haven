@@ -49,10 +49,28 @@ function Signup({ goToLogin, goToHome }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("🎉 Your account has been created!");
-    goToLogin();
+  
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        alert("🎉 Account created successfully!");
+        goToLogin();
+      } else {
+        alert("⚠️ " + data.message);
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("Server error — please try again.");
+    }
   };
 
   return (
