@@ -56,7 +56,7 @@ function App() {
   const handleLogin = (userRole, userEmail) => {
     setRole(userRole);
     setEmail(userEmail);
-    setPage(userRole === "admin" ? "adminDashboard" : "userDashboard");
+    setPage(userRole === "admin" ? "adminDashboard" : "home");
   };
 
   return (
