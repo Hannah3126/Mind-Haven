@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Games.css";
 import Navbar from "./navbar";
 import "./navbar.css";
+import AchievementPopup from "./AchievementPopup"; 
+
 
 const gamesData = [
   {
@@ -63,6 +65,18 @@ export default function GamesPage({
   goToquiz,
   goToPuzzle,
 }) {
+
+const [showAchievements, setShowAchievements] = useState(false);
+// Temporary dummy achievement data
+const [achievements] = useState({
+  gamesPlayedToday: 3,
+  wordleStreak: 4,
+  badges: [
+    { id: 1, name: "First Game Played", icon: "🎉" },
+    { id: 2, name: "Daily Player", icon: "🔥" },
+    { id: 3, name: "Wordle Beginner", icon: "🧠" },
+  ],
+});
   return (
     <div className="games-page">
       {/* ---------- NAVBAR ---------- */}
@@ -83,8 +97,17 @@ export default function GamesPage({
           <h1>Games page</h1>
           <p>Games to Relax and Refresh Your Mind</p>
         </div>
+        
         <div className="banner-image-placeholder"></div>
+        
       </section>
+
+      <section className="achievements-button-wrapper">
+        <button className="achievements-btn" onClick={() => setShowAchievements(true)}>
+          🏅 View Achievements
+        </button>
+      </section>
+
 
       {/* ---------- GAMES GRID ---------- */}
       <section className="games-section">
@@ -124,6 +147,13 @@ export default function GamesPage({
           ))}
         </div>
       </section>
+
+      {showAchievements && (
+        <AchievementPopup
+          data={achievements}
+          onClose={() => setShowAchievements(false)}
+        />
+      )}
 
       {/* ---------- FOOTER ---------- */}
       <footer className="footer">

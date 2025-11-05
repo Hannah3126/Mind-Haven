@@ -1,0 +1,133 @@
+.achievement-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  
+  .achievement-popup {
+    background: #ffffff;
+    width: 90%;
+    max-width: 420px;
+    padding: 28px 24px;
+    border-radius: 16px;
+    text-align: center;
+    animation: fadeIn 0.25s ease-in-out;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  
+  .achievement-title {
+    margin-bottom: 12px;
+  }
+  
+  .achievement-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin: 16px 0;
+  }
+  
+  .stat-box {
+    background: #eef6ff;
+    border-radius: 12px;
+    padding: 12px;
+    width: 110px;
+  }
+  
+  .stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #3178f6;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .badge-heading {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+  }
+  
+  .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+    margin: 12px 0;
+  }
+  
+  .badge-card {
+    background: #f8faff;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #dee6ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .badge-icon {
+    font-size: 26px;
+  }
+  
+  .badge-name {
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+  
+  .no-badges {
+    color: #777;
+    font-size: 0.85rem;
+    margin: 12px 0;
+  }
+  
+  .close-btn {
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: #4b9fff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .achievements-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0; /* spacing above & below */
+  }
+  
+  .achievements-btn {
+    background-color: #6f74ff;
+    color: white;
+    font-weight: 600;
+    padding: 14px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .achievements-btn:hover {
+    background-color: #5863f8;
+    transform: translateY(-2px);
+  }
