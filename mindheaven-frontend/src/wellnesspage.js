@@ -15,12 +15,16 @@ const ThoughtTrackerBox = () => {
     if (!thought.trim()) return;
     try {
       setLoading(true);
+  
+      const userId = localStorage.getItem("user_id"); // ✅ pull user id
+  
       const res = await fetch('http://localhost:5000/api/reframe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ thought }),
+        body: JSON.stringify({ thought, userId }),
         mode: 'cors'
       });
+  
       const data = await res.json();
       setReframed(data.reframed || 'No response received.');
     } catch (err) {

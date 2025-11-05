@@ -142,11 +142,36 @@ app.get("/test", (req, res) => {
   res.json({ message: "CORS test route working" });
 });
 
+// Save thought + reframe
 app.post('/api/reframe', async (req, res) => {
   try {
-    const { thought } = req.body;
+    const { thought, userId } = req.body;
+
+    if (!thought || !userId) {
+      return res.status(400).json({ error: "Thought and userId required" });
+    }
+
+    // Run AI reframe
     const reframed = await reframeThought(thought);
-    res.json({ reframed });
+
+    // Insert into DB
+    db.run(
+      `INSERT INTO thoughts (user_id, thought, reframed) VALUES (?, ?, ?)`,
+      [userId, thought, reframed],
+      function (err) {
+        if (err) {
+          console.error("DB Insert Error:", err);
+          return res.status(500).json({ error: "Database error" });
+        }
+
+        return res.json({
+          success: true,
+          thoughtId: this.lastID,
+          thought,
+          reframed
+        });
+      }
+    );
   } catch (err) {
     console.error("Reframe Error:", err);
     res.status(500).json({ error: "Something went wrong" });
