@@ -5,13 +5,54 @@ import "./Appointment.css";
 export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, userRole, userEmail,userName }) {
   const [name, setName] = React.useState(userName || "");
   const [email, setEmail] = React.useState(userEmail || "");
+  const [phone, setPhone] = React.useState("");
+  const [date, setDate] = React.useState("");
+  const [time, setTime] = React.useState("");
+  const [notes, setNotes] = React.useState("");
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // prevent page refresh
-    console.log("Booking Data:", { name, email,});
-    alert("Appointment Recorded")
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const userId = localStorage.getItem("user_id");
+  
+    const payload = {
+      userId,
+      name,
+      email,
+      phone,
+      date,
+      time,
+      notes
+    };
+  
+    try {
+      const res = await fetch("http://localhost:5000/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      const data = await res.json();
+  
+      if (!data.success) {
+        alert("Error booking appointment");
+        return;
+      }
+  
+      alert("✅ Appointment booked successfully!");
+      
+      // reset other fields
+      setPhone("");
+      setDate("");
+      setTime("");
+      setNotes("");
+  
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Try again.");
+    }
+  };
 
   return (
     <div className="appointment-page">
@@ -54,43 +95,59 @@ export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToG
           </div>
         </div>
 
-        <form className="appointment-form">
-        <div className="form-group">
-          <label>Full Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your full name"
-          />
-        </div>
+        <form className="appointment-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Full Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your full name"
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
-        </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+            />
+          </div>
+
           <div className="form-group">
             <label>Phone:</label>
-            <input type="text" placeholder="Enter your phone number" />
+            <input
+              type="text"
+              placeholder="Enter your phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </div>
+
           <div className="form-group">
             <label>Preferred Date:</label>
-            <input type="date" />
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </div>
+
           <div className="form-group">
             <label>Preferred Time:</label>
-            <input type="time" />
+            <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
           </div>
+
           <div className="form-group">
             <label>Additional Notes:</label>
-            <textarea placeholder="Any specific concerns or questions?"></textarea>
+            <textarea
+              placeholder="Any specific concerns or questions?"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
           </div>
-          <button className="submit-btn">Book Now</button>
+
+          <button className="submit-btn" type="submit">
+            Book Now
+          </button>
         </form>
       </section>
 

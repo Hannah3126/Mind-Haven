@@ -1,33 +1,35 @@
-// updateProfile.js
+// createAppointmentsTable.js
+
 import sqlite3 from "sqlite3";
 
-// Change path if your DB lives somewhere else
+// Connect to DB
 const db = new sqlite3.Database("./users.db", (err) => {
   if (err) {
-    console.error("❌ DB connection error:", err);
-  } else {
-    console.log("✅ Connected to database");
+    console.error("❌ Error connecting to database:", err.message);
+    return;
   }
+  console.log("✅ Connected to SQLite DB");
 });
 
-db.serialize(() => {
-  db.run(
-    `CREATE TABLE IF NOT EXISTS thoughts (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        thought TEXT NOT NULL,
-        reframed TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY(user_id) REFERENCES users(id)
-    )`,
-    (err) => {
-      if (err) {
-        console.error("❌ Error creating thoughts table:", err);
-      } else {
-        console.log("✅ thoughts table ready");
-      }
-    }
-  );
-});
+// Create Appointments table
+const createTableQuery = `
+CREATE TABLE IF NOT EXISTS appointments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  name TEXT,
+  email TEXT,
+  phone TEXT,
+  date TEXT,
+  time TEXT,
+  notes TEXT
+);
+`;
 
-db.close();
+db.run(createTableQuery, (err) => {
+  if (err) {
+    console.error("❌ Failed creating table:", err.message);
+  } else {
+    console.log("✅ Appointments table created successfully!");
+  }
+  db.close();
+});

@@ -178,6 +178,37 @@ app.post('/api/reframe', async (req, res) => {
   }
 });
 
+// Create appointment
+app.post("/appointments", (req, res) => {
+  const { userId, name, email, phone, date, time, notes } = req.body;
+
+  if (!name || !email || !date || !time) {
+    return res.status(400).json({ success: false, message: "name, email, date and time are required" });
+  }
+
+  const sql = `
+    INSERT INTO appointments (user_id, name, email, phone, date, time, notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
+  const params = [
+    userId ?? null,
+    String(name).trim(),
+    String(email).trim(),
+    phone ? String(phone).trim() : null,
+    String(date).trim(),     
+    String(time).trim(),      
+    notes ? String(notes).trim() : null
+  ];
+
+  db.run(sql, params, function(err) {
+    if (err) {
+      console.error("Appointment insert error:", err);
+      return res.status(500).json({ success: false, message: "Failed to save appointment" });
+    }
+    return res.json({ success: true, appointmentId: this.lastID });
+  });
+});
+
 
 // Start Server
 app.listen(PORT, () => {
