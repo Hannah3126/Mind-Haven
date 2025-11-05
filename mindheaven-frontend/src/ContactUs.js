@@ -2,19 +2,23 @@ import React from "react";
 import Navbar from "./navbar"; // ✅ use your existing navbar
 import "./ContactUs.css";
 
-export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
+export default function ContactPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs,userEmail,userName,userRole }) {
   return (
     <div className="contact-page">
       
       {/* ---------- NAVBAR ---------- */}
       <Navbar
+        currentPage="contact"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       {/* ---------- HERO SECTION ---------- */}

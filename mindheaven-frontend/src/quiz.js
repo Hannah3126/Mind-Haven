@@ -75,7 +75,18 @@ const results = {
   },
 };
 
-export default function FunQuizGame({ goToHome, goToGames }) {
+export default function FunQuizGame({
+  goToHome,
+  goToLogin,
+  goToSignup,
+  goToGames,
+  goToContact,
+  goToWellness,
+  goToBlogs,
+  userEmail,
+  userName,
+  userRole
+}) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showResult, setShowResult] = useState(false);
@@ -110,7 +121,19 @@ export default function FunQuizGame({ goToHome, goToGames }) {
 
   return (
     <div className="quiz-page">
-      <Navbar currentPage="funquiz" goToHome={goToHome} goToGames={goToGames} />
+            <Navbar
+        currentPage="quiz"
+        goToHome={goToHome}
+        goToLogin={goToLogin}
+        goToSignup={goToSignup}
+        goToGames={goToGames}
+        goToContact={goToContact}
+        goToWellness={goToWellness}
+        goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
+      />
 
       <section className="quiz-banner">
         <div className="banner-content">

@@ -64,6 +64,9 @@ export default function GamesPage({
   goToPatternRecall,
   goToquiz,
   goToPuzzle,
+  userEmail,
+  userName,
+  userRole
 }) {
 
 const [showAchievements, setShowAchievements] = useState(false);
@@ -81,7 +84,7 @@ const [achievements] = useState({
     <div className="games-page">
       {/* ---------- NAVBAR ---------- */}
       <Navbar
-        currentPage="games"
+        currentPage="home"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
@@ -89,6 +92,9 @@ const [achievements] = useState({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       {/* ---------- HERO / BANNER ---------- */}

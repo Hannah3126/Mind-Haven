@@ -12,21 +12,24 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment }) {
+function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment,userName,userEmail,userRole,goToHome  }) {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
-      <Navbar 
-        currentPage={currentPage} // Pass the current page state
-        goToHome={() => { /* This should be passed from App.js */ }} 
-        goToLogin={goToLogin} 
-        goToSignup={goToSignup} 
-        goToGames={goToGames} 
-        goToContact={goToContact} 
-        goToWellness={goToWellness} 
-        goToBlogs={goToBlogs} 
-      />
+      <Navbar
+        currentPage="home"
+        goToHome={goToHome}
+        goToLogin={goToLogin}
+        goToSignup={goToSignup}
+        goToGames={goToGames}
+        goToContact={goToContact}
+        goToWellness={goToWellness}
+        goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
+      />
       
 
       {/* ---------- HERO SECTION ---------- */}

@@ -9,8 +9,11 @@ export default function Music({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
+  userEmail,
+  userName,
+  userRole
 }) {
   const musicTracks = [
     {
@@ -61,10 +64,12 @@ export default function Music({
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
-
       {/* ---------- BANNER ---------- */}
       <section className="music-banner">
         <div className="banner-content">
@@ -107,7 +112,7 @@ export default function Music({
           <div className="footer-links">
             <ul>
               <li onClick={goToHome}>Home</li>
-              <li onClick={goTowellness}>Wellness</li>
+              <li onClick={goToWellness}>Wellness</li>
               <li onClick={goToGames}>Games</li>
               <li onClick={goToBlogs}>Blog</li>
               <li onClick={goToContact}>Contact Us</li>

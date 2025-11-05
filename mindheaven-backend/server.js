@@ -64,28 +64,31 @@ db.get("SELECT * FROM users WHERE email = ?", ["user@mindheaven.com"], (err, row
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  db.get(
-    "SELECT * FROM users WHERE email = ?",
-    [email],
-    (err, row) => {
-      if (err) {
-        return res.json({ success: false, message: "Error occurred" });
-      }
-      if (!row) {
-        return res.json({ success: false, message: "Invalid email or password" });
-      }
-      if (row.password !== password) {
-        return res.json({ success: false, message: "Invalid email or password" });
+  db.get("SELECT * FROM users WHERE email = ?", [email], (err, userRow) => {
+    if (err) {
+      return res.json({ success: false, message: "Error occurred" });
+    }
+    if (!userRow || userRow.password !== password) {
+      return res.json({ success: false, message: "Invalid email or password" });
+    }
+
+    // ✅ Fetch profile (name, mood, etc.)
+    db.get("SELECT * FROM user_profiles WHERE user_id = ?", [userRow.id], (err2, profileRow) => {
+      if (err2) {
+        console.log("Profile fetch error:", err2);
       }
 
-     
-      res.json({
+      return res.json({
         success: true,
         message: "Login successful",
-        role: row.role
+        role: userRow.role,
+        userId: userRow.id,
+        
+        // ✅ Return name from profile table
+        name: profileRow?.name || ""
       });
-    }
-  );
+    });
+  });
 });
 
 

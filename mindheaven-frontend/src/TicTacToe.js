@@ -8,9 +8,10 @@ const TicTacToe = ({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
   currentPage,
+  userEmail,userName,userRole
 }) => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
@@ -81,14 +82,17 @@ const TicTacToe = ({
     <div className="tictactoe-page">
       {/* Keep the top blue Navbar */}
       <Navbar
-        currentPage={currentPage}
+        currentPage="tictactoe"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       <div className="tictactoe-content">

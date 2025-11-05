@@ -2,12 +2,13 @@ import React from "react";
 import Navbar from "./navbar";
 import "./Appointment.css";
 
-export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs }) {
+export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, userRole, userEmail,userName }) {
   return (
     <div className="appointment-page">
 
       {/* ---------- NAVBAR ---------- */}
       <Navbar
+        currentPage="appointements"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
@@ -15,6 +16,9 @@ export default function AppointmentPage({ goToHome, goToLogin, goToSignup, goToG
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       {/* ---------- HERO SECTION ---------- */}

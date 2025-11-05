@@ -27,6 +27,9 @@ function App() {
   const [page, setPage] = useState("home");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState(localStorage.getItem("user_name") || "");
+  const [userEmail, setUserEmail] = useState(localStorage.getItem("user_email") || "");
+  const [userRole, setUserRole] = useState(localStorage.getItem("user_role") || "");
 
   // ✅ Centralized navigation functions
   const navigation = {
@@ -56,13 +59,26 @@ function App() {
   const handleLogin = (userRole, userEmail) => {
     setRole(userRole);
     setEmail(userEmail);
+  
+    // ✅ also set from localStorage immediately
+    setUserName(localStorage.getItem("user_name") || "");
+    setUserEmail(localStorage.getItem("user_email") || "");
+    setUserRole(localStorage.getItem("user_role") || "");
+  
     setPage(userRole === "admin" ? "adminDashboard" : "home");
   };
 
   return (
     <div className="App">
       {/* 🏠 Home */}
-      {page === "home" && <HomePage {...navigation} />}
+      {page === "home" && (
+        <HomePage
+          {...navigation}
+          userName={userName}
+          userEmail={userEmail}
+          userRole={userRole}
+        />
+      )}
 
       {/* 🔐 Login */}
       {page === "login" && <Login {...navigation} onLogin={handleLogin} />}

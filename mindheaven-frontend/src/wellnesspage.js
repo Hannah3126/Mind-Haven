@@ -113,24 +113,31 @@ const WellnessPage = ({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
   goToMeditation,
   goToMusic,
   goToAppointment,
   goToTips,
+  userEmail,
+  userName,
+  userRole
 }) => {
   return (
     <div className="wellness-page">
       {/* ---------- NAVBAR ---------- */}
       <Navbar
+        currentPage="wellness"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       {/* ---------- HERO SECTION ---------- */}

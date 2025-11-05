@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./navbar";
 import "./Puzzle.css";
 
-export default function PuzzleGame({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goTowellness, goToBlogs }) {
+export default function PuzzleGame({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs,userName,userRole,userEmail }) {
   const size = 4; // 4x4 puzzle
   const [tiles, setTiles] = useState([]);
   const [moveCount, setMoveCount] = useState(0);
@@ -51,13 +51,17 @@ export default function PuzzleGame({ goToHome, goToLogin, goToSignup, goToGames,
   return (
     <div className="puzzle-page">
       <Navbar
+        currentPage="puzzle"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       <section className="puzzle-hero">

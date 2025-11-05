@@ -75,3 +75,23 @@
   background-color: #4c6ef5;
   color: white;
 }
+.welcome-text {
+  margin-right: 10px;
+  font-weight: 600;
+  color: #4c6ef5;
+  margin-top: 5px;
+}
+.logout-btn {
+  background: #f87171;
+  color: white;
+}
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.nav-greeting {
+  display: flex;
+  align-items: center; /* ✅ centers the greeting */
+  gap: 10px;
+  font-weight: 600;
+}

@@ -8,9 +8,12 @@ function WordleGame({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
   currentPage,
+  userEmail,
+  userName,
+  userRole
 }) {
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState("");
@@ -95,14 +98,17 @@ function WordleGame({
     <div className="wordle-container">
       {/* Keep the top blue Navbar */}
       <Navbar
-        currentPage={currentPage}
+        currentPage="wordle"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       <h1 className="wordle-logo">Mind Heaven - Wordle</h1>

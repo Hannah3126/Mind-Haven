@@ -11,9 +11,12 @@ export default function MatchingGame({
   goToSignup,
   goToGames,
   goToContact,
-  goTowellness,
+  goToWellness,
   goToBlogs,
-  currentPage = "matching"
+  currentPage = "matching",
+  userEmail,
+  userRole,
+  userName
 }) {
   const [level, setLevel] = useState('medium');
   const [cards, setCards] = useState([]);
@@ -81,14 +84,17 @@ export default function MatchingGame({
     <div className="memory-game-page">
       {/* ---------- NAVBAR ---------- */}
       <Navbar
-        currentPage={currentPage}
+        currentPage="matching"
         goToHome={goToHome}
         goToLogin={goToLogin}
         goToSignup={goToSignup}
         goToGames={goToGames}
         goToContact={goToContact}
-        goTowellness={goTowellness}
+        goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        userName={userName}    // ✅ show logged in name
+        userRole={userRole}
+        userEmail={userEmail}
       />
 
       {/* ---------- MEMORY GAME ---------- */}
