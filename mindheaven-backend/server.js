@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import sqlite3 from 'sqlite3';
 import cors from 'cors';
 import reframeThought from './reframe.js';
+import nodemailer from "nodemailer";
 
 const app = express();
 const PORT = 5000;
@@ -58,6 +59,34 @@ db.get("SELECT * FROM users WHERE email = ?", ["user@mindheaven.com"], (err, row
     ]);
   }
 });
+
+// Email setup
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "hannahjoshua030@gmail.com",
+    pass: "tvng sryz lacv kquc"
+  }
+});
+
+async function sendAppointmentEmail({ name, email, date, time, notes }) {
+  const mailOptions = {
+    from: `MindHeaven 💜 <hannahjoshua030@gmail.com>`,
+    to: email,
+    subject: "Your Appointment is Confirmed ✅",
+    html: `
+      <h2>Your Mind Heaven Appointment</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ""}
+      <br/>
+      <p>We look forward to supporting you 💙</p>
+    `
+  };
+
+  await transporter.sendMail(mailOptions);
+}
 
 
 // Login 
@@ -179,7 +208,7 @@ app.post('/api/reframe', async (req, res) => {
 });
 
 // Create appointment
-app.post("/appointments", (req, res) => {
+app.post("/appointments", async (req, res) => {
   const { userId, name, email, phone, date, time, notes } = req.body;
 
   if (!name || !email || !date || !time) {
@@ -190,21 +219,31 @@ app.post("/appointments", (req, res) => {
     INSERT INTO appointments (user_id, name, email, phone, date, time, notes)
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
+
   const params = [
     userId ?? null,
     String(name).trim(),
     String(email).trim(),
     phone ? String(phone).trim() : null,
-    String(date).trim(),     
-    String(time).trim(),      
+    String(date).trim(),
+    String(time).trim(),
     notes ? String(notes).trim() : null
   ];
 
-  db.run(sql, params, function(err) {
+  db.run(sql, params, async function(err) {
     if (err) {
       console.error("Appointment insert error:", err);
       return res.status(500).json({ success: false, message: "Failed to save appointment" });
     }
+
+    try {
+      // ✅ Send confirmation email
+      await sendAppointmentEmail({ name, email, date, time, notes });
+      console.log("✅ Appointment confirmation email sent");
+    } catch (emailErr) {
+      console.error("❌ Email failed:", emailErr);
+    }
+
     return res.json({ success: true, appointmentId: this.lastID });
   });
 });
