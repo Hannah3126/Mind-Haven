@@ -209,6 +209,27 @@ app.post("/appointments", (req, res) => {
   });
 });
 
+app.post("/api/getAppointmentsByEmail", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    db.all(
+      `SELECT * FROM appointments WHERE email = ? ORDER BY date ASC, time ASC`,
+      [email],
+      (err, rows) => {
+        if (err) return res.json({ success: false, error: err.message });
+
+        return res.json({
+          success: true,
+          appointments: rows
+        });
+      }
+    );
+  } catch (err) {
+    res.json({ success: false, error: err.message });
+  }
+});
+
 
 // Start Server
 app.listen(PORT, () => {

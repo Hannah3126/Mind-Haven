@@ -119,4 +119,58 @@
   background-color: #5a7ae0;
 }
 
+.appointment-card {
+  flex: 1;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+.secondary-btn {
+  background: white;
+  border: 2px solid #4c6ef5;
+  color: #4c6ef5;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.appointments-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.appointment-item {
+  background: #eef3ff;
+  border: 1px solid #c7d7ff;
+  padding: 12px;
+  border-radius: 8px;
+}
+
 /* Footer remains the same as your ContactUs.css */
+/* Smooth fade + slide transition */
+.fade-slide-enter {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.fade-slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.35s ease;
+}
+
+.fade-slide-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-slide-exit-active {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all 0.35s ease;
+}
