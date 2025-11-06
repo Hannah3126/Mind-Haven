@@ -53,7 +53,7 @@ function Signup({ goToLogin, goToHome }) {
     e.preventDefault();
   
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5050/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -6,7 +6,7 @@ import reframeThought from './reframe.js';
 import nodemailer from "nodemailer";
 
 const app = express();
-const PORT = 5000;
+const PORT = 5050;
 
 app.use(cors({
   origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
