@@ -1,5 +1,3 @@
-// Navbar.js
-
 import React from "react";
 
 const Navbar = ({ 
@@ -13,9 +11,13 @@ const Navbar = ({
   goToBlogs,
   onLogout
 }) => {
-
-  const userName = localStorage.getItem("user_name");
-  const isLoggedIn = !!userName;
+  
+  // ✅ pull from localStorage correctly
+  const userId = localStorage.getItem("user_id");
+  const storedName = localStorage.getItem("user_name");
+  
+  // ✅ logged in check
+  const isLoggedIn = !!userId && !!storedName;
 
   const isActive = (pageName) => currentPage === pageName ? "active" : "";
 
@@ -34,11 +36,17 @@ const Navbar = ({
       <div className="nav-buttons">
         {isLoggedIn ? (
           <>
-            <span className="welcome-text">Hi, {userName.split(" ")[0]} 🌼</span>
+            <span className="welcome-text">
+              Hi, {storedName.split(" ")[0]} 🌼
+            </span>
+
             <button 
               className="nav-btn logout-btn"
               onClick={() => {
-                localStorage.clear();
+                // ✅ only remove auth keys, not everything
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("user_name");
+
                 onLogout && onLogout();
                 goToHome();
               }}
