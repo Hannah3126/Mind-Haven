@@ -147,9 +147,9 @@ app.post("/signup", (req, res) => {
 
         // Insert onboarding info
         db.run(
-          `INSERT INTO user_profiles (user_id, mood, reason, wantsTherapy, supportAreas, notesForTherapist) 
-           VALUES (?, ?, ?, ?, ?, ?)`,
-          [userId, mood, reason, wantsTherapy, supportAreasString, notesForTherapist],
+          `INSERT INTO user_profiles (user_id, name, mood, reason, wantsTherapy, supportAreas, notesForTherapist) 
+          VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [userId, name, mood, reason, wantsTherapy, supportAreasString, notesForTherapist],
           (err2) => {
             if (err2) {
               console.log(err2);

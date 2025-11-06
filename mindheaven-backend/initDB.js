@@ -1,35 +1,45 @@
-// createAppointmentsTable.js
-
 import sqlite3 from "sqlite3";
 
-// Connect to DB
 const db = new sqlite3.Database("./users.db", (err) => {
-  if (err) {
-    console.error("❌ Error connecting to database:", err.message);
-    return;
-  }
-  console.log("✅ Connected to SQLite DB");
+  if (err) return console.error("DB connection error:", err);
+  console.log("✅ Connected to SQLite");
 });
 
-// Create Appointments table
-const createTableQuery = `
-CREATE TABLE IF NOT EXISTS appointments (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER,
-  name TEXT,
-  email TEXT,
-  phone TEXT,
-  date TEXT,
-  time TEXT,
-  notes TEXT
-);
-`;
+const userEmail = "jessica@gmail.com";
+const userId = 6;
 
-db.run(createTableQuery, (err) => {
-  if (err) {
-    console.error("❌ Failed creating table:", err.message);
-  } else {
-    console.log("✅ Appointments table created successfully!");
-  }
-  db.close();
+db.serialize(() => {
+  console.log(`🧹 Deleting user ${userEmail} (ID: ${userId})...`);
+
+  // Delete from profiles
+  db.run(
+    `DELETE FROM user_profiles WHERE user_id = ?`,
+    [userId],
+    function (err) {
+      if (err) return console.error("❌ Error deleting profile:", err);
+      console.log(`🗑️ Deleted ${this.changes} profile row(s)`);
+    }
+  );
+
+  // Delete appointments
+  db.run(
+    `DELETE FROM appointments WHERE user_id = ?`,
+    [userId],
+    function (err) {
+      if (err) return console.error("❌ Error deleting appointments:", err);
+      console.log(`📆 Deleted ${this.changes} appointment(s)`);
+    }
+  );
+
+  // Delete user account
+  db.run(
+    `DELETE FROM users WHERE id = ? AND email = ?`,
+    [userId, userEmail],
+    function (err) {
+      if (err) return console.error("❌ Error deleting user:", err);
+      console.log(`👤 Deleted ${this.changes} user row(s)`);
+      console.log("✅ Completed cleanup");
+      db.close();
+    }
+  );
 });
