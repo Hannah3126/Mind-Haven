@@ -12,8 +12,9 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment,userName,userEmail,userRole,goToHome  }) {
+function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment,userName,userEmail,userRole,goToHome,goToMeditation,goToMusic  }) {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
+  
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -29,6 +30,8 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
         userName={userName}    // ✅ show logged in name
         userRole={userRole}
         userEmail={userEmail}
+        goToMeditation={goToMeditation}
+        goToMusic={goToMusic}
       />
       
 
@@ -184,86 +187,89 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
 
 
 
-      {/* ---------- FEATURES SECTION ---------- */}
-      <section className="features-section">
-        <h2 className="feature-title" style={{ color: "black" }}>
-          What we <span style={{ color: "#4c6ef5" }}>provide</span>
-        </h2>
-        <p>Everything you need for a healthier, calmer mind</p>
-        <div className="features-grid">
-          <div className="feature-card">
-            <button
-    className="arrow-icon"
-    onClick={() => goToWellness('meditation')} // optional section identifier
-  >
-    <ArrowUpRight color="black" />
-  </button>
-            <div className="feature-icon">
-              <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
-            </div>
-            <h3>Meditation & Exercise</h3>
-            <p>Practice mindfulness and energize your body with guided sessions.</p>
-          </div>
-          <div className="feature-card">
-            <button
-    className="arrow-icon"
-    onClick={() => goToWellness('meditation')} // optional section identifier
-  >
-    <ArrowUpRight color="black" />
-  </button>
-            <div className="feature-icon">
-              <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
-            </div>
-            <h3> Songs & Music</h3>
-            <p>Boost your spirit with soothing playlists made for your mood.</p>
-          </div>
-          <div className="feature-card">
-            <button
-    className="arrow-icon"
-    onClick={() => goToWellness('music')} // optional section identifier
-  >
-    <ArrowUpRight color="black" />
-  </button>
-            <div className="feature-icon">
-              <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
-            </div>
-            <h3> Thought Tracker</h3>
-            <p>Record, reflect, and track your emotions with ease.</p>
-          </div>
-          <div className="feature-card">
-          <button className="arrow-icon" onClick={goToWellness}  >
+{/* ---------- FEATURES SECTION ---------- */}
+    <section className="features-section">
+      <h2 className="feature-title" style={{ color: "black" }}>
+        What we <span style={{ color: "#4c6ef5" }}>provide</span>
+      </h2>
+      <p>Everything you need for a healthier, calmer mind</p>
+
+      <div className="features-grid">
+
+        {/* Meditation & Exercise */}
+        <div className="feature-card">
+          <button className="arrow-icon" onClick={goToMeditation}>
             <ArrowUpRight color="black" />
           </button>
-            <div className="feature-icon">
-              
-              <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
-            </div>
-            <h3> Mental Health Tips</h3>
-            <p>Simple science-based advice for everyday wellness.</p>
+          <div className="feature-icon">
+            <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
           </div>
-          <div className="feature-card">
+          <h3>Meditation & Exercise</h3>
+          <p>Practice mindfulness and energize your body with guided sessions.</p>
+        </div>
+
+        {/* Songs & Music */}
+        <div className="feature-card">
+          <button className="arrow-icon" onClick={goToMusic}>
+            <ArrowUpRight color="black" />
+          </button>
+          <div className="feature-icon">
+            <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
+          </div>
+          <h3>Songs & Music</h3>
+          <p>Boost your spirit with soothing playlists made for your mood.</p>
+        </div>
+
+        {/* Thought Tracker — ✅ untouched */}
+        <div className="feature-card">
+          <button className="arrow-icon" onClick={() => goToWellness('music')}>
+            <ArrowUpRight color="black" />
+          </button>
+          <div className="feature-icon">
+            <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
+          </div>
+          <h3>Thought Tracker</h3>
+          <p>Record, reflect, and track your emotions with ease.</p>
+        </div>
+
+        {/* Mental Health Tips */}
+        <div className="feature-card">
+          <button className="arrow-icon" onClick={goToTips}>
+            <ArrowUpRight color="black" />
+          </button>
+          <div className="feature-icon">
+            <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
+          </div>
+          <h3>Mental Health Tips</h3>
+          <p>Simple science-based advice for everyday wellness.</p>
+        </div>
+
+        {/* Games */}
+        <div className="feature-card">
           <button className="arrow-icon" onClick={goToGames}>
             <ArrowUpRight color="black" />
           </button>
-            <div className="feature-icon">
-              <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
-            </div>
-            <h3> Games</h3>
-            <p>Fun ways to reduce stress while staying mindful.</p>
+          <div className="feature-icon">
+            <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
           </div>
-          <div className="feature-card">
-            <a href="/blogs" className="arrow-icon">
-              <ArrowUpRight color="black" onClick={goToBlogs} />
-            </a>
-            <div className="feature-icon">
-              
-              <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
-            </div>
-            <h3> Blogs</h3>
-            <p>Explore expert insights and personal stories that inspire growth.</p>
-          </div>
+          <h3>Games</h3>
+          <p>Fun ways to reduce stress while staying mindful.</p>
         </div>
-      </section>
+
+        {/* Blogs */}
+        <div className="feature-card">
+          <button className="arrow-icon" onClick={goToBlogs}>
+            <ArrowUpRight color="black" />
+          </button>
+          <div className="feature-icon">
+            <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
+          </div>
+          <h3>Blogs</h3>
+          <p>Explore expert insights and personal stories that inspire growth.</p>
+        </div>
+
+      </div>
+    </section>
 
       {/* ---------- STATS SECTION ---------- */}
       <section className="did-you-know-section">
