@@ -264,3 +264,51 @@
   color: white;
   cursor: pointer;
 }
+
+.meditation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.meditation-modal {
+  background: #ffffff;
+  width: 90%;
+  max-width: 700px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  animation: fadeIn 0.25s ease-in-out;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  float: right;
+  background: #fff;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.end-session {
+  margin-top: 15px;
+  background: #ff6b6b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
