@@ -1,16 +1,25 @@
 import React from "react";
 import "./AchievementPopup.css";
+import { X } from "lucide-react";
 
 export default function AchievementPopup({ data, onClose }) {
   return (
-    <div className="achievement-overlay">
-      <div className="achievement-popup">
-        <h2 className="achievement-title">🏆 Your Achievements</h2>
+    <div className="achievement-overlay" onClick={onClose}>
+      <div
+        className="achievement-popup"
+        onClick={(e) => e.stopPropagation()} // prevents closing when clicking inside
+      >
+        <button className="popup-close-btn" onClick={onClose}>
+          <X size={22} />
+        </button>
+
+        <h2 className="achievement-title">🏆 Personal Achievements</h2>
+        <p className="achievement-sub">Your journey to a calmer mind is growing 🌱</p>
 
         <div className="achievement-stats">
           <div className="stat-box">
             <span className="stat-value">{data.gamesPlayedToday}</span>
-            <span className="stat-label">Games Today</span>
+            <span className="stat-label">Games Played Today</span>
           </div>
           <div className="stat-box">
             <span className="stat-value">{data.wordleStreak}</span>
@@ -18,7 +27,7 @@ export default function AchievementPopup({ data, onClose }) {
           </div>
         </div>
 
-        <h3 className="badge-heading">Badges</h3>
+        <h3 className="badge-heading">✨ Earned Badges</h3>
 
         <div className="badge-grid">
           {data.badges && data.badges.length > 0 ? (
@@ -32,10 +41,6 @@ export default function AchievementPopup({ data, onClose }) {
             <p className="no-badges">No badges earned yet — start playing!</p>
           )}
         </div>
-
-        <button className="close-btn" onClick={onClose}>
-          ✖ Close
-        </button>
       </div>
     </div>
   );
