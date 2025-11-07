@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./music.css";
 import Navbar from "./navbar";
 import "./navbar.css";
@@ -15,6 +15,8 @@ export default function Music({
   userName,
   userRole
 }) {
+  const [currentTrack, setCurrentTrack] = useState(null);
+
   const musicTracks = [
     {
       title: "Peaceful Piano",
@@ -56,7 +58,6 @@ export default function Music({
 
   return (
     <div className="music-page">
-      {/* ---------- NAVBAR ---------- */}
       <Navbar
         currentPage="music"
         goToHome={goToHome}
@@ -66,11 +67,11 @@ export default function Music({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
-        userName={userName}    // ✅ show logged in name
+        userName={userName}
         userRole={userRole}
         userEmail={userEmail}
       />
-      {/* ---------- BANNER ---------- */}
+
       <section className="music-banner">
         <div className="banner-content">
           <h1>Music Therapy</h1>
@@ -78,7 +79,6 @@ export default function Music({
         </div>
       </section>
 
-      {/* ---------- MUSIC GRID ---------- */}
       <section className="music-section">
         <div className="music-grid">
           {musicTracks.map((track, index) => (
@@ -90,7 +90,7 @@ export default function Music({
               <h3>{track.title}</h3>
               <button
                 className="start-btn"
-                onClick={() => window.open(track.link, "_blank")}
+                onClick={() => setCurrentTrack(track)}
               >
                 Play
               </button>
@@ -99,16 +99,33 @@ export default function Music({
         </div>
       </section>
 
-      {/* ---------- FOOTER ---------- */}
+      {/* ✅ Music Player */}
+      {currentTrack && (
+        <div className="music-player-bar">
+          <h4>🎧 Now Playing: {currentTrack.title}</h4>
+
+          <iframe
+            width="1"
+            height="1"
+            style={{ opacity: 0, position: "absolute", zIndex: -1 }}
+            src={`${currentTrack.link.replace("watch?v=", "embed/")}?autoplay=1&controls=0&modestbranding=1&showinfo=0`}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+          ></iframe>
+
+          <button className="stop-btn" onClick={() => setCurrentTrack(null)}>
+            ✖ Stop
+          </button>
+        </div>
+      )}
+
       <footer className="footer">
         <div className="footer-container">
-          {/* Brand Info */}
           <div className="footer-brand">
             <h3>Mind Heaven</h3>
             <p>Relax your mind and soul with the power of sound and rhythm.</p>
           </div>
 
-          {/* Navigation Links */}
           <div className="footer-links">
             <ul>
               <li onClick={goToHome}>Home</li>
@@ -124,18 +141,16 @@ export default function Music({
               <li>Sleep Aid</li>
               <li>Energizing</li>
               <li>Concentration</li>
-               <li>Spiritual Balance</li>
+              <li>Spiritual Balance</li>
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div className="footer-contact">
             <h4>Contact</h4>
             <p>Email: mindheaven@gmail.com</p>
             <p>Phone: +1 234 456 8890</p>
           </div>
 
-          {/* Message Box */}
           <div className="footer-message-box">
             <textarea
               className="footer-textarea"
@@ -146,9 +161,7 @@ export default function Music({
         </div>
 
         <div className="footer-bottom">
-          <p>
-            © 2025 Mind Heaven | Designed with ♫ to bring peace through music.
-          </p>
+          <p>© 2025 Mind Heaven | Designed with ♫ to bring peace through music.</p>
         </div>
       </footer>
     </div>
