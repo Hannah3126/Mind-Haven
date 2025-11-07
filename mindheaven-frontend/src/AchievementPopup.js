@@ -31,8 +31,10 @@ export default function AchievementPopup({ data, onClose }) {
             <span className="stat-label">Total Games</span>
           </div>
           <div className="stat-box">
-            <span className="stat-value">{data.wordleStreak || 0}</span>
-            <span className="stat-label">Wordle Streak</span>
+          <span className="stat-value">
+  {data.wordleStreak !== undefined ? data.wordleStreak : 0}
+</span>            
+<span className="stat-label">Wordle Streak</span>
           </div>
           <div className="stat-box">
             <span className="stat-value">{data.bestMemoryScore || "-"}</span>

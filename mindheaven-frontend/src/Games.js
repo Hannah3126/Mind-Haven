@@ -70,10 +70,18 @@ export default function GamesPage({
 }) {
 
 const [showAchievements, setShowAchievements] = useState(false);
+// ✅ Get current user ID
+const userId = localStorage.getItem("user_id");
+
+// ✅ Wordle streak key for that user
+const streakKey = `wordle_streak_${userId}`;
+
+// ✅ Read real streak
+const wordleStreak = parseInt(localStorage.getItem(streakKey) || "0");
 // Temporary dummy achievement data
 const [achievements] = useState({
   gamesPlayedToday: 3,
-  wordleStreak: 4,
+  wordleStreak: wordleStreak, // ✅ real streak here
   badges: [
     { id: 1, name: "First Game Played", icon: "🎉" },
     { id: 2, name: "Daily Player", icon: "🔥" },
