@@ -60,6 +60,17 @@ db.get("SELECT * FROM users WHERE email = ?", ["user@mindheaven.com"], (err, row
   }
 });
 
+// ✅ Wordle Game Stats Table
+db.run(
+  `CREATE TABLE IF NOT EXISTS wordle_stats (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    played_on TEXT,
+    won INTEGER,
+    streak INTEGER
+  )`
+);
+
 // Email setup
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -269,6 +280,62 @@ app.post("/api/getAppointmentsByEmail", async (req, res) => {
   }
 });
 
+app.post("/api/game/wordle/save", (req, res) => {
+  const { userId, won, streak } = req.body;
+
+  if (!userId) {
+    return res.json({ success: false, message: "User ID required" });
+  }
+
+  const today = new Date().toDateString();
+
+  db.run(
+    `INSERT INTO wordle_stats (user_id, played_on, won, streak)
+     VALUES (?, ?, ?, ?)`,
+    [userId, today, won ? 1 : 0, streak],
+    (err) => {
+      if (err) {
+        console.error("DB Error:", err);
+        return res.json({ success: false, message: "DB error" });
+      }
+      return res.json({ success: true });
+    }
+  );
+});
+
+app.post("/api/game/wordle/stats", (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.json({ success: false, message: "User ID required" });
+  }
+
+  db.all(
+    `SELECT * FROM wordle_stats WHERE user_id = ? ORDER BY id DESC`,
+    [userId],
+    (err, rows) => {
+      if (err) {
+        console.error("Fetch error:", err);
+        return res.json({ success: false, message: "DB error" });
+      }
+
+      const gamesPlayed = rows.length;
+      const wins = rows.filter((r) => r.won === 1).length;
+      const winRate = gamesPlayed > 0 ? ((wins / gamesPlayed) * 100).toFixed(0) : 0;
+      const longestStreak = rows.reduce((max, r) => Math.max(max, r.streak), 0);
+      const currentStreak = rows[0]?.streak || 0;
+
+      return res.json({
+        success: true,
+        gamesPlayed,
+        wins,
+        winRate,
+        longestStreak,
+        currentStreak
+      });
+    }
+  );
+});
 
 // Start Server
 app.listen(PORT, () => {

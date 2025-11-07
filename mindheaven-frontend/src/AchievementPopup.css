@@ -148,3 +148,110 @@
   .popup-close-btn:hover {
     background: #f3f4f6;
   }
+
+  .achievement-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  
+  .achievement-popup {
+    background: #fff;
+    width: 380px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  .achievement-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .achievement-sub {
+    font-size: 0.85rem;
+    opacity: .7;
+    margin-bottom: 15px;
+  }
+  
+  .achievement-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .stat-box {
+    background: #f7f9ff;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4c6ef5;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+    opacity: .6;
+  }
+  
+  .badge-heading {
+    text-align: left;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+  
+  .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .badge-card {
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .badge-card.earned {
+    background: #e8f3ff;
+    border: 1.5px solid #4c6ef5;
+  }
+  
+  .badge-card.locked {
+    opacity: 0.4;
+    filter: blur(0.5px);
+  }
+  
+  .badge-icon {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+  }
+  
+  .close-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px;
+    border: none;
+    background: #4c6ef5;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+  }

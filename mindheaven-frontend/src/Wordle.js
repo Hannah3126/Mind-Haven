@@ -15,13 +15,37 @@ function WordleGame({
   userName,
   userRole
 }) {
+  // ✅ Logged-in user ID
+  const userId = parseInt(localStorage.getItem("user_id"));
+
+  // ✅ Keys unique to each user BEFORE using them
+  const streakKey = `wordle_streak_${userId}`;
+  const dayKey = `wordle_last_day_${userId}`;
+
+  // ✅ Streak + lastPlayed loaded per-user
+  const [streak, setStreak] = useState(
+    parseInt(localStorage.getItem(streakKey) || "0")
+  );
+  const [lastPlayedDay, setLastPlayedDay] = useState(
+    localStorage.getItem(dayKey) || ""
+  );
+
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
   const [validWords, setValidWords] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
 
-  // Seeded random for daily word
+  // ✅ Deterministic daily word RNG
+  const mulberry32 = (a) => {
+    return function () {
+      let t = (a += 0x6d2b79f5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+
   const getSeededRandomIndex = (wordList) => {
     const today = new Date();
     const seed =
@@ -32,16 +56,7 @@ function WordleGame({
     return Math.floor(rng() * wordList.length);
   };
 
-  const mulberry32 = (a) => {
-    return function () {
-      let t = (a += 0x6d2b79f5);
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  };
-
-  // Load valid words and pick the daily word
+  // ✅ Load valid words + today’s word
   useEffect(() => {
     fetch("/valid-wordle-words.txt")
       .then((res) => res.text())
@@ -52,41 +67,88 @@ function WordleGame({
           .filter((w) => w.length === 5);
 
         setValidWords(words);
-
-        const index = getSeededRandomIndex(words);
-        setWordToGuess(words[index]);
+        const idx = getSeededRandomIndex(words);
+        setWordToGuess(words[idx]);
       })
       .catch(() => setMessage("⚠️ Failed to load word list."));
   }, []);
 
-  // Handle user guess
+  // ✅ If new day, allow play again
+  useEffect(() => {
+    const today = new Date().toDateString();
+    if (lastPlayedDay !== today) {
+      setLastPlayedDay(today);
+      localStorage.setItem(dayKey, today);
+    }
+  }, [lastPlayedDay, dayKey]);
+
+  // ✅ Handle guess logic
   const handleGuess = () => {
-    const upperInput = input.toUpperCase();
-
-    if (upperInput.length !== 5) {
-      setMessage("❗ Please enter a 5-letter word.");
+    const today = new Date().toDateString();
+  
+    // ✅ BLOCK IF the user already finished today's game (win or lose)
+    const alreadyFinishedToday =
+      lastPlayedDay === today &&
+      (localStorage.getItem(streakKey) !== null); // If streakKey exists for today, game was already counted
+  
+    if (alreadyFinishedToday && guesses.length === 0) {
+      setMessage("✅ You've already played today's Wordle!");
       return;
     }
-
-    if (!validWords.includes(upperInput)) {
-      setMessage("❌ Not a valid English word. Try again.");
+  
+    const guess = input.toUpperCase();
+  
+    if (guess.length !== 5) {
+      setMessage("❗ Enter a 5-letter word");
       return;
     }
-
-    const newGuesses = [...guesses, upperInput];
+    if (!validWords.includes(guess)) {
+      setMessage("❌ Not a valid English word");
+      return;
+    }
+  
+    const newGuesses = [...guesses, guess];
     setGuesses(newGuesses);
     setInput("");
-
-    if (upperInput === wordToGuess) {
-      setMessage("🎉 Great job! You guessed the word!");
-    } else if (newGuesses.length >= 5) {
-      setMessage(`😔 Out of tries! The word was ${wordToGuess}.`);
-    } else {
-      setMessage("");
+  
+    // ✅ WIN
+    if (guess === wordToGuess) {
+      const newStreak = streak + 1;
+      setStreak(newStreak);
+      localStorage.setItem(streakKey, newStreak);
+      localStorage.setItem(dayKey, today);
+  
+      setMessage("🎉 You got it!");
+  
+      fetch("http://localhost:5050/api/game/wordle/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, won: true, streak: newStreak })
+      });
+  
+      return;
     }
+  
+    // ❌ LOSS (out of tries)
+    if (newGuesses.length >= 5) {
+      setMessage(`😔 Out of tries. The word was ${wordToGuess}`);
+  
+      setStreak(0);
+      localStorage.setItem(streakKey, 0);
+      localStorage.setItem(dayKey, today);
+  
+      fetch("http://localhost:5050/api/game/wordle/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, won: false, streak: 0 })
+      });
+  
+      return;
+    }
+  
+    setMessage("");
   };
 
-  // Determine letter color for Wordle logic
   const getColor = (letter, index) => {
     if (!wordToGuess) return "absent";
     if (wordToGuess[index] === letter) return "correct";
@@ -96,7 +158,6 @@ function WordleGame({
 
   return (
     <div className="wordle-container">
-      {/* Keep the top blue Navbar */}
       <Navbar
         currentPage="wordle"
         goToHome={goToHome}
@@ -106,7 +167,7 @@ function WordleGame({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
-        userName={userName}    // ✅ show logged in name
+        userName={userName}
         userRole={userRole}
         userEmail={userEmail}
       />
@@ -115,12 +176,24 @@ function WordleGame({
 
       <div className="wordle-body">
         <h2 className="game-title">Guess the 5-letter word 💡</h2>
-        <p className="game-subtitle">You have 5 tries. Think calm, think clear!</p>
+
+        <p style={{
+          fontWeight: "bold",
+          color: "white",
+          background: "#4c6ef5",
+          padding: "6px 12px",
+          borderRadius: "20px",
+          display: "inline-block",
+          fontSize: "14px",
+          marginBottom: "8px"
+        }}>
+          🔥 Streak: {streak} day{streak !== 1 && "s"}
+        </p>
 
         <div className="wordle-board">
-          {guesses.map((guess, idx) => (
-            <div key={idx} className="guess-row">
-              {guess.split("").map((letter, i) => (
+          {guesses.map((g, row) => (
+            <div key={row} className="guess-row">
+              {g.split("").map((letter, i) => (
                 <span key={i} className={`letter-box ${getColor(letter, i)}`}>
                   {letter}
                 </span>
@@ -129,34 +202,35 @@ function WordleGame({
           ))}
         </div>
 
-        {guesses.length < 5 && message !== "🎉 Great job! You guessed the word!" && (
-          <div className="input-section">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleGuess();
-              }}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-            >
-              <input
-                type="text"
-                maxLength={5}
-                value={input}
-                onChange={(e) => setInput(e.target.value.toUpperCase())}
-                placeholder="Enter your guess"
-                className="wordle-input"
-                autoFocus
-              />
-              <button type="submit" className="submit-btn-wordle">
-                Submit
-              </button>
-            </form>
-          </div>
+        {guesses.length < 5 && !message.includes("🎉") && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleGuess();
+              
+            }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "100%"
+            }}
+          >
+            <input
+              type="text"
+              maxLength={5}
+              value={input}
+              onChange={(e) => setInput(e.target.value.toUpperCase())}
+              placeholder="Enter guess"
+              className="wordle-input"
+              autoFocus
+            />
+            <button className="submit-btn-wordle">Submit</button>
+          </form>
         )}
 
         <p className="status-msg">{message}</p>
       </div>
-      
     </div>
   );
 }
