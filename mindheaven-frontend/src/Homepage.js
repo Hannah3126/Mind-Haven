@@ -14,6 +14,15 @@ import { ArrowRight } from "lucide-react";
 
 function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment,userName,userEmail,userRole,goToHome,goToMeditation,goToMusic  }) {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("user_email");
+    localStorage.clear(); 
+    window.location.reload();
+    goToLogin(); 
+  };
   
   return (
     <div className="homepage">
@@ -32,6 +41,8 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
         userEmail={userEmail}
         goToMeditation={goToMeditation}
         goToMusic={goToMusic}
+        onLogout={handleLogout}
+        
       />
       
 
