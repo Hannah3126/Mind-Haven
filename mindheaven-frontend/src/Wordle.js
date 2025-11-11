@@ -2,41 +2,34 @@ import React, { useState, useEffect } from "react";
 import "./Wordle.css";
 import Navbar from "./navbar";
 
-function WordleGame({
-  goToHome,
-  goToLogin,
-  goToSignup,
-  goToGames,
-  goToContact,
-  goToWellness,
-  goToBlogs,
-  currentPage,
-  userEmail,
-  userName,
-  userRole
-}) {
-  // ✅ Logged-in user ID
+function WordleGame({ goToHome, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, userEmail, userName, userRole }) {
   const userId = parseInt(localStorage.getItem("user_id"));
-
-  // ✅ Keys unique to each user BEFORE using them
-  const streakKey = `wordle_streak_${userId}`;
+  
   const dayKey = `wordle_last_day_${userId}`;
 
-  // ✅ Streak + lastPlayed loaded per-user
-  const [streak, setStreak] = useState(
-    parseInt(localStorage.getItem(streakKey) || "0")
-  );
-  const [lastPlayedDay, setLastPlayedDay] = useState(
-    localStorage.getItem(dayKey) || ""
-  );
-
+  const [streak, setStreak] = useState(0);
+  const [lastPlayedDay, setLastPlayedDay] = useState(localStorage.getItem(dayKey) || "");
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
   const [validWords, setValidWords] = useState([]);
   const [wordToGuess, setWordToGuess] = useState("");
 
-  // ✅ Deterministic daily word RNG
+  // ✅ Fetch streak from DB on load
+  useEffect(() => {
+    if (!userId) return;
+
+    fetch(`http://localhost:5050/api/game/wordle/streak/${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setStreak(data.streak);
+        }
+      })
+      .catch(err => console.log("Error fetching streak", err));
+  }, [userId]);
+
+  // 🎯 Seeded random word of the day
   const mulberry32 = (a) => {
     return function () {
       let t = (a += 0x6d2b79f5);
@@ -46,112 +39,98 @@ function WordleGame({
     };
   };
 
-  const getSeededRandomIndex = (wordList) => {
-    const today = new Date();
-    const seed =
-      today.getFullYear() * 10000 +
-      (today.getMonth() + 1) * 100 +
-      today.getDate();
+  const getSeededIndex = (list) => {
+    const d = new Date();
+    const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
     const rng = mulberry32(seed);
-    return Math.floor(rng() * wordList.length);
+    return Math.floor(rng() * list.length);
   };
 
-  // ✅ Load valid words + today’s word
+  // ✅ Load word list and set today's word
   useEffect(() => {
     fetch("/valid-wordle-words.txt")
-      .then((res) => res.text())
-      .then((text) => {
+      .then(r => r.text())
+      .then(text => {
         const words = text
           .split("\n")
-          .map((w) => w.trim().toUpperCase())
-          .filter((w) => w.length === 5);
+          .map(w => w.trim().toUpperCase())
+          .filter(w => w.length === 5);
 
         setValidWords(words);
-        const idx = getSeededRandomIndex(words);
-        setWordToGuess(words[idx]);
-      })
-      .catch(() => setMessage("⚠️ Failed to load word list."));
+        setWordToGuess(words[getSeededIndex(words)]);
+      });
   }, []);
 
-  // ✅ If new day, allow play again
+  // ✅ Allow playing again on new day
   useEffect(() => {
     const today = new Date().toDateString();
     if (lastPlayedDay !== today) {
+      setGuesses([]);
+      setMessage("");
+
       setLastPlayedDay(today);
       localStorage.setItem(dayKey, today);
     }
   }, [lastPlayedDay, dayKey]);
 
-  // ✅ Handle guess logic
   const handleGuess = () => {
     const today = new Date().toDateString();
-  
-    // ✅ BLOCK IF the user already finished today's game (win or lose)
-    const alreadyFinishedToday =
-      lastPlayedDay === today &&
-      (localStorage.getItem(streakKey) !== null); // If streakKey exists for today, game was already counted
-  
-    if (alreadyFinishedToday && guesses.length === 0) {
-      setMessage("✅ You've already played today's Wordle!");
+
+    // ❌ Block if user already finished today's game
+    if (lastPlayedDay === today && guesses.length === 0) {
+      setMessage("✅ You've already played today!");
       return;
     }
-  
+
     const guess = input.toUpperCase();
-  
-    if (guess.length !== 5) {
-      setMessage("❗ Enter a 5-letter word");
-      return;
-    }
-    if (!validWords.includes(guess)) {
-      setMessage("❌ Not a valid English word");
-      return;
-    }
-  
+    if (guess.length !== 5) return setMessage("❗ Enter a 5-letter word");
+    if (!validWords.includes(guess)) return setMessage("❌ Word not in list");
+
     const newGuesses = [...guesses, guess];
     setGuesses(newGuesses);
     setInput("");
-  
-    // ✅ WIN
+
+    // 🎉 WIN
     if (guess === wordToGuess) {
       const newStreak = streak + 1;
       setStreak(newStreak);
-      localStorage.setItem(streakKey, newStreak);
+      setLastPlayedDay(today);
       localStorage.setItem(dayKey, today);
-  
-      setMessage("🎉 You got it!");
-  
+
+      setMessage("🎉 You guessed it!");
+
       fetch("http://localhost:5050/api/game/wordle/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, won: true, streak: newStreak })
       });
-  
+
       return;
     }
-  
-    // ❌ LOSS (out of tries)
+
+    // ❌ LOSS — no tries left
     if (newGuesses.length >= 5) {
-      setMessage(`😔 Out of tries. The word was ${wordToGuess}`);
-  
+      setMessage(`😔 Out of tries. Word was ${wordToGuess}`);
+
       setStreak(0);
-      localStorage.setItem(streakKey, 0);
+      setLastPlayedDay(today);
       localStorage.setItem(dayKey, today);
-  
+
       fetch("http://localhost:5050/api/game/wordle/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, won: false, streak: 0 })
       });
-  
+
       return;
     }
-  
+
     setMessage("");
   };
 
-  const getColor = (letter, index) => {
+  const getColor = (letter, idx) => {
     if (!wordToGuess) return "absent";
-    if (wordToGuess[index] === letter) return "correct";
+    if (wordToGuess[idx] === letter) return "correct";
     if (wordToGuess.includes(letter)) return "present";
     return "absent";
   };
