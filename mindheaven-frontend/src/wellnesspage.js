@@ -18,7 +18,7 @@ const ThoughtTrackerBox = () => {
   
       const userId = localStorage.getItem("user_id"); // ✅ pull user id
   
-      const res = await fetch('http://localhost:5000/api/reframe', {
+      const res = await fetch('http://localhost:5050/api/reframe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ thought, userId }),

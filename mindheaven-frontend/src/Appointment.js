@@ -52,7 +52,7 @@ export default function AppointmentPage({
 
   const loadAppointments = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/getAppointmentsByEmail", {
+      const res = await fetch("http://localhost:5050/api/getAppointmentsByEmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })

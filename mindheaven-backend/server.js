@@ -337,6 +337,21 @@ app.post("/api/game/wordle/stats", (req, res) => {
   );
 });
 
+app.get("/api/game/wordle/streak/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  db.get(
+    `SELECT streak FROM wordle_scores WHERE user_id = ? ORDER BY played_on DESC LIMIT 1`,
+    [userId],
+    (err, row) => {
+      if (err) return res.json({ success: false });
+
+      const streak = row ? row.streak : 0;
+      res.json({ success: true, streak });
+    }
+  );
+});
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
