@@ -5,7 +5,7 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 
 export default function AppointmentPage({
   goToHome, goToLogin, goToSignup, goToGames, goToContact,
-  goToWellness, goToBlogs, userRole, userEmail, userName
+  goToWellness, goToBlogs, goToAdminDashboard, goToProfile, userRole, userEmail, userName
 }) {
 
   const [name, setName] = React.useState(userName || "");
@@ -77,6 +77,8 @@ export default function AppointmentPage({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        goToAdminDashboard={goToAdminDashboard}
+        goToProfile={goToProfile}
         userName={userName}
         userRole={userRole}
         userEmail={userEmail}

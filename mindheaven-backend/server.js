@@ -178,6 +178,156 @@ app.post("/signup", (req, res) => {
   });
 });
 
+    });
+  });
+});
+
+// ✅ Update profile for a given user
+app.post("/api/profile/update", (req, res) => {
+  const {
+    currentEmail,          // logged-in email (identity)
+    email,                 // new email from form
+    name,
+    mood,
+    reason,
+    wantsTherapy,
+    supportAreas,
+    notesForTherapist
+  } = req.body;
+
+  if (!currentEmail) {
+    return res.json({ success: false, message: "Current email required" });
+  }
+
+  const supportAreasString = JSON.stringify(supportAreas || []);
+
+  // 1) Find user by current email
+  db.get(
+    "SELECT * FROM users WHERE email = ?",
+    [currentEmail],
+    (err, userRow) => {
+      if (err) {
+        console.error("User lookup error:", err);
+        return res.json({ success: false, message: "DB error" });
+      }
+
+      if (!userRow) {
+        return res.json({ success: false, message: "User not found" });
+      }
+
+      const userId = userRow.id;
+
+      // 2) Update users.email (to new email from form)
+      db.run(
+        "UPDATE users SET email = ? WHERE id = ?",
+        [email, userId],
+        (err2) => {
+          if (err2) {
+            console.error("Email update error:", err2);
+            return res.json({ success: false, message: "Failed to update email" });
+          }
+
+          // 3) Check if profile row exists
+          db.get(
+            "SELECT * FROM user_profiles WHERE user_id = ?",
+            [userId],
+            (err3, profileRow) => {
+              if (err3) {
+                console.error("Profile check error:", err3);
+                return res.json({ success: false, message: "DB error" });
+              }
+
+              if (!profileRow) {
+                // INSERT new profile
+                db.run(
+                  `INSERT INTO user_profiles 
+                    (user_id, name, mood, reason, wantsTherapy, supportAreas, notesForTherapist)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                  [
+                    userId,
+                    name || "",
+                    mood || "",
+                    reason || "",
+                    wantsTherapy || "",
+                    supportAreasString,
+                    notesForTherapist || "",
+                  ],
+                  function (err4) {
+                    if (err4) {
+                      console.error("Profile insert error:", err4);
+                      return res.json({
+                        success: false,
+                        message: "Failed to save profile",
+                      });
+                    }
+
+                    return res.json({
+                      success: true,
+                      message: "Profile created",
+                      profile: {
+                        userId,
+                        email,
+                        name,
+                        mood,
+                        reason,
+                        wantsTherapy,
+                        supportAreas,
+                        notesForTherapist,
+                      },
+                    });
+                  }
+                );
+              } else {
+                // UPDATE existing profile
+                db.run(
+                  `UPDATE user_profiles
+                   SET name = ?, mood = ?, reason = ?, wantsTherapy = ?, supportAreas = ?, notesForTherapist = ?
+                   WHERE user_id = ?`,
+                  [
+                    name || "",
+                    mood || "",
+                    reason || "",
+                    wantsTherapy || "",
+                    supportAreasString,
+                    notesForTherapist || "",
+                    userId,
+                  ],
+                  function (err5) {
+                    if (err5) {
+                      console.error("Profile update error:", err5);
+                      return res.json({
+                        success: false,
+                        message: "Failed to update profile",
+                      });
+                    }
+
+                    return res.json({
+                      success: true,
+                      message: "Profile updated",
+                      profile: {
+                        userId,
+                        email,
+                        name,
+                        mood,
+                        reason,
+                        wantsTherapy,
+                        supportAreas,
+                        notesForTherapist,
+                      },
+                    });
+                  }
+                );
+              }
+            }
+          );
+        }
+      );
+    }
+  );
+});
+
+
+
 app.get("/test", (req, res) => {
   res.json({ message: "CORS test route working" });
 });
@@ -352,8 +502,152 @@ app.get("/api/game/wordle/streak/:userId", (req, res) => {
   );
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// ✅ Allowed tables for admin dashboard
+const ADMIN_TABLES = {
+  users: "users",
+  user_profiles: "user_profiles",
+  appointments: "appointments",
+  wordle_stats: "wordle_stats",
+  thoughts: "thoughts",
+  // add/remove table names here as needed
+};
+
+// ✅ Get list of admin tables
+app.get("/api/admin/tables", (req, res) => {
+  const tables = Object.keys(ADMIN_TABLES);
+  res.json({ success: true, tables });
 });
+
+// ✅ Get all rows for a specific table
+app.get("/api/admin/table/:table", (req, res) => {
+  const key = req.params.table;
+  const tableName = ADMIN_TABLES[key];
+
+  if (!tableName) {
+    return res.status(400).json({ success: false, message: "Invalid table" });
+  }
+
+  const sql = `SELECT * FROM ${tableName}`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.error("Admin table fetch error:", err);
+      return res
+        .status(500)
+        .json({ success: false, message: "DB error loading table" });
+    }
+
+    res.json({ success: true, rows });
+  });
+});
+
+// ✅ Update a single row in a table (by id)
+app.post("/api/admin/table/:table/update", (req, res) => {
+  const key = req.params.table;
+  const tableName = ADMIN_TABLES[key];
+
+  if (!tableName) {
+    return res.status(400).json({ success: false, message: "Invalid table" });
+  }
+
+  const { row } = req.body;
+
+  if (!row || row.id == null) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Row with id is required" });
+  }
+
+  // Build dynamic UPDATE: SET col1 = ?, col2 = ?, ...
+  const columns = Object.keys(row).filter((col) => col !== "id");
+
+  if (columns.length === 0) {
+    return res
+      .status(400)
+      .json({ success: false, message: "No columns to update" });
+  }
+
+  const setClause = columns.map((col) => `${col} = ?`).join(", ");
+  const values = columns.map((col) => row[col]);
+  values.push(row.id); // for WHERE id = ?
+
+  const sql = `UPDATE ${tableName} SET ${setClause} WHERE id = ?`;
+
+  db.run(sql, values, function (err) {
+    if (err) {
+      console.error("Admin row update error:", err);
+      return res
+        .status(500)
+        .json({ success: false, message: "DB error updating row" });
+    }
+
+    return res.json({ success: true, message: "Row updated" });
+  });
+});
+
+
+
+
+//const app = express();
+
+//const PORT = 5000; // fixed port
+const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2'; // you said you pulled this
+
+app.use(cors({
+  origin: 'http://localhost:3000', // React dev server
+}));
+app.use(express.json());
+
+// Simple health route to test ports/CORS
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', model: OLLAMA_MODEL });
+});
+
+// Chat endpoint
+app.post('/api/chat', async (req, res) => {
+  const { messages } = req.body;
+
+  if (!Array.isArray(messages)) {
+    return res.status(400).json({ error: 'messages must be an array' });
+  }
+
+  const systemMessage = {
+    role: 'system',
+    content:
+      'You are MindHeaven, a friendly, supportive mental health chatbot. ' +
+      'You offer general emotional support, coping ideas, and gentle reflections. ' +
+      'You are NOT a doctor or therapist and you never give medical, diagnostic, or emergency advice. ' +
+      'If the user sounds like they might hurt themselves or others, encourage them to contact ' +
+      'local emergency services, a crisis line, or a mental health professional immediately.',
+  };
+
+  try {
+    const response = await axios.post(`${OLLAMA_URL}/api/chat`, {
+      model: OLLAMA_MODEL,
+      stream: false,
+      messages: [systemMessage, ...messages],
+    });
+
+    const reply = response.data?.message?.content || '';
+    return res.json({ reply });
+  } catch (err) {
+    console.error('Error talking to Ollama:', err.message);
+    if (err.response) {
+      console.error('Ollama response data:', err.response.data);
+    }
+    return res.status(500).json({ error: 'Failed to get response from model' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`MindHeaven chatbot backend running at http://localhost:${PORT}`);
+  console.log(`Talking to Ollama at ${OLLAMA_URL} using model "${OLLAMA_MODEL}"`);
+});
+
+
+// // Start Server
+// app.listen(PORT, () => {
+//   console.log(`Server running at http://localhost:${PORT}`);
+// });
 

@@ -1,0 +1,122 @@
+.admin-page {
+  min-height: 100vh;
+  background: #f3f4f8;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.admin-content {
+  max-width: 1200px;
+  margin: 80px auto 40px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.admin-content h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.8rem;
+  color: #111827;
+}
+
+.admin-subtitle {
+  margin: 0 0 16px 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Second navbar for tables */
+.admin-table-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.admin-table-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.1s ease, border-color 0.1s ease,
+    transform 0.05s ease;
+}
+
+.admin-table-btn:hover {
+  background: #eef2ff;
+  border-color: #4f46e5;
+}
+
+.admin-table-btn-active {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+/* Table area */
+.admin-table-wrapper {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.admin-table-scroll {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.admin-table th,
+.admin-table td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #f9fafb;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.admin-table input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+.admin-update-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: none;
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.admin-update-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.admin-error {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.85rem;
+}

@@ -58,6 +58,8 @@ export default function GamesPage({
   goToContact,
   goToWellness,
   goToBlogs,
+  goToAdminDashboard,
+  goToProfile,
   goToWordle,
   goToTicTacToe,
   goToMatchingGame, 
@@ -100,6 +102,8 @@ const [achievements] = useState({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        goToAdminDashboard={goToAdminDashboard}
+        goToProfile={goToProfile}
         userName={userName}    // ✅ show logged in name
         userRole={userRole}
         userEmail={userEmail}

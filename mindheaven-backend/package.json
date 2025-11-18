@@ -1,7 +1,6 @@
 {
   "name": "mindheaven-backend",
   "version": "1.0.0",
-  "description": "",
   "type": "module",
   "main": "server.js",
   "scripts": {
@@ -12,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.13.1",
+    "axios": "^1.13.2",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "cors-anywhere": "^0.4.4",
@@ -24,5 +23,6 @@
     "sqlite3": "^5.1.7",
     "undici": "^7.16.0",
     "web-streams-polyfill": "^4.2.0"
-  }
+  },
+  "description": ""
 }

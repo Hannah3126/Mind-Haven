@@ -10,6 +10,8 @@ export default function ContactPage({
   goToContact,
   goToWellness,
   goToBlogs,
+  goToAdminDashboard,
+  goToProfile,
   userEmail,
   userName,
   userRole
@@ -94,6 +96,8 @@ export default function ContactPage({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        goToAdminDashboard={goToAdminDashboard}
+        goToProfile={goToProfile}
         userName={userName}
         userRole={userRole}
         userEmail={userEmail}

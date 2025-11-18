@@ -19,6 +19,10 @@ import FunQuizGame from "./quiz";
 import Appointment from "./Appointment";
 import Puzzle from "./Puzzle";
 import PatternRecall from "./PatternRecall";
+import Chatbot from "./Chatbot";
+import Profile from "./Profile";
+
+
 
 
 import "./App.css";
@@ -37,7 +41,7 @@ function App() {
     goToLogin: () => { setPage("login"); window.scrollTo(0,0); },
     goToSignup: () => { setPage("signup"); window.scrollTo(0,0); },
     goToUserDashboard: () => { setPage("userDashboard"); window.scrollTo(0,0); },
-    goToAdminDashboard: () => { setPage("adminDashboard"); window.scrollTo(0,0); },
+    goToAdminDashboard: () => { setPage("AdminDashboard"); window.scrollTo(0,0); },
     goToGames: () => { setPage("games"); window.scrollTo(0,0); },
     goToWordle: () => { setPage("wordle"); window.scrollTo(0,0); },
     goToTicTacToe: () => { setPage("tictactoe"); window.scrollTo(0,0); },
@@ -53,6 +57,8 @@ function App() {
     goToAppointment: () => { setPage("Appointment"); window.scrollTo(0,0); },
     goToPuzzle: () => { setPage("Puzzle"); window.scrollTo(0,0); },
     goToPatternRecall: () => { setPage("patternrecall"); window.scrollTo(0,0); },
+    goToChatbot: () => { setPage("chatbot"); window.scrollTo(0,0); },
+    goToProfile: () => { setPage("profile"); window.scrollTo(0,0); },
   };
 
   // ✅ Handle login role switching
@@ -65,8 +71,28 @@ function App() {
     setUserEmail(localStorage.getItem("user_email") || "");
     setUserRole(localStorage.getItem("user_role") || "");
   
-    setPage(userRole === "admin" ? "adminDashboard" : "home");
+    setPage(userRole === "admin" ? "AdminDashboard" : "home");
   };
+
+    const handleLogout = () => {
+    // Clear localStorage
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("user_email");
+    localStorage.removeItem("user_role");
+
+    // Clear React state
+    setRole("");
+    setEmail("");
+    setUserName("");
+    setUserEmail("");
+    setUserRole("");
+
+    // Go back to home
+    setPage("home");
+  };
+
+
 
   return (
     <div className="App">
@@ -92,9 +118,22 @@ function App() {
       )}
 
       {/* 🧑‍💼 Admin Dashboard */}
-      {page === "adminDashboard" && (
+      {page === "AdminDashboard" && (
         <AdminDashboard {...navigation} email={email} role={role} />
       )}
+
+      {/* Chatbot */}
+      {page === "chatbot" && (<Chatbot {...navigation} email={email} role={role} />)}
+
+      {/* Profile */}
+      {page === "profile" && (
+      <Profile
+      {...navigation}
+      userName={localStorage.getItem("user_name") || userName || ""}
+      userEmail={localStorage.getItem("user_email") || userEmail || ""}
+      userRole={localStorage.getItem("user_role") || userRole || ""}
+      />)}
+
 
       {/* 🎮 Games */}
       {page === "games" && <GamesPage {...navigation} />}
@@ -112,7 +151,6 @@ function App() {
       {page === "quiz" && <FunQuizGame {...navigation} />}
       {page === "Puzzle" && <Puzzle {...navigation} />}
       {page === "patternrecall" && <PatternRecall {...navigation} />}
-
 
       {/* 💬 Contact */}
       {page === "contact" && <ContactUs {...navigation} />}

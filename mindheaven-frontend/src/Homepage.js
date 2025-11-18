@@ -12,7 +12,6 @@ import { HelpCircle } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
 
-function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, goToWellness, goToBlogs, goToTips,goToAppointment,userName,userEmail,userRole,goToHome,goToMeditation,goToMusic  }) {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
 
   const handleLogout = () => {
@@ -41,6 +40,8 @@ function HomePage({ currentPage, goToLogin, goToSignup, goToGames, goToContact, 
         userEmail={userEmail}
         goToMeditation={goToMeditation}
         goToMusic={goToMusic}
+        goToProfile={goToProfile}
+        goToAdminDashboard={goToAdminDashboard}
         onLogout={handleLogout}
         
       />

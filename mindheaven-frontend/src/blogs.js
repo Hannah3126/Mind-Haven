@@ -12,6 +12,7 @@ export default function BlogPage({
   goToContact,
   goToWellness,
   goToBlogs,
+  goToAdminDashboard,
 }) {
   // ✅ Blog data with external links
   const blogs = [
@@ -71,6 +72,7 @@ export default function BlogPage({
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        goToAdminDashboard={goToAdminDashboard}
       />
 
       {/* ---------- BLOG PAGE BANNER ---------- */}
