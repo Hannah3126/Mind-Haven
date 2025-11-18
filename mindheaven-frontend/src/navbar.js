@@ -9,17 +9,20 @@ const Navbar = ({
   goToContact, 
   goToWellness, 
   goToBlogs,
+  goToChatbot,
+  goToProfile,
+  goToAdminDashboard,
   onLogout
-}) => {
+  }) => {
   
   // ✅ pull from localStorage correctly
   const userId = localStorage.getItem("user_id");
   const storedName = localStorage.getItem("user_name");
-  
-  // ✅ logged in check
-  const isLoggedIn = !!userId && !!storedName;
-
+  const storedRole = localStorage.getItem("user_role");          // "admin" or "user"
+  //const isLoggedIn = !!userId && !!storedName && !!storedRole;
   const isActive = (pageName) => currentPage === pageName ? "active" : "";
+  const userRole = localStorage.getItem("user_role");
+  const isLoggedIn = !!storedRole;
 
   return (
     <nav className="navbar">
@@ -31,13 +34,18 @@ const Navbar = ({
         <li><a href="#" onClick={goToGames} className={isActive("games")}>Games</a></li>
         <li><a href="#" onClick={goToBlogs} className={isActive("blogs")}>Blogs</a></li>
         <li><a href="#" onClick={goToContact} className={isActive("contact")}>Contact Us</a></li>
+        <li><a href="#" onClick={goToChatbot} className={isActive("chatbot")}>Chatbot</a></li>
+        {storedRole === "admin" && (<li><a href="#" onClick={goToAdminDashboard} className={isActive("Admin")}>Admin</a></li>)}
       </ul>
+
 
       <div className="nav-buttons">
         {isLoggedIn ? (
           <>
-            <span className="welcome-text">
-              Hi, {storedName.split(" ")[0]} 🌼
+            <span className="welcome-text"
+              onClick={goToProfile}>
+                Hi, {(storedName || (storedRole === "admin" ? "Admin" : "Friend")).split(" ")[0]} 🌼
+              {/* Hi, {storedName.split(" ")[0]} 🌼 */}
             </span>
 
             <button 
@@ -46,6 +54,8 @@ const Navbar = ({
                 // ✅ only remove auth keys, not everything
                 localStorage.removeItem("user_id");
                 localStorage.removeItem("user_name");
+                localStorage.removeItem("user_email");
+                localStorage.removeItem("user_role");
 
                 onLogout && onLogout();
                 goToHome();

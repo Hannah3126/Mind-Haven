@@ -4,6 +4,8 @@ import sqlite3 from 'sqlite3';
 import cors from 'cors';
 import reframeThought from './reframe.js';
 import nodemailer from "nodemailer";
+import axios from 'axios';
+
 
 const app = express();
 const PORT = 5050;
@@ -178,7 +180,64 @@ app.post("/signup", (req, res) => {
   });
 });
 
-    
+// ✅ Get full profile for a given user
+app.post("/api/profile/get", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.json({ success: false, message: "Email required" });
+  }
+
+  const sql = `
+    SELECT 
+      u.id AS userId,
+      u.email,
+      u.role,
+      p.name,
+      p.mood,
+      p.reason,
+      p.wantsTherapy,
+      p.supportAreas,
+      p.notesForTherapist
+    FROM users u
+    LEFT JOIN user_profiles p ON u.id = p.user_id
+    WHERE u.email = ?
+  `;
+
+  db.get(sql, [email], (err, row) => {
+    if (err) {
+      console.error("Profile fetch error:", err);
+      return res.json({ success: false, message: "DB error" });
+    }
+
+    if (!row) {
+      console.log("No user found for email:", email);
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    let supportAreas = [];
+    try {
+      supportAreas = row.supportAreas ? JSON.parse(row.supportAreas) : [];
+    } catch (e) {
+      supportAreas = [];
+    }
+
+    return res.json({
+      success: true,
+      profile: {
+        userId: row.userId,
+        email: row.email,
+        role: row.role,
+        name: row.name || "",
+        mood: row.mood || "",
+        reason: row.reason || "",
+        wantsTherapy: row.wantsTherapy || "",
+        supportAreas,
+        notesForTherapist: row.notesForTherapist || ""
+      }
+    });
+  });
+});
 
 // ✅ Update profile for a given user
 app.post("/api/profile/update", (req, res) => {

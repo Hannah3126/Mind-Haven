@@ -14,6 +14,7 @@ function Chatbot({
   goToWellness,
   goToBlogs,
   goToAdminDashboard,
+  goToProfile,
 }) {
   const [messages, setMessages] = useState([
     {
@@ -75,6 +76,7 @@ function Chatbot({
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
         goToAdminDashboard={goToAdminDashboard}
+        goToProfile={goToProfile}
       />
 
       {/* Chat area below navbar */}

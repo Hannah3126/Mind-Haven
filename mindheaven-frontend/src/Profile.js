@@ -21,6 +21,7 @@ function Profile({ userId, userEmail, isLoggedIn, storedName, goToHome, goToLogi
   goToContact,
   goToWellness,
   goToBlogs,
+  goToChatbot,
   goToAdminDashboard, }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -186,35 +187,9 @@ const handleSubmit = async (e) => {
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
+        goToChatbot={goToChatbot}
         goToAdminDashboard={goToAdminDashboard}
       />
-        {/* <div className="logo" onClick={goToHome}>
-          Mind Heaven
-        </div> */}
-
-        {/* <ul className="nav-links">
-          <li>
-            <button onClick={goToHome}>Home</button>
-          </li>
-        </ul> */}
-
-        {/* <div className="nav-buttons">
-          {isLoggedIn ? (
-            <>
-              <span
-                className="welcome-text-link"
-                onClick={goToProfile}
-              >
-                Hi, {storedName?.split(" ")[0] || "Friend"} 🌼
-              </span>
-            </>
-          ) : (
-            <button className="login-btn" onClick={goToLogin}>
-              Login
-            </button>
-          )}
-        </div> */}
-      {/* </nav> */}
 
       {/* ✅ Main profile card, simple like other pages */}
       <div className="profile-card">

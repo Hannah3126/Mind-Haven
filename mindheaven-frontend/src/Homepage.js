@@ -28,6 +28,7 @@ const HomePage = ({
   goToMusic,
   goToProfile,
   goToAdminDashboard,
+  goToChatbot,
   goToAppointment,
   goToTips,
   userName,
@@ -64,6 +65,7 @@ const HomePage = ({
         goToMusic={goToMusic}
         goToProfile={goToProfile}
         goToAdminDashboard={goToAdminDashboard}
+        goToChatbot={goToChatbot}
         onLogout={handleLogout}
       />
 
