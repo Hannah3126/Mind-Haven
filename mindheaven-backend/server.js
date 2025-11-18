@@ -178,9 +178,7 @@ app.post("/signup", (req, res) => {
   });
 });
 
-    });
-  });
-});
+    
 
 // ✅ Update profile for a given user
 app.post("/api/profile/update", (req, res) => {

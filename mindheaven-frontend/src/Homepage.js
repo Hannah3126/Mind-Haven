@@ -1,28 +1,50 @@
 import "./App.css";
 import "./Homepage.css";
 import Navbar from "./navbar";
-import './navbar.css';
+import "./navbar.css";
 import React, { useState } from "react";
 
+import {
+  Brain,
+  Music,
+  Flower,
+  Lightbulb,
+  Gamepad2,
+  BookOpen,
+  ArrowUpRight,
+  HelpCircle,
+  ArrowRight,
+} from "lucide-react";
 
-
-import { Brain, Music, Flower, Lightbulb, Gamepad2, BookOpen } from "lucide-react";
-import { ArrowUpRight } from "lucide-react";
-import { HelpCircle } from "lucide-react";
-import { ArrowRight } from "lucide-react";
-
-
+const HomePage = ({
+  goToHome,
+  goToLogin,
+  goToSignup,
+  goToGames,
+  goToContact,
+  goToWellness,
+  goToBlogs,
+  goToMeditation,
+  goToMusic,
+  goToProfile,
+  goToAdminDashboard,
+  goToAppointment,
+  goToTips,
+  userName,
+  userRole,
+  userEmail,
+}) => {
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("user_id");
     localStorage.removeItem("user_name");
     localStorage.removeItem("user_email");
-    localStorage.clear(); 
+    localStorage.clear();
     window.location.reload();
-    goToLogin(); 
+    goToLogin();
   };
-  
+
   return (
     <div className="homepage">
       {/* ---------- NAVBAR ---------- */}
@@ -35,7 +57,7 @@ import { ArrowRight } from "lucide-react";
         goToContact={goToContact}
         goToWellness={goToWellness}
         goToBlogs={goToBlogs}
-        userName={userName}    // ✅ show logged in name
+        userName={userName}
         userRole={userRole}
         userEmail={userEmail}
         goToMeditation={goToMeditation}
@@ -43,16 +65,12 @@ import { ArrowRight } from "lucide-react";
         goToProfile={goToProfile}
         goToAdminDashboard={goToAdminDashboard}
         onLogout={handleLogout}
-        
       />
-      
 
       {/* ---------- HERO SECTION ---------- */}
-
       <section
         className="hero-section"
         style={{
-          // backgroundImage: `url(${process.env.PUBLIC_URL + '/Home1.png'})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -81,7 +99,6 @@ import { ArrowRight } from "lucide-react";
         >
           <h1
             style={{
-
               color: "black",
               fontSize: "2.2rem",
               marginBottom: "12px",
@@ -90,7 +107,7 @@ import { ArrowRight } from "lucide-react";
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)", // makes text readable on bright areas
+              textShadow: "2px 2px 6px rgba(0, 0, 0, 0.4)",
             }}
           >
             Your mind deserves the same care as your body
@@ -119,7 +136,7 @@ import { ArrowRight } from "lucide-react";
                 cursor: "pointer",
                 fontWeight: "600",
               }}
-               onClick={() => goToAppointment('appointment')}
+              onClick={() => goToAppointment("appointment")}
             >
               Schedule Appointment
             </button>
@@ -134,11 +151,10 @@ import { ArrowRight } from "lucide-react";
                 borderRadius: "8px",
                 cursor: "pointer",
                 fontWeight: "600",
-
               }}
               onClick={() => setShowEmergencyModal(true)}
             >
-              Emergency 
+              Emergency
             </button>
           </div>
         </div>
@@ -150,8 +166,8 @@ import { ArrowRight } from "lucide-react";
           <div className="emergency-modal">
             <h2>Need Immediate Help?</h2>
             <p>
-              You are not alone. Please reach out for immediate support using
-              one of the numbers below.
+              You are not alone. Please reach out for immediate support using one
+              of the numbers below.
             </p>
             <ul className="emergency-list">
               <li>
@@ -176,8 +192,8 @@ import { ArrowRight } from "lucide-react";
               </li>
             </ul>
             <p style={{ fontStyle: "italic", marginTop: "10px" }}>
-              If you are in danger, please contact your local emergency
-              services immediately.
+              If you are in danger, please contact your local emergency services
+              immediately.
             </p>
             <button
               className="close-btn"
@@ -189,115 +205,99 @@ import { ArrowRight } from "lucide-react";
         </div>
       )}
 
+      {/* ---------- FEATURES SECTION ---------- */}
+      <section className="features-section">
+        <h2 className="feature-title" style={{ color: "black" }}>
+          What we <span style={{ color: "#4c6ef5" }}>provide</span>
+        </h2>
+        <p>Everything you need for a healthier, calmer mind</p>
 
-
-
-
-
-
-
-
-
-
-{/* ---------- FEATURES SECTION ---------- */}
-    <section className="features-section">
-      <h2 className="feature-title" style={{ color: "black" }}>
-        What we <span style={{ color: "#4c6ef5" }}>provide</span>
-      </h2>
-      <p>Everything you need for a healthier, calmer mind</p>
-
-      <div className="features-grid">
-
-        {/* Meditation & Exercise */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={goToMeditation}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
+        <div className="features-grid">
+          <div className="feature-card">
+            <button className="arrow-icon" onClick={goToMeditation}>
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <Flower size={80} color="#a78bfa" strokeWidth={1.5} />
+            </div>
+            <h3>Meditation & Exercise</h3>
+            <p>Practice mindfulness and energize your body with guided sessions.</p>
           </div>
-          <h3>Meditation & Exercise</h3>
-          <p>Practice mindfulness and energize your body with guided sessions.</p>
-        </div>
 
-        {/* Songs & Music */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={goToMusic}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
+          <div className="feature-card">
+            <button className="arrow-icon" onClick={goToMusic}>
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <Music size={48} color="#4c6ef5" strokeWidth={1.5} />
+            </div>
+            <h3>Songs & Music</h3>
+            <p>Boost your spirit with soothing playlists made for your mood.</p>
           </div>
-          <h3>Songs & Music</h3>
-          <p>Boost your spirit with soothing playlists made for your mood.</p>
-        </div>
 
-        {/* Thought Tracker — ✅ untouched */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={() => goToWellness('music')}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
+          <div className="feature-card">
+            <button
+              className="arrow-icon"
+              onClick={() => goToWellness("music")}
+            >
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <Brain size={48} color="#38bdf8" strokeWidth={1.5} />
+            </div>
+            <h3>Thought Tracker</h3>
+            <p>Record, reflect, and track your emotions with ease.</p>
           </div>
-          <h3>Thought Tracker</h3>
-          <p>Record, reflect, and track your emotions with ease.</p>
-        </div>
 
-        {/* Mental Health Tips */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={goToTips}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
+          <div className="feature-card">
+            <button className="arrow-icon" onClick={goToTips}>
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <Lightbulb size={48} color="#fbbf24" strokeWidth={1.5} />
+            </div>
+            <h3>Mental Health Tips</h3>
+            <p>Simple science-based advice for everyday wellness.</p>
           </div>
-          <h3>Mental Health Tips</h3>
-          <p>Simple science-based advice for everyday wellness.</p>
-        </div>
 
-        {/* Games */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={goToGames}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
+          <div className="feature-card">
+            <button className="arrow-icon" onClick={goToGames}>
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <Gamepad2 size={48} color="#34d399" strokeWidth={1.5} />
+            </div>
+            <h3>Games</h3>
+            <p>Fun ways to reduce stress while staying mindful.</p>
           </div>
-          <h3>Games</h3>
-          <p>Fun ways to reduce stress while staying mindful.</p>
-        </div>
 
-        {/* Blogs */}
-        <div className="feature-card">
-          <button className="arrow-icon" onClick={goToBlogs}>
-            <ArrowUpRight color="black" />
-          </button>
-          <div className="feature-icon">
-            <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
+          <div className="feature-card">
+            <button className="arrow-icon" onClick={goToBlogs}>
+              <ArrowUpRight color="black" />
+            </button>
+            <div className="feature-icon">
+              <BookOpen size={48} color="#f472b6" strokeWidth={1.5} />
+            </div>
+            <h3>Blogs</h3>
+            <p>Explore expert insights and personal stories that inspire growth.</p>
           </div>
-          <h3>Blogs</h3>
-          <p>Explore expert insights and personal stories that inspire growth.</p>
         </div>
-
-      </div>
-    </section>
+      </section>
 
       {/* ---------- STATS SECTION ---------- */}
       <section className="did-you-know-section">
         <div className="did-you-know-card">
           <h2 className="did-you-know-heading">
-  Did you know 
-  <HelpCircle className="question-icon" size={30} />
-</h2>
+            Did you know <HelpCircle className="question-icon" size={30} />
+          </h2>
 
           <p className="subtitle">The Truth About Mental Health</p>
           <p className="description">
             Good mental health is the foundation of a happy and meaningful life.
-            It allows us to manage stress, build strong relationships, and make positive choices.
-            A healthy mind leads to inner peace and personal growth.
+            It allows us to manage stress, build strong relationships, and make
+            positive choices. A healthy mind leads to inner peace and personal
+            growth.
           </p>
-          {/* <button className="learn-more-btn">Learn more</button> */}
         </div>
 
         <div className="did-you-know-stats">
@@ -328,67 +328,59 @@ import { ArrowRight } from "lucide-react";
         </div>
       </section>
 
-
-
       {/* ---------- BLOG SECTION ---------- */}
       <section className="blog-section">
         <h2>Blogs Section</h2>
         <p className="blog-caption">Articles and tips to improve mental health</p>
+
         <div className="blog-grid">
           <div className="blog-card">
-            <img
-              src="/blog1.png"
-              alt="Anxiety"
-            />
+            <img src="/blog1.png" alt="Anxiety" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to control anxiety</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} />
+              Read more
+            </a>
           </div>
+
           <div className="blog-card">
-            <img
-              src="/blog2.png"
-              alt="Depression"
-            />
+            <img src="/blog2.png" alt="Depression" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce depression</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} />
+              Read more
+            </a>
           </div>
+
           <div className="blog-card">
-            <img
-              src="/blog3.png"
-              alt="Stress management"
-            />
+            <img src="/blog3.png" alt="Stress" />
             <div className="blog-meta">
               <p className="blog-small-title">Anxiety</p>
               <p className="blog-date">Oct 10, 2025</p>
             </div>
             <h3>Tips to reduce stress</h3>
             <a href="/blogs/1" className="read-more">
-                
-             <ArrowRight size={16} strokeWidth={2.5} />
-             Read more
-             </a>
+              <ArrowRight size={16} strokeWidth={2.5} />
+              Read more
+            </a>
           </div>
-          </div>
+        </div>
 
-  {/* View More button section */}
-  <div className="view-more-container">
-    <button className="view-more-btn" onClick={goToBlogs}>View More </button>
-  <p className="blog-subtitle"> Discover more helpful articles on managing your mental health</p>
+        <div className="view-more-container">
+          <button className="view-more-btn" onClick={goToBlogs}>
+            View More
+          </button>
+          <p className="blog-subtitle">
+            Discover more helpful articles on managing your mental health
+          </p>
         </div>
       </section>
 
@@ -396,60 +388,65 @@ import { ArrowRight } from "lucide-react";
       <section className="testimonial-section">
         <h2>Hear from our users</h2>
         <p>Real stories of growth, healing, and positive change</p>
+
         <div className="testimonial-grid">
           <div className="testimonial">
             <img src="/Pic1.png" alt="" className="user-icon" />
             <h4>Jamin</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “Mind Heaven helped me overcome my anxiety and brought peace into my daily routine.”
-            </p>
 
+            <p>
+              “Mind Heaven helped me overcome my anxiety and brought peace into
+              my daily routine.”
+            </p>
           </div>
+
           <div className="testimonial">
             <img src="/pic2.png" alt="" className="user-icon" />
             <h4>Srija Namala</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “The meditation and games are so helpful! My mental health has improved significantly.”
-            </p>
 
+            <p>
+              “The meditation and games are so helpful! My mental health has
+              improved significantly.”
+            </p>
           </div>
 
           <div className="testimonial">
             <img src="/Pic3.png" alt="" className="user-icon" />
             <h4>Tejas</h4>
             <p className="testinomal-date">1 month ago</p>
-            
-            <p>
-              “ For years, I struggled to find a consistent self-care routine, but this app provides the structure and gentle guidance.”
-            </p>
 
+            <p>
+              “For years, I struggled to find a consistent self-care routine,
+              but this app provides the structure and gentle guidance.”
+            </p>
           </div>
+
           <div className="testimonial">
             <img src="/Pic4.png" alt="" className="user-icon" />
             <h4>Hannah Joshua</h4>
             <p className="testinomal-date">1 month ago</p>
-            
 
             <p>
-              “The CBT (Cognitive Behavioral Therapy) lessons are short, actionable, and grounded in research.”
+              “The CBT lessons are short, actionable, and grounded in
+              research.”
             </p>
-
           </div>
         </div>
       </section>
 
       {/* ---------- FOOTER ---------- */}
-     <footer className="footer-homepage">
-        <p>© 2025 Mind Heaven | Designed with ♡ to make mental health accessible for everyone.</p>
+      <footer className="footer-homepage">
+        <p>
+          © 2025 Mind Heaven | Designed with ♡ to make mental health accessible
+          for everyone.
+        </p>
       </footer>
 
-     <footer /> 
-    </div> 
+      <footer />
+    </div>
   );
-}
-export default HomePage;
+};
 
+export default HomePage;
