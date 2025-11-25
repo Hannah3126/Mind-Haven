@@ -63,8 +63,13 @@ Role-based dashboards (Admin and User),
 Styled UI with branding and password toggle,
 Dummy data for blogs, videos, forums.
 
-Next Steps (Sprint 2) -
+Sprint 2 -
+User features (games, blogs, wellness page, feedback form) 
 
-Admin actions (promote user, delete user),
-User features (chatbot, forums, virtual meeting features),
+Sprint 3 -
+User features (forums, virtual meeting features, Though tracker, Achievements page),
 Profile edit (user can update info).
+
+Final -
+Admin actions (promote user, edit data of any table),
+User functions (Chatbot)
